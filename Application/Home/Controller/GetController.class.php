@@ -7,7 +7,7 @@ class GetController extends Controller {
 	*不包含验证信息在内的相关数据
 	*函数名遵循getXXX
 	*/
-	/*
+	/*sdas
 	*获取用户名称
 	*传入参数:@param token（令牌）
 	*返回值@return response（错误信息提示），status（错误判断编码），name（用户名称）
