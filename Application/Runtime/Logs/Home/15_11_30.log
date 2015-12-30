@@ -1,0 +1,728 @@
+[ 2015-11-30T17:58:27+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.053003s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.008001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.523030s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.523030s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.055003s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.055003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.013001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.013001s ]
+
+[ 2015-11-30T17:58:33+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.082005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.082005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-11-30T17:58:37+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0370s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0010s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T17:58:40+08:00 ] 127.0.0.1 /index.php/import/checkList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+SQL: UPDATE `orders` SET `exportTime`='2015-11-30 17:58:40' WHERE `orderId` IN ('1231213','123123') [ RunTime:0.1470s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+
+[ 2015-11-30T17:58:40+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-11-30T17:58:46+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0010s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T17:58:48+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T17:58:48+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0010s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T17:58:54+08:00 ] 127.0.0.1 /index.php/import/checkList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+SQL: UPDATE `orders` SET `exportTime`='2015-11-30 17:58:54' WHERE `orderId` IN ('1231213','123123') [ RunTime:0.1280s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+
+[ 2015-11-30T17:58:54+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-11-30T17:58:54+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T17:59:16+08:00 ] 127.0.0.1 /index.php/import/checkOrders
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:checkOrders
+
+[ 2015-11-30T17:59:33+08:00 ] 127.0.0.1 /index.php/import/checkList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined variable: res D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 126 行.
+
+[ 2015-11-30T17:59:34+08:00 ] 127.0.0.1 /index.php/import/checkOrders
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:checkOrders
+
+[ 2015-11-30T18:02:41+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:02:41+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:02:53+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001001s ]
+
+[ 2015-11-30T18:02:54+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0010s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:03:55+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-11-30T18:05:26+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-11-30T18:05:26+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0010s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:05:29+08:00 ] 127.0.0.1 /index.php/import/checkList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0030s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+SQL: UPDATE `orders` SET `exportTime`='2015-11-30 18:05:29' WHERE `orderId` IN ('1231213','123123') [ RunTime:0.0730s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+
+[ 2015-11-30T18:05:29+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-11-30T18:05:29+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:05:42+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:05:43+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:06:27+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:06:27+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:06:31+08:00 ] 127.0.0.1 /index.php/import/checkList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+SQL: UPDATE `orders` SET `exportTime`='2015-11-30 18:06:31' WHERE `orderId` IN ('1231213','123123') [ RunTime:0.1404s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+
+[ 2015-11-30T18:07:36+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:07:37+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:07:39+08:00 ] 127.0.0.1 /index.php/import/checkList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+SQL: UPDATE `orders` SET `haveSAR`='1',`exportTime`='2015-11-30 18:07:39' WHERE `orderId` IN ('1231213','123123') [ RunTime:0.2340s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+
+[ 2015-11-30T18:07:44+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:07:45+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:08:36+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015600s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015600s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:08:36+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:08:49+08:00 ] 127.0.0.1 /index.php/import/checkList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 117 行.
+SQL: UPDATE `orders` SET `haveSAR`='1',`exportTime`='2015-11-30 18:08:49' WHERE `orderId` IN ('1231213','123123') [ RunTime:0.0936s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 123 行.
+
+[ 2015-11-30T18:08:49+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015600s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015600s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:08:54+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:09:12+08:00 ] 127.0.0.1 /index.php/import/check
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant check - assumed 'check' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 15 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-11-30T18:09:16+08:00 ] 127.0.0.1 /index.php/import/getUncheckList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `orders` [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 98 行.
+SQL: SELECT * FROM `orders` WHERE `usrId` = 1325115 AND `haveSAR` = 0  [ RunTime:0.0000s ]
+NOTIC: [8] Use of undefined constant response - assumed 'response' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant status - assumed 'status' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+NOTIC: [8] Use of undefined constant result - assumed 'result' D:\wamp\www\Application\Home\Controller\ImportController.class.php 第 103 行.
+
+[ 2015-11-30T18:12:07+08:00 ] 127.0.0.1 /index.php/mail/mail
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:mail
+
+[ 2015-11-30T18:13:26+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.027001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.027001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.012001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.013001s ]
+
+[ 2015-11-30T18:13:31+08:00 ] 127.0.0.1 /index.php/mail/email
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+

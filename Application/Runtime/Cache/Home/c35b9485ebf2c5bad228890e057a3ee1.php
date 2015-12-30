@@ -1,0 +1,66 @@
+<?php if (!defined('THINK_PATH')) exit();?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="/Public/script/jquery-2.1.4.min.js"></script>
+	<script src="/Public/script/public.js"></script>
+	<script>
+		$(document).ready(function(){
+			var orderId = getUrlParam("orderId");
+			$.ajax({
+				type: "post",
+				url: "/index.php/import/getOrder",
+				data: {"orderId":orderId},
+				dataType: "text",
+				success:
+					function(data){
+						data=eval('('+data+')');
+						loadInfo(data);
+					}
+			});
+		});
+	</script>
+	<script>
+		function loadInfo(data) {
+	        $("#import").html("");//清空info内容
+			var json = eval('('+data+')');
+	            $("#import").append(
+                   		"</td>"+
+	    					"<td>" + json.result.postorid + "</td>"+
+	    					"<td>" + json.result.importtime + "</td>"+
+	    					"<td>" + json.result.exporttime + "</td>"+
+	    					"<td>" + json.result.positionid    +"</td>"+
+	    					"<td>" + json.result.orderinfo + "</td>"+
+	    					"<td>" + json.result.usrname + "</td>"+
+	    					"<td>" + json.result.usrphonenumber + "</td>"+
+	    					"<td>" + json.result.usrid + "</td>"+
+	    					"<td>" + json.result.orderid + "</td>");
+
+		}
+	</script>
+	<title>你的邮件已经录入成功了</title>
+</head>
+<body>
+	<h3>你的邮件已经录入成功了</h3>
+	<p>详细情况如下所示</p>
+	<table border="1" cellspacing="0" cellpadding="0">
+		<tr><th>录入单</th></tr>
+		<tr>
+			<td>邮递员编号</td>
+			<td>录入时间</td>
+			<td>取件时间</td>
+			<td>库存位置</td>
+			<td>订单信息</td>
+			<td>客户名称</td>
+			<td>客户电话</td>
+			<td>客户id</td>
+			<td>订单号</td>
+		</tr>
+		<tr id="import">
+			
+		</tr>
+		
+	</table>
+</body>
+</html>
