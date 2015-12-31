@@ -6,7 +6,25 @@ class LoginController extends Controller {
     	$this->display("login");
     }
     public function logined(){
-		$this->display("logined");
+		$login = cookie('login');
+		$res=isTokenL($login);
+		if(is_bool($res)){
+			if($res){
+				$map['Id'] = getTokenKey($login['token']);
+				$usr_info = array(
+					'Id'=>$map['Id']
+				);
+				$usrs = M('usr');
+				$usrs->create($usr_info);
+				$list=$usrs->where($map)->find();
+				$this->assign('username',$list['name']);
+				$this->display("logined");
+			}else{
+				$this->show("ss", 'utf-8', 'text/html');
+			}
+		}else{
+			$this->show("ss", 'utf-8', 'text/html');
+		}
 	}
 	/*
 	*验证用户名密码是否正确
@@ -36,7 +54,8 @@ class LoginController extends Controller {
 				$usr_info['token']=$token;
 				$usr_info['grantTime']=date('Y-m-d H:i:s', time());
 				$list=$usrs->where($map)->save($usr_info);
-				$res=array(response=>"用户名密码验证信息正确。",status=>"1",token=>$token);
+				$res=array(response=>"登陆成功",status=>"1");
+				cookie('login',array(id=>$usr_info["id"],token=>$token),3600);
 			}else{
 				$res=array(response=>"用户名密码验证信息错误",status=>"2");
 			}
@@ -45,10 +64,7 @@ class LoginController extends Controller {
 	}
 	
 	public function tlogin(){
-		$usr_info = array(
-			'id'=>I('post.name'),
-			'token'=>I('post.token')
-		);
+		$usr_info = cookie('login');
 		$res=isTokenL($usr_info);
 		if(is_bool($res)){
 			$res= $res?array(response=>"token登陆成功。",status=>"1"):array(response=>"token登陆失败。",status=>"0");

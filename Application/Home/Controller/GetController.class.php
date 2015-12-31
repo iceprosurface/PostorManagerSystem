@@ -7,14 +7,14 @@ class GetController extends Controller {
 	*不包含验证信息在内的相关数据
 	*函数名遵循getXXX
 	*/
-	/*sdas
+	/*
 	*获取用户名称
 	*传入参数:@param token（令牌）
 	*返回值@return response（错误信息提示），status（错误判断编码），name（用户名称）
 	*说明:0:数据创建失败，1:用户名称返回成功，2:用户名称返回失败
 	*/
 	public function getUsrName(){
-		$token=I('post.token');
+		$token=getClientLToken();
 		if(isThisTokenL($token)){
 			$map['Id'] = getTokenKey($token);
 			$usrs = M('usr');
@@ -34,7 +34,7 @@ class GetController extends Controller {
 	*返回值@return response（错误信息提示），status（错误判断编s码），checkedCount，uncheckedCount
 	*/
 	public function getOrderNumber(){
-		$token=I('post.token');
+		$token=getClientLToken();
 		if(isThisTokenL($token)){
 			$map['usrId'] = getTokenKey($token);
 			$map['haveSAR'] = "0";
@@ -54,7 +54,7 @@ class GetController extends Controller {
 	*返回值@return array orders
 	*/
 	public function getUnchecked(){
-		$token=I('post.token');
+		$token=getClientLToken();
 		$res=$token;
 		if(isThisTokenL($token)){
 			$map['usrId'] = getTokenKey($token);
@@ -73,7 +73,7 @@ class GetController extends Controller {
 	*返回值@return array orders
 	*/
 	public function getChecked(){
-		$token=I('post.token');
+		$token=getClientLToken();
 		$res=$token;
 		if(isThisTokenL($token)){
 			$map['usrId'] = getTokenKey($token);

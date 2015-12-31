@@ -1,1 +1,0 @@
-<?php if (!defined('THINK_PATH')) exit();?><div><h1>usrbins</h1></div>

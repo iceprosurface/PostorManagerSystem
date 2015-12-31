@@ -43,7 +43,7 @@
         <script>
     		$(document).ready(function(){
 				//若cookie中有数据则代表可以进行cookie登陆操作
-				var tlogin=getCookie("login");
+				var tlogin;
 				if(tlogin!=""&&tlogin!=null){
 					tlogin=stringToJson(tlogin);
 					$.post(
@@ -53,7 +53,6 @@
 							json = eval('('+data+')');
 							if(json.status==3){
 								//return true;
-								setCookie('login',json2str(json.cookie), 1);
 								window.location="/index.php/login/logined";
 							}else{
 								if(json.status==1){
@@ -75,7 +74,6 @@
 							json = eval('('+data+')');
 							if(json.status==1){
 								//return true;
-								setCookie('login',json2str({"name":$('#user_id').prop('value'),"token":json.token}), 1);
 								window.location="/index.php/login/logined";
 							}else{
 								alert('error');

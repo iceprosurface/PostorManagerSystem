@@ -95,7 +95,7 @@
     </script>
     <script>
 	function loadChecked(){
-		var tlogin=stringToJson(getCookie("login"));
+		var tlogin;
 		$.post(
 			"/index.php/get/getChecked",
 			tlogin,
@@ -191,19 +191,19 @@
 		});
 	}
 	$(document).ready(function(){
-		if(getCookie("login")=="") window.location="/index.php/login/login?respond=1";
-		var tlogin=stringToJson(getCookie("login"));
-		if(tlogin!=""){
-			$.post(
-				"/index.php/get/getUsrName", 
-				tlogin,
-				function(data){
-					json = eval('('+data+')');
-					$("#username").append(json.name);
-				});
-		}else{
-			window.location="/index.php/login/login?respond=1";
-		}
+		//if(getCookie("login")=="") window.location="/index.php/login/login?respond=1";
+		var tlogin;
+		//if(tlogin!=""){
+		//	$.post(
+		//		"/index.php/get/getUsrName", 
+		//		tlogin,
+		//		function(data){
+		//			json = eval('('+data+')');
+		//			$("#username").append(json.name);
+		//		});
+		//}else{
+		//	window.location="/index.php/login/login?respond=1";
+		//}
 		sidebarRefresh(tlogin);
 	});
 	</script>
@@ -245,7 +245,7 @@
 		}
 		//登出
 		function loginOut(){
-			var tlogin=stringToJson(getCookie("login"));
+			var tlogin;
 			if(tlogin!=""){
 				$.post(
 					"/index.php/login/loginOut", 
@@ -253,7 +253,6 @@
 					function(data){
 						json = eval('('+data+')');
 						if(json.status==1){
-							setCookie("login",null,-1);
 							window.location="/index.php/login/login?respond=1";
 						}else{
 							alert('没有成功登出');
@@ -288,7 +287,7 @@
         </ul>
 
         <div class="app-bar-element place-right">
-            <span class="dropdown-toggle" id="username"><span class="mif-cog"></span></span>
+            <span class="dropdown-toggle" id="username"><?php echo ($username); ?><span class="mif-cog"></span></span>
             <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow" data-role="dropdown" data-no-close="true" style="width: 220px">
                 <h2 class="text-light">个人中心</h2>
                 <ul class="unstyled-list">

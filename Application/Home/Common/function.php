@@ -246,6 +246,10 @@
 			return TRUE;
 		}
 	}
+	function getClientLToken(){
+		$value=cookie('login');
+		return $value['token'];
+	}
 	function createToken1(){
 		$params='UTgCZlU2U2AFMwRwDXoBNFsuDGFXcAI1CjMEPgV0AycAdVA\/AjEDaApnVDkBNgYzU2tRYA==';
 		$form =decrypt($params,null);
