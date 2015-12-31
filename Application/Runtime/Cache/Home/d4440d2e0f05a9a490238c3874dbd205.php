@@ -1,1 +1,0 @@
-<?php if (!defined('THINK_PATH')) exit();?><div><h1>all table</h1></div>
