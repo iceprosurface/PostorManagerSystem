@@ -102,29 +102,7 @@
 		$source = decrypt($token,$key);
 		return $source != "" ? str_replace(session_id(),"",$source) : false;
     }
-	// /**
-    // * 写入token
-    // * 
-    // * @param string $token
-    // */
-
-    // function setToken($token){
-		// $tokens = getTokens();
-		// $tokens[] = $token;
-		// session(C('SESSION_KEY_TOKEN'),$tokens);
-    // }
-    /**
-    * 记录被使用的token,实际是向session 的一个数组里加入一个元素，说明这个token以经使用过，以避免数据重复提交。
-    *
-    * @param string $token
-    */
-
-    // function dropToken($token){
-		// $tokens = getTokens();
-		// $tokens[] = $token;
-		// $_SESSION[C('SESSION_KEY_TOKEN')]=$tokens;
-    // }
-
+	
     /**
     * 检查是否为指定的Token
     * @param string $token 要检查的token值
@@ -246,15 +224,11 @@
 			return TRUE;
 		}
 	}
+	/**
+    * 从客户端获取登陆信息
+    * @return $value-token
+    */
 	function getClientLToken(){
 		$value=cookie('login');
 		return $value['token'];
-	}
-	function createToken1(){
-		$params='UTgCZlU2U2AFMwRwDXoBNFsuDGFXcAI1CjMEPgV0AycAdVA\/AjEDaApnVDkBNgYzU2tRYA==';
-		$form =decrypt($params,null);
-		echo $form.'<br/>';
-		echo $source.'<br/>';
-		echo session_id().'<br/>';
-		echo json_encode(getTokens()).'<br/>';
 	}

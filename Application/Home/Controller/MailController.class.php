@@ -16,7 +16,7 @@ class MailController extends Controller {
 	}
 	//邮件验证平台
 	public function mailcheck(){
-		$token=I('post.token');
+		$token=getClientLToken();
 		if(isThisTokenL($token)){
 			$map['Id'] = getTokenKey($token);
 			$usrs = M('usr');

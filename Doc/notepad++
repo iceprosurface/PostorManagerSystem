@@ -54,6 +54,9 @@
                         <File name="D:\wamp\www\PostorManagerSystem\Application\Home\View\Login\logined.html" />
                     </Folder>
                     <File name="D:\wamp\www\PostorManagerSystem\Application\Home\View\index.html" />
+                    <Folder name="Public">
+                        <File name="D:\wamp\www\PostorManagerSystem\Application\Home\View\Public\header.html" />
+                    </Folder>
                 </Folder>
                 <File name="D:\wamp\www\PostorManagerSystem\Application\Home\index.html" />
             </Folder>

@@ -6,7 +6,7 @@ class LoginController extends Controller {
     	$this->display("login");
     }
     public function logined(){
-		$login = cookie('login');
+		$login = getClientLToken();
 		$res=isTokenL($login);
 		if(is_bool($res)){
 			if($res){
@@ -64,7 +64,7 @@ class LoginController extends Controller {
 	}
 	
 	public function tlogin(){
-		$usr_info = cookie('login');
+		$usr_info = getClientLToken();
 		$res=isTokenL($usr_info);
 		if(is_bool($res)){
 			$res= $res?array(response=>"token登陆成功。",status=>"1"):array(response=>"token登陆失败。",status=>"0");
@@ -75,7 +75,7 @@ class LoginController extends Controller {
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	public function loginOut(){
-		$token=I('post.token');
+		$token=getClientLToken();
 		$usr_info = array(
 			'id'=>I('post.name'),
 			'token'=>I('post.token')
