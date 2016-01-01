@@ -168,21 +168,23 @@
 			}
 		}
 		//查询数据库
-
 		$usrs = M('usr');
 		if($usrs->create($usr_info)){
 			$map['Id']=$usr_info['Id'];
 			$list=$usrs->where($map)->find();
-			//若和上次的一致且在有效期内则认为处于上次有效免密码登录时间内
-			if( ($usr_info['token'] != null) && ($list['token']==$usr_info['token'])){
+			//若用户提交token为null，token和数据库不符，当前时间减去授予时间大于有效时间，则该token是无效的
+			if( ($usr_info['token'] != null) 
+				&& ($list['token']==$usr_info['token'])
+				&& (time()-strtotime($list['granttime'])) <= $list['expiretime']){
 				//更新token
 				$token =createToken($usr_info['id']);
-				//清空token
+				//session清空token
 				session(C('SESSION_KEY_TOKEN'),null);
-				//写入token
+				//session写入token
 				session(C('SESSION_KEY_TOKEN'),$token);
 				$usr_info['token']=$token;
 				$usr_info['grantTime']=date('Y-m-d H:i:s', time());
+				//更新数据库token，和授予时间
 				$list=$usrs->where($map)->save($usr_info);
 				return  $token;
 			}else{

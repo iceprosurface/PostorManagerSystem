@@ -14,5 +14,9 @@ return array(
 		'READ_DATA_MAP'=>true,
 		'DEFAULT_FILTER'=>'strip_tags',
 		'API_KEY'=>'',//设置短信平台的验证码
-	
+		'TMPL_PARSE_STRING' =>array(
+			'_CSS_' => '/public/css/', //css文件地址
+			'_SCRIPT_' => '/public/script/',//js文件地址
+			
+		),
 );

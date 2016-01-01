@@ -5,25 +5,30 @@ class LoginController extends Controller {
     public function index(){
     	$this->display("login");
     }
-    public function logined(){
+	public function login(){
 		$login = getClientLToken();
 		$res=isTokenL($login);
-		if(is_bool($res)){
-			if($res){
-				$map['Id'] = getTokenKey($login['token']);
-				$usr_info = array(
-					'Id'=>$map['Id']
-				);
-				$usrs = M('usr');
-				$usrs->create($usr_info);
-				$list=$usrs->where($map)->find();
-				$this->assign("list",$list);
-				$this->display("logined");
-			}else{
-				$this->display("logined");
-			}
-		}else{
+		if(is_bool($res) && $res){
 			$this->display("logined");
+		}else{
+			$this->display("login");
+		}
+	}
+    public function logined(){
+		$login = getClientLToken();
+		$res=isThisTokenL($login);
+		if(is_bool($res) && $res){
+			$map['Id'] = getTokenKey($login['token']);
+			$usr_info = array(
+				'Id'=>$map['Id']
+			);
+			$usrs = M('usr');
+			$usrs->create($usr_info);
+			$list=$usrs->where($map)->find();
+			$this->assign("list",$list);
+			$this->display("logined");
+		}else{
+			$this->display("login");
 		}
 	}
 	/*
@@ -64,8 +69,8 @@ class LoginController extends Controller {
 	}
 	
 	public function tlogin(){
-		$usr_info = getClientLToken();
-		$res=isTokenL($usr_info);
+		$token = getClientLToken();
+		$res=isTokenL($token);
 		if(is_bool($res)){
 			$res= $res?array(response=>"token登陆成功。",status=>"1"):array(response=>"token登陆失败。",status=>"0");
 		}else{
@@ -76,11 +81,7 @@ class LoginController extends Controller {
 	}
 	public function loginOut(){
 		$token=getClientLToken();
-		$usr_info = array(
-			'id'=>I('post.name'),
-			'token'=>I('post.token')
-		);
-		$res=isTokenL($usr_info);
+		$res=isTokenL($token);
 		if(is_bool($res)){
 			if($res){
 				//只要验证通过则清除

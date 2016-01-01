@@ -20,7 +20,7 @@ define('APP_DEBUG',true);
 // 定义应用目录
 define('APP_PATH','./Application/');
 define('BIND_MODULE','Home');//要把这一句加上,绑定home
-define('_PATH_','./Public/');
+define('_PATH_','/Public/');
 
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';

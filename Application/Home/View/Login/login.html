@@ -3,12 +3,12 @@
 <head>
     <title>登陆</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="/public/css/metro.css" rel="stylesheet">
-    <link href="/public/css/metro-icons.css" rel="stylesheet">
+    <link href="_CSS_metro.css" rel="stylesheet">
+    <link href="_CSS_metro-icons.css" rel="stylesheet">
 
-    <script src="/public/script/jquery-2.1.4.min.js"></script>
-    <script src="/public/script/metro.js"></script>
-    <script src="/public/script/public.js"></script>
+    <script src="_SCRIPT_jquery-2.1.4.min.js"></script>
+    <script src="_SCRIPT_metro.js"></script>
+    <script src="_SCRIPT_public.js"></script>
  
     <style>
         .login-form {
@@ -41,29 +41,6 @@
         });
         </script>
         <script>
-    		$(document).ready(function(){
-				//若cookie中有数据则代表可以进行cookie登陆操作
-				var tlogin;
-				if(tlogin!=""&&tlogin!=null){
-					tlogin=stringToJson(tlogin);
-					$.post(
-						"/index.php/login/tlogin", 
-						tlogin,
-						function(data){
-							json = eval('('+data+')');
-							if(json.status==3){
-								//return true;
-								window.location="/index.php/login/logined";
-							}else{
-								if(json.status==1){
-									window.location="/index.php/login/logined";
-								}else{
-									alert('false');
-								}
-							}
-						});
-				}
-			});
 			$(function(){
 				$('.login').click(function(){
 					var params = $("#login").serialize();

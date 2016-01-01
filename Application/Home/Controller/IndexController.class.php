@@ -9,7 +9,7 @@ class IndexController extends Controller {
 		$this->display("logined");
 	}
 	public function test(){
-		createToken1();
+
 	}
 }
 ?>
