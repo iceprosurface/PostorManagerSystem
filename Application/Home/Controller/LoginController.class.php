@@ -17,13 +17,13 @@ class LoginController extends Controller {
 				$usrs = M('usr');
 				$usrs->create($usr_info);
 				$list=$usrs->where($map)->find();
-				$this->assign('username',$list['name']);
+				$this->assign("list",$list);
 				$this->display("logined");
 			}else{
-				$this->show("ss", 'utf-8', 'text/html');
+				$this->display("logined");
 			}
 		}else{
-			$this->show("ss", 'utf-8', 'text/html');
+			$this->display("logined");
 		}
 	}
 	/*

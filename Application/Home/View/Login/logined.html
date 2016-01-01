@@ -287,7 +287,7 @@
         </ul>
 
         <div class="app-bar-element place-right">
-            <span class="dropdown-toggle" id="username">{$username}<span class="mif-cog"></span></span>
+            <span class="dropdown-toggle" id="username">{$list.name}<span class="mif-cog"></span></span>
             <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow" data-role="dropdown" data-no-close="true" style="width: 220px">
                 <h2 class="text-light">个人中心</h2>
                 <ul class="unstyled-list">
@@ -366,27 +366,30 @@
 						</div>
 						<div class="list">
 							<div class="list-content">
-								<span class="list-title">你上一次的登陆IP为：</span>
+								<span class="list-title">你上一次的登陆IP为：{$list.lastip}</span>
 								
 							</div>
 						</div>
 						<div class="list">
 							<div class="list-content">
-								<span class="list-title">你上一次的登陆日期为：</span>
+								<span class="list-title">你上一次的登陆日期为：{$list.lastlogin}</span>
 								
 							</div>
 						</div>
 						<div class="list">
 							<div class="list-content">
-								<span class="list-title">你现在的登陆有效期为：</span>
-								<div class="input-control" data-role="select">
-									<select>
-										<option>12小时</option>
-										<option>24小时</option>
-										<option>1天</option>
-										<option>2天</option>
-										<option>15天</option>
-										<option>30天</option>
+								<span class="list-title">你现在的登陆有效期为：{$list['expiretime']/3600}小时
+									<input type="button" value="更改"   onclick="">
+								</span>
+							
+								<div class="input-control" data-role="select" id="expiretime" >
+									<select class="select">
+										<option value="3600">1小时</option>
+										<option value="43200">12小时</option>
+										<option value="86400">24小时</option>
+										<option value="172800">2天</option>
+										<option value="1296000">15天</option>
+										<option value="2592000">30天</option>
 									</select>
 								</div>
 								<input type="button" value="保存">
