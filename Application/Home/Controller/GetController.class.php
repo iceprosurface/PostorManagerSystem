@@ -1,100 +1,85 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class GetController extends Controller {
+class GetController extends BaseController {
 	/*
-	*´Ë¿ØÖÆÆ÷ÓÃÓÚajax»ñÈ¡¸÷ÖÖÀàÐÍµÄÊý¾Ý
-	*²»°üº¬ÑéÖ¤ÐÅÏ¢ÔÚÄÚµÄÏà¹ØÊý¾Ý
-	*º¯ÊýÃû×ñÑ­getXXX
+	*æ­¤æŽ§åˆ¶å™¨ç”¨äºŽajaxèŽ·å–å„ç§ç±»åž‹çš„æ•°æ®
+	*ä¸åŒ…å«éªŒè¯ä¿¡æ¯åœ¨å†…çš„ç›¸å…³æ•°æ®
+	*å‡½æ•°åéµå¾ªgetXXX
 	*/
+	public function _initialize(){
+		$token=getClientLToken();
+		$this->token=$token;
+	}
+	
 	/*
-	*»ñÈ¡ÓÃ»§Ãû³Æ
-	*´«Èë²ÎÊý:@param token£¨ÁîÅÆ£©
-	*·µ»ØÖµ@return response£¨´íÎóÐÅÏ¢ÌáÊ¾£©£¬status£¨´íÎóÅÐ¶Ï±àÂë£©£¬name£¨ÓÃ»§Ãû³Æ£©
-	*ËµÃ÷:0:Êý¾Ý´´½¨Ê§°Ü£¬1:ÓÃ»§Ãû³Æ·µ»Ø³É¹¦£¬2:ÓÃ»§Ãû³Æ·µ»ØÊ§°Ü
+	*èŽ·å–ç”¨æˆ·åç§°
+	*ä¼ å…¥å‚æ•°:@param tokenï¼ˆä»¤ç‰Œï¼‰
+	*è¿”å›žå€¼@return responseï¼ˆé”™è¯¯ä¿¡æ¯æç¤ºï¼‰ï¼Œstatusï¼ˆé”™è¯¯åˆ¤æ–­ç¼–ç ï¼‰ï¼Œnameï¼ˆç”¨æˆ·åç§°ï¼‰
+	*è¯´æ˜Ž:0:æ•°æ®åˆ›å»ºå¤±è´¥ï¼Œ1:ç”¨æˆ·åç§°è¿”å›žæˆåŠŸï¼Œ2:ç”¨æˆ·åç§°è¿”å›žå¤±è´¥
 	*/
 	public function getUsrName(){
-		$token=getClientLToken();
-		if(isThisTokenL($token)){
-			$map['Id'] = getTokenKey($token);
-			$usrs = M('usr');
-			$res=array(response=>"Êý¾Ý´´½¨Ê§°Ü,ÇëÁªÏµ¹ÜÀíÔ±ÒÔ½â¾öÎÊÌâ¡£´íÎó´úÂë:0¡£",status=>"0");
-			if($usrs->create($usr_info)){
-				$list=$usrs->where($map)->find();
-				$res=array(response=>$map['Id'],status=>"1",name=>$list['name']);
-			}
-		}else{
-			//$this->redirect("/login/login");
+		$map['Id'] = getTokenKey($this->token);
+		$usrs = M('usr');
+		$res=array(response=>"æ•°æ®åˆ›å»ºå¤±è´¥,è¯·è”ç³»ç®¡ç†å‘˜ä»¥è§£å†³é—®é¢˜ã€‚é”™è¯¯ä»£ç :0ã€‚",status=>"0");
+		if($usrs->create($usr_info)){
+			$list=$usrs->where($map)->find();
+			$res=array(response=>$map['Id'],status=>"1",name=>$list['name']);
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
-	*»ñÈ¡ÓÃ»§µÄÓÊ¼þÊýÁ¿
-	*´«Èë²ÎÊý:@param token£¨ÁîÅÆ£©
-	*·µ»ØÖµ@return response£¨´íÎóÐÅÏ¢ÌáÊ¾£©£¬status£¨´íÎóÅÐ¶Ï±àsÂë£©£¬checkedCount£¬uncheckedCount
+	*èŽ·å–ç”¨æˆ·çš„é‚®ä»¶æ•°é‡
+	*ä¼ å…¥å‚æ•°:@param tokenï¼ˆä»¤ç‰Œï¼‰
+	*è¿”å›žå€¼@return responseï¼ˆé”™è¯¯ä¿¡æ¯æç¤ºï¼‰ï¼Œstatusï¼ˆé”™è¯¯åˆ¤æ–­ç¼–sç ï¼‰ï¼ŒcheckedCountï¼ŒuncheckedCount
 	*/
 	public function getOrderNumber(){
-		$token=getClientLToken();
-		if(isThisTokenL($token)){
-			$map['usrId'] = getTokenKey($token);
-			$map['haveSAR'] = "0";
-			$orders = M('orders');
-			$uncheckedCount=$orders->where($map)->select();
-			$map['haveSAR'] = "1";
-			$checkedCount=$orders->field(array('orderId','orderInfo','exportTime','postorId'))->where($map)->select();
-			$res=array(response=>"ÓÃ»§êÇ³Æ",status=>"1",checkedCount=>count($checkedCount),uncheckedCount=>count($uncheckedCount));
-		}else{
-			//$this->redirect("/login/login");
-		}
+		$map['usrId'] = getTokenKey($this->token);
+		$map['haveSAR'] = "0";
+		$orders = M('orders');
+		$uncheckedCount=$orders->where($map)->select();
+		$map['haveSAR'] = "1";
+		$checkedCount=$orders->field(array('orderId','orderInfo','exportTime','postorId'))->where($map)->select();
+		$res=array(response=>"ç”¨æˆ·æ˜µç§°",status=>"1",checkedCount=>count($checkedCount),uncheckedCount=>count($uncheckedCount));
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
-	*»ñÈ¡ÉÐÎ´ÊÕ¼þÁÐ±í
-	*´«Èë²ÎÊý:@param int page @param string token
-	*·µ»ØÖµ@return array orders
+	*èŽ·å–å°šæœªæ”¶ä»¶åˆ—è¡¨
+	*ä¼ å…¥å‚æ•°:@param int page @param string token
+	*è¿”å›žå€¼@return array orders
 	*/
 	public function getUnchecked(){
-		$token=getClientLToken();
-		$res=$token;
-		if(isThisTokenL($token)){
-			$map['usrId'] = getTokenKey($token);
-			$map['haveSAR'] = "0";
-			$orders = M('orders');
-			$orderlist=$orders->field(array('orderId','orderInfo','positionId','importTime','postorId'))->where($map)->select();
-			$res=array(response=>"ÓÃ»§êÇ³Æ",status=>"1",orders=>$orderlist);
-		}else{
-			//$this->redirect("/login/login");
-		}
+		$map['usrId'] = getTokenKey($this->token);
+		$map['haveSAR'] = "0";
+		$orders = M('orders');
+		$orderlist=$orders->field(array('orderId','orderInfo','positionId','importTime','postorId'))->where($map)->select();
+		$res=array(response=>"ç”¨æˆ·æ˜µç§°",status=>"1",orders=>$orderlist);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
-	*»ñÈ¡ÒÑ¾­ÊÕ¼þÁÐ±í
-	*´«Èë²ÎÊý:@param int page @param string token
-	*·µ»ØÖµ@return array orders
+	*èŽ·å–å·²ç»æ”¶ä»¶åˆ—è¡¨
+	*ä¼ å…¥å‚æ•°:@param int page @param string token
+	*è¿”å›žå€¼@return array orders
 	*/
 	public function getChecked(){
-		$token=getClientLToken();
-		$res=$token;
-		if(isThisTokenL($token)){
-			$map['usrId'] = getTokenKey($token);
-			$map['haveSAR'] = "1";
-			$orders = M('orders');
-			$orderlist=$orders->where($map)->select();
-			$res=array(response=>"ÓÃ»§êÇ³Æ",status=>"1",orders=>$orderlist);
-		}else{
-			//$this->redirect("/login/login");
-		}
+		$map['usrId'] = getTokenKey($this->token);
+		$map['haveSAR'] = "1";
+		$orders = M('orders');
+		$orderlist=$orders->where($map)->select();
+		$res=array(response=>"ç”¨æˆ·æ˜µç§°",status=>"1",orders=>$orderlist);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
-	*»ñÈ¡loadµÄÒ³Ãæ
-	*´«Èë²ÎÊý:@param page
-	*·µ»ØÖµ@return html
+	*èŽ·å–loadçš„é¡µé¢
+	*ä¼ å…¥å‚æ•°:@param page
+	*è¿”å›žå€¼@return html
 	*/
 	public function load(){
 		$page=I('get.page');
 		$this->display($page);
 	}
-	
+	public function error(){
+		$this->show("éžæ³•çš„è®¿é—®","utf-8","text/html");
+	}
 
 }
