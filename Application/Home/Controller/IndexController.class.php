@@ -9,7 +9,19 @@ class IndexController extends Controller {
 		$this->display("logined");
 	}
 	public function test(){
-
+		$model=D(OrderUpdateView);
+		$list=$model->find();
+		$this->ajaxReturn(json_encode($list),'JSON');
+		// $usrs = M('positions');
+		// for($i=1;$i<200;$i++){
+			// $s=array(
+				// 'positionId'=>$i,
+				// 'haveProduct'=>false,
+			// );
+			// $usrs->create($s);
+			// $list=$usrs->add($s);
+			// echo $list."+".$s;
+		// }
 	}
 }
 ?>

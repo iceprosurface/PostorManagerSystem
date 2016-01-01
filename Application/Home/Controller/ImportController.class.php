@@ -27,14 +27,17 @@ class ImportController extends Controller {
 				'usrId'=>I('post.usrId'),
 				'usrName'=>I('post.usrName'),
 				'positionId'=>I('post.positionId'),
+				'haveProduct'=>true,
 				'postorId'=>I('post.postorId'),
-				'importTime'=>date('Y-m-d H:i:s', time())
+				'importTime'=>date('Y-m-d H:i:s', time()),
+				
 		);
     
 		$orders = M('orders');
+		$positions = M('positions');
 		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
-		if($orders->create($import_info)){
-			$import_result=$orders->where($import_info)->add();
+		if($orders->create($import_info) & $positions->create($import_info)){
+			$import_result=($orders->add($import_info))&($positions->where($import_info['positionId'])->save($import_info));
 			if($import_result !== false){
 				$res=array(response=>"注册成功",status=>"1",orderId=>$import_info['orderId']);
 			}else{
@@ -114,13 +117,24 @@ class ImportController extends Controller {
 		$import_info = array('usrId'=>I('post.usrId'));
 		if( is_array( $checkOrder ) ){
 			$orders = M('orders');
+			$positions = M('positions');
 			$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
-			if($orders->create($import_info)){
-				$map['orderId']=array('in',$checkOrder);
+			//获得快件订单对应的库存位置
+			$map['orderId']=array('in',$checkOrder);
+			$check_list=$orders->field(array('positionId'))->where($map)->select();
+			//转化为标准数列
+			foreach($check_list as $i){
+				$list[]=$i['positionid'];
+			}
+			if($orders->create($import_info) & $positions->create($check_list)){
 				$data['haveSAR']=true;
 				$data['exportTime']=date('Y-m-d H:i:s', time());
-				$check_result=$orders->field(array('orderId','orderInfo','exportTime','haveSAR'))->where($map)->save($data);
-				$res=$check_result?array(response=>"已经成功取件",status=>"1"):array(response=>"取件失败",status=>"2");
+				$data['haveProduct']=false;
+				$orders_result=$orders->field(array('orderId','orderInfo','exportTime','haveSAR'))->where($map)->save($data);
+				//更改map条件为positionid
+				$map['positionId']=array('in',$list);
+				$positions_result=$positions->where($map)->save($data);
+				$res=($orders_result&$positions_result)?array(response=>"已经成功取件",status=>"1"):array(response=>"取件失败",status=>"2");
 			}
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');

@@ -153,10 +153,14 @@
 	}
 	/**
     * 检查是token登录是否合法
-    * @param array $usr_info 要检查的token值
+    * @param array $token 要检查的token值
     * @return boolean/token
     */
-	function isTokenL($usr_info){
+	function isTokenL($token){
+		$usr_info=array(
+			'token'=>$token,
+		);
+		
 		//判断是否有token若有必然在此次登录有效期内
 		if(session(C('SESSION_KEY_TOKEN'))!=null){
 			//判断是否和session一致，一致说明还处在本次登录有效期内
