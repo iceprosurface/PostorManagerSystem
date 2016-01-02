@@ -13,5 +13,6 @@ return array(
 	// 'MAIL_SECURE'                   =>'tls',//是否启用tls
 	'MAIL_CHARSET'                  =>'utf-8',//文件编码
 	'MAIL_ISHTML'                   =>TRUE,//是否开启html传输
-
+	// 是否验证Ajax请求
+	'IS_AJAX'=>TRUE,
 );

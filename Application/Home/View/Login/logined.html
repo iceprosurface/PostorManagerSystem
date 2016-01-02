@@ -117,6 +117,18 @@
 								"<td>" + item.postorid + "</td>"+
 							"</tr>");
 				});
+				$("#page").html("");
+				$("#page").append(data.page+"/"+data.maxPage);
+				data.page=data.page-0;
+				if(data.page>=2){
+					$("#previousPage").attr('onclick','');
+					$("#previousPage").attr('onclick','loadUnchecked('+(data.page-1)+')');
+					
+				}
+				if(data.maxPage>1){
+					$("#nextPage").attr('onclick','');
+					$("#nextPage").attr('onclick','loadUnchecked('+(data.page+1)+')');
+				}
 			}
 		);
 	}
