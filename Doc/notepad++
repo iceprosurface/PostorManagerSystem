@@ -28,9 +28,11 @@
                     <File name="D:\wamp\www\PostorManagerSystem\Application\Home\Controller\LoginController.class.php" />
                     <File name="D:\wamp\www\PostorManagerSystem\Application\Home\Controller\MailController.class.php" />
                     <File name="D:\wamp\www\PostorManagerSystem\Application\Home\Controller\ValidateController.class.php" />
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Home\Controller\BaseController.class.php" />
                 </Folder>
                 <Folder name="Model">
                     <File name="D:\wamp\www\PostorManagerSystem\Application\Home\Model\index.html" />
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Home\Model\OrderUpdateViewModel.class.php" />
                 </Folder>
                 <Folder name="View">
                     <Folder name="Get">
