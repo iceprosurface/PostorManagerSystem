@@ -5,8 +5,8 @@ class IndexController extends Controller {
     public function index(){
     	$this->display("login");
     }
-    public function logined(){
-		$this->display("logined");
+    public function illegalRequirement(){
+		$this->display("illegalRequirement");
 	}
 	public function test(){
 		$model=D(OrderUpdateView);

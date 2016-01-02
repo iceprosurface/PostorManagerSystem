@@ -8,6 +8,9 @@ class GetController extends BaseController {
 	*函数名遵循getXXX
 	*/
 	public function _initialize(){
+		if(C('IS_AJAX')&& !IS_AJAX ){
+			$this->redirect("index/illegalRequirement");
+		}
 		$token=getClientLToken();
 		$this->token=$token;
 	}
@@ -23,7 +26,7 @@ class GetController extends BaseController {
 		$usrs = M('usr');
 		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
 		if($usrs->create($usr_info)){
-			$list=$usrs->where($map)->find();
+			$list=$usrs->field(array('name'))->where($map)->find();
 			$res=array(response=>$map['Id'],status=>"1",name=>$list['name']);
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
@@ -49,11 +52,24 @@ class GetController extends BaseController {
 	*返回值@return array orders
 	*/
 	public function getUnchecked(){
+		$page=I('post.page');
+		//处理page为大于0的数字
+		$page=(is_numeric($page))&&($page>0)?$page:1;
 		$map['usrId'] = getTokenKey($this->token);
 		$map['haveSAR'] = "0";
 		$orders = M('orders');
 		$orderlist=$orders->field(array('orderId','orderInfo','positionId','importTime','postorId'))->where($map)->select();
-		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist);
+		//计算长度
+		$length = count($orderlist);
+		//计算页数,10为一页
+		$maxPage = ceil( $length  / 10 );
+		//若page大于最大页数则取最大页数
+		$page= $page > $maxPage? $maxPage:$page;
+		//返回orderRetuen
+		for($i=10*($page-1);$i<(($page==$maxPage)?$length-10*($page-1):10*($page));$i++){
+			$orderReturn[]=$orderlist[$i];
+		}
+		$res=array(response=>"用户昵称",status=>"1",orders=>$orderReturn,page=>$page,maxPage=>$maxPage);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
@@ -62,11 +78,24 @@ class GetController extends BaseController {
 	*返回值@return array orders
 	*/
 	public function getChecked(){
+		$page=I('post.page');
+		//处理page为大于0的数字
+		$page=(is_numeric($page))&&($page>0)?$page:1;
 		$map['usrId'] = getTokenKey($this->token);
 		$map['haveSAR'] = "1";
 		$orders = M('orders');
-		$orderlist=$orders->where($map)->select();
-		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist);
+		$orderlist=$orders->field(array('orderId','orderInfo','exportTime','postorId'))->where($map)->select();
+		//计算长度
+		$length = count($orderlist);
+		//计算页数,10为一页
+		$maxPage = ceil( $length  / 10 );
+		//若page大于最大页数则取最大页数
+		$page= $page > $maxPage? $maxPage:$page;
+		//返回orderRetuen
+		for($i=10*($page-1);$i<(($page==$maxPage)?$length-10*($page-1):10*($page));$i++){
+			$orderReturn[]=$orderlist[$i];
+		}
+		$res=array(response=>"用户昵称",status=>"1",orders=>$orderReturn,page=>$page,maxPage=>$maxPage);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*

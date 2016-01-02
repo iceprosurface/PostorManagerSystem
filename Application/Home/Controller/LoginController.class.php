@@ -9,7 +9,7 @@ class LoginController extends Controller {
 		$login = getClientLToken();
 		$res=isTokenL($login);
 		if(is_bool($res) && $res){
-			$this->display("logined");
+			$this->redirect("logined");
 		}else{
 			$this->display("login");
 		}
@@ -28,7 +28,7 @@ class LoginController extends Controller {
 			$this->assign("list",$list);
 			$this->display("logined");
 		}else{
-			$this->display("login");
+			$this->redirect("login");
 		}
 	}
 	/*
