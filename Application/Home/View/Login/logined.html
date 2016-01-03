@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <link rel='shortcut icon' type='image/x-icon' href='../favicon.ico' />
-
-    <title>邮件管理系统</title>
-
-    <link href="_CSS_metro.css" rel="stylesheet">
-    <link href="_CSS_metro-icons.css" rel="stylesheet">
-
-    <script src="_SCRIPT_jquery-2.1.4.min.js"></script>
-    <script src="_SCRIPT_metro.js"></script>
-    <script src="_SCRIPT_public.js"></script>
+<include file="Public:header" title="邮件管理系统"/>
 	<script src="_SCRIPT_select2.min.js"></script>
+	<script src="_SCRIPT_content-load.js"></script>
     <style>
 		.wizard2 .step {
 		  width: 100%;
@@ -45,7 +33,7 @@
     </style>
 	
 	<script>
-		//dialo and swizard
+		//dialog and swizard
 		function respondDialog(id,title,text){
 			var dialog = $(id).data('dialog');
 			$(id).children().children()[0].innerHTML=text;
@@ -94,83 +82,6 @@
         })
     </script>
     <script>
-	function loadChecked(){
-		var tlogin;
-		$.post(
-			"_ENTER_get/getChecked",
-			{'page':'1'},
-			function(data){
-				data = eval('('+data+')');
-				$("#OrderTable").html("");//清空info内容
-				$.each(data.orders, function(i, item){
-					$("#OrderTable").append(
-							"<tr>"+
-							"<td>"+
-							"<label class='input-control checkbox small-check no-margin'>"+
-								"<input type='checkbox' id='checkBox_"+i+"''>"+
-								"<span class='check'></span>"+
-							"</label>"+
-							"</td>"+
-								"<td>" + item.orderid + "</td>"+
-								"<td>" + item.exporttime + "</td>"+
-								"<td>" + item.orderinfo + "</td>"+
-								"<td>" + item.postorid + "</td>"+
-							"</tr>");
-				});
-				$("#page").html("");
-				$("#page").append(data.page+"/"+data.maxPage);
-				data.page=data.page-0;
-				if(data.page>=2){
-					$("#previousPage").attr('onclick','');
-					$("#previousPage").attr('onclick','loadUnchecked('+(data.page-1)+')');
-					
-				}
-				if(data.maxPage>1){
-					$("#nextPage").attr('onclick','');
-					$("#nextPage").attr('onclick','loadUnchecked('+(data.page+1)+')');
-				}
-			}
-		);
-	}
-	function loadUnchecked(page){
-		var tlogin;
-		$.post(
-			"_ENTER_get/getUnchecked",
-			{'page':page},
-			function(data){
-				data = eval('('+data+')');
-				$("#OrderTable").html("");//清空info内容
-				$.each(data.orders, function(i, item) {
-					$("#OrderTable").append(
-							"<tr>"+
-							"<td>"+
-							"<label class='input-control checkbox small-check no-margin'>"+
-								"<input type='checkbox' class='uncheck' id='checkBox_"+i+"''>"+
-								"<span class='check'></span>"+
-							"</label>"+
-							"</td>"+
-								"<td>" + item.orderid + "</td>"+
-								"<td>" + item.importtime + "</td>"+
-								"<td>" + item.positionid    +"</td>"+	
-								"<td>" + item.orderinfo + "</td>"+
-								"<td>" + item.postorid + "</td>"+
-							"</tr>");
-				});
-				$("#page").html("");
-				$("#page").append(data.page+"/"+data.maxPage);
-				data.page=data.page-0;
-				if(data.page>=2){
-					$("#previousPage").attr('onclick','');
-					$("#previousPage").attr('onclick','loadUnchecked('+(data.page-1)+')');
-					
-				}
-				if(data.maxPage>1){
-					$("#nextPage").attr('onclick','');
-					$("#nextPage").attr('onclick','loadUnchecked('+(data.page+1)+')');
-				}
-			}
-		);
-	}
 	function selectCheckBox(t){
 		var mes = '通知|你已经选择了全部订单|你已经取消了全部订单';
 		$.Notify({
@@ -219,105 +130,14 @@
 		sidebarRefresh(tlogin);
 	});
 	</script>
-	<script>
-		function sidebarRefresh(tlogin){
-			//检测邮件数目使用
-			if(tlogin!=""){
-				$.post(
-				"_ENTER_get/getOrderNumber", 
-				tlogin,
-				function(data){
-					json = eval('('+data+')');
-					$("#checkedCount").text(json.checkedCount);
-					$("#uncheckCount").text(json.uncheckedCount);
-					var allCount=json.checkedCount+json.uncheckedCount;
-					$("#allCount").text(allCount);
-				});
-			}
-		}
-		//切换到尚未收件列表
-		function turnUnreceived(){
-			$("#main").load("_ENTER_get/load?page=TurnUnchecked",function(){loadUnchecked(1);});
-		}
-		//切换到设置页面
-		function changeToConfig(){
-			$("#main").load("_ENTER_get/load?page=ChangeToConfig");
-		}
-		//切换到已经收件列表
-		function turnReceived(){
-			$("#main").load("_ENTER_get/load?page=TurnChecked",function(){loadChecked();});
-		}
-		//切换到垃圾箱
-		function turnBin(){
-			$("#main").load("_ENTER_get/load?page=TurnBin");
-		}
-		//切换到全部收件列表
-		function turnAll(){
-			$("#main").load("_ENTER_get/load?page=TurnAll");
-		}
-		//登出
-		function loginOut(){
-			var tlogin;
-			if(tlogin!=""){
-				$.post(
-					"_ENTER_login/loginOut", 
-					tlogin,
-					function(data){
-						json = eval('('+data+')');
-						if(json.status==1){
-							window.location="_ENTER_login/login?respond=1";
-						}else{
-							alert('没有成功登出');
-						}
-					});
-			}else{
-				window.location="_ENTER_login/login?respond=1";
-			}
-			
-		}
-	</script>
+	
 </head>
 <body class="bg-white" >
 	
-	<!--  -->
-    <div class="app-bar fixed-top darcula" data-role="appbar">
-        <a class="app-bar-element branding">快件管理系统</a>
-        <span class="app-bar-divider"></span>
-        <ul class="app-bar-menu">
-            <li><a href=""><span class="mif-home icon"></span></a></li>
-            <li><a href="">设置</a></li>
-            <li><a href="">app下载</a></li>
-            <li>
-                <a href="" class="dropdown-toggle">帮助</a>
-                <ul class="d-menu" data-role="dropdown">
-                    <li><a href="">联系管理员</a></li>
-                    <li><a href="">技术支持</a></li>
-                    <li class="divider"></li>
-                    <li><a href="">关于</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <div class="app-bar-element place-right">
-            <span class="dropdown-toggle" id="username">{$list.name}<span class="mif-cog"></span></span>
-            <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow" data-role="dropdown" data-no-close="true" style="width: 220px">
-                <h2 class="text-light">个人中心</h2>
-                <ul class="unstyled-list">
-                    <li><a href="#page=showDialog" class="fg-white fg-hover-yellow" onclick="showDialog('#dialog');">更改信息</a></li>
-                    <li><a href="" class="fg-white fg-hover-yellow">通知</a></li>
-                    <li onclick="loginOut();"><a class="fg-white fg-hover-yellow">登出</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-				
+	<!-- 上边栏 -->
+	<include file="Public:Nav" name="{$list.name}"/>
 	
-	<script>
-		$(function(){
-			$("#tab-control").tabControl();
-		});
-	</script>
-	<!-- 内容 -->
+	<!-- 正文 -->
     <div class="page-content">
 		<div class="flex-grid no-responsive-future" style="height: 100%;">
 			<div class="row" style="height: 100%;">
