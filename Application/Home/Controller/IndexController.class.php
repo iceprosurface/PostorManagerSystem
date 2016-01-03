@@ -9,7 +9,8 @@ class IndexController extends Controller {
 		$this->display("illegalRequirement");
 	}
 	public function test(){
-		$res = cookie('login');
+		// $res = session(C('SESSION_KEY_TOKEN'),null);
+		$res = session(C('SESSION_KEY_TOKEN'));
 		// $usrs = M('positions');
 		// for($i=1;$i<200;$i++){
 			// $s=array(
