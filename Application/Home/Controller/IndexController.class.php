@@ -9,9 +9,7 @@ class IndexController extends Controller {
 		$this->display("illegalRequirement");
 	}
 	public function test(){
-		$model=D(OrderUpdateView);
-		$list=$model->find();
-		$this->ajaxReturn(json_encode($list),'JSON');
+		$res = cookie('login');
 		// $usrs = M('positions');
 		// for($i=1;$i<200;$i++){
 			// $s=array(
@@ -22,6 +20,7 @@ class IndexController extends Controller {
 			// $list=$usrs->add($s);
 			// echo $list."+".$s;
 		// }
+		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 }
 ?>
