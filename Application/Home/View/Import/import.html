@@ -14,12 +14,12 @@
         $('.import').click(function(){
 			var params = $("#importTable").serialize();
 			$.post(
-				"/index.php/import/va", 
+				"_ENTER_import/va", 
 				params,
 				function(data){
 					json = eval('('+data+')');
 					if(json.status==1){
-						window.location="/index.php/import/detail?orderId="+json.orderId;
+						window.location="_ENTER_import/detail?orderId="+json.orderId;
 					}else{
 						alert('error');
 					}

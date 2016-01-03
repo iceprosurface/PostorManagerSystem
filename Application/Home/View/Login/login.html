@@ -45,13 +45,13 @@
 				$('.login').click(function(){
 					var params = $("#login").serialize();
 					$.post(
-						"/index.php/login/va", 
+						"_ENTER_login/va", 
 						params,
 						function(data){
 							json = eval('('+data+')');
 							if(json.status==1){
 								//return true;
-								window.location="/index.php/login/logined";
+								window.location="_ENTER_login/logined";
 							}else{
 								alert('error');
 							}

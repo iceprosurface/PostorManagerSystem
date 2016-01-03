@@ -97,7 +97,7 @@
 	function loadChecked(){
 		var tlogin;
 		$.post(
-			"/index.php/get/getChecked",
+			"_ENTER_get/getChecked",
 			{'page':'1'},
 			function(data){
 				data = eval('('+data+')');
@@ -135,7 +135,7 @@
 	function loadUnchecked(page){
 		var tlogin;
 		$.post(
-			"/index.php/get/getUnchecked",
+			"_ENTER_get/getUnchecked",
 			{'page':page},
 			function(data){
 				data = eval('('+data+')');
@@ -200,7 +200,7 @@
 		if(list.length==0)return false;
 			$.ajax({
 				type: "post",
-				url: "/index.php/import/checkList",
+				url: "_ENTER_import/checkList",
 				data: {'checkOrder':list,'token':stringToJson(getCookie("login"))},
 				dataType: "json",
 				success:
@@ -215,19 +215,7 @@
 		});
 	}
 	$(document).ready(function(){
-		//if(getCookie("login")=="") window.location="/index.php/login/login?respond=1";
 		var tlogin;
-		//if(tlogin!=""){
-		//	$.post(
-		//		"/index.php/get/getUsrName", 
-		//		tlogin,
-		//		function(data){
-		//			json = eval('('+data+')');
-		//			$("#username").append(json.name);
-		//		});
-		//}else{
-		//	window.location="/index.php/login/login?respond=1";
-		//}
 		sidebarRefresh(tlogin);
 	});
 	</script>
@@ -236,7 +224,7 @@
 			//检测邮件数目使用
 			if(tlogin!=""){
 				$.post(
-				"/index.php/get/getOrderNumber", 
+				"_ENTER_get/getOrderNumber", 
 				tlogin,
 				function(data){
 					json = eval('('+data+')');
@@ -249,41 +237,41 @@
 		}
 		//切换到尚未收件列表
 		function turnUnreceived(){
-			$("#main").load("/index.php/get/load?page=TurnUnchecked",function(){loadUnchecked(1);});
+			$("#main").load("_ENTER_get/load?page=TurnUnchecked",function(){loadUnchecked(1);});
 		}
 		//切换到设置页面
 		function changeToConfig(){
-			$("#main").load("/index.php/get/load?page=ChangeToConfig");
+			$("#main").load("_ENTER_get/load?page=ChangeToConfig");
 		}
 		//切换到已经收件列表
 		function turnReceived(){
-			$("#main").load("/index.php/get/load?page=TurnChecked",function(){loadChecked();});
+			$("#main").load("_ENTER_get/load?page=TurnChecked",function(){loadChecked();});
 		}
 		//切换到垃圾箱
 		function turnBin(){
-			$("#main").load("/index.php/get/load?page=TurnBin");
+			$("#main").load("_ENTER_get/load?page=TurnBin");
 		}
 		//切换到全部收件列表
 		function turnAll(){
-			$("#main").load("/index.php/get/load?page=TurnAll");
+			$("#main").load("_ENTER_get/load?page=TurnAll");
 		}
 		//登出
 		function loginOut(){
 			var tlogin;
 			if(tlogin!=""){
 				$.post(
-					"/index.php/login/loginOut", 
+					"_ENTER_login/loginOut", 
 					tlogin,
 					function(data){
 						json = eval('('+data+')');
 						if(json.status==1){
-							window.location="/index.php/login/login?respond=1";
+							window.location="_ENTER_login/login?respond=1";
 						}else{
 							alert('没有成功登出');
 						}
 					});
 			}else{
-				window.location="/index.php/login/login?respond=1";
+				window.location="_ENTER_login/login?respond=1";
 			}
 			
 		}
