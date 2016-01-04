@@ -5,9 +5,7 @@ class IndexController extends Controller {
     public function index(){
     	$this->display("login");
     }
-    public function illegalRequirement(){
-		$this->display("illegalRequirement");
-	}
+
 	public function test(){
 		// $res = session(C('SESSION_KEY_TOKEN'),null);
 		$res = session(C('SESSION_KEY_TOKEN'));

@@ -19,8 +19,10 @@ return array(
 		'TMPL_PARSE_STRING' =>array(
 			'_CSS_'			=>'/public/css/', 		// css文件地址
 			'_SCRIPT_' 		=>'/public/script/',	// js文件地址
+			'_IMAGE_'		=>'/public/image/',	// image文件地址
 			'_ENTER_'		=>'/index.php/home/',	// 入口地址
 			'_ADMIN_'		=>'/index.php/admin/',	// 后台入口
+
 			
 		),
 		'DEFAULT_C_LAYER'	=>'Controller', 			// 默认的控制器层名称

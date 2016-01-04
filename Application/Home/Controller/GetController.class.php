@@ -9,7 +9,7 @@ class GetController extends BaseController {
 	*/
 	public function _initialize(){
 		if(C('IS_AJAX')&& !IS_AJAX ){
-			$this->redirect("index/illegalRequirement");
+			$this->redirect("public/illegalRequirement");
 		}
 		$token=getClientLToken();
 		$this->token=$token;
