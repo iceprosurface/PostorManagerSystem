@@ -38,8 +38,8 @@ class LoginController extends Controller {
 	*/
 	public function va(){
 		$usr_info = array(
-			'id'=>I('post.usrid'),
-			'psw'=>I('post.psw'),
+			'id'=>I('post.usrid',0),
+			'psw'=>I('post.psw',0),
 			'lastLogin'=>date('Y-m-d H:i:s', time()),
 			'lastIp'=>get_client_ip()
 			);
