@@ -91,7 +91,7 @@ Index.php对形如<include />标签的文件进行处理，
 <!DOCTYPE html>
 <html>
 <head>
-    <title>[title]</title>
+    <title>登陆</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="_CSS_metro.css" rel="stylesheet">
     <link href="_CSS_metro-icons.css" rel="stylesheet">
