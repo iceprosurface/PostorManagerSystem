@@ -6,4 +6,13 @@ class IndexController extends Controller {
 		$this->display(index);
 		
     }
+	public function login(){
+		//判断登陆成功（此处只需要session 2小时，不需要记住登陆状态）
+		if(isThisTokenLogin()){
+			$this->redirect(login/login);
+		}elseif(isPswCurrect()){
+			$this->redirect(login/login);
+		}
+		$this->display(login);
+    }
 }
