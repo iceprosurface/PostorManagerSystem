@@ -107,6 +107,26 @@
             </Folder>
             <File name="D:\wamp\www\PostorManagerSystem\Application\index.html" />
             <File name="D:\wamp\www\PostorManagerSystem\Application\README.md" />
+            <Folder name="Admin">
+                <Folder name="Common">
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\Common\index.html" />
+                </Folder>
+                <Folder name="Conf">
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\Conf\config.php" />
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\Conf\index.html" />
+                </Folder>
+                <Folder name="Model">
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\Model\index.html" />
+                </Folder>
+                <Folder name="View">
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\View\index.html" />
+                </Folder>
+                <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\index.html" />
+                <Folder name="controller">
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\Controller\IndexController.class.php" />
+                    <File name="D:\wamp\www\PostorManagerSystem\Application\Admin\Controller\PublicController.class.php" />
+                </Folder>
+            </Folder>
         </Folder>
         <Folder name="Public">
             <Folder name="css">

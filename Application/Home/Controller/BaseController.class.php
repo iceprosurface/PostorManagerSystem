@@ -5,7 +5,7 @@ class BaseController extends Controller {
 
 	public function _initialize(){
 		$token=getClientLToken();
-		if(!isThisTokenL($token)){
+		if(!isTokenL($token)){
 			$this->redirect("login/login");
 		}
     }

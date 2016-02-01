@@ -154,11 +154,12 @@
 	/**
     * 检查是token登录是否合法
     * @param array $token 要检查的token值
-    * @return boolean/token
+    * @return boolean
     */
 	function isTokenL($token){
 		$usr_info=array(
 			'token'=>$token,
+			'id'=>cookie('login')['id'],
 		);
 		
 		//判断是否有token若有必然在此次登录有效期内
@@ -171,13 +172,15 @@
 				return  false;
 			}
 		}
+		
 		//查询数据库
 		$usrs = M('usr');
 		if($usrs->create($usr_info)){
 			$map['Id']=$usr_info['Id'];
 			$list=$usrs->where($map)->find();
-			//若用户提交token为null，token和数据库不符，当前时间减去授予时间大于有效时间，则该token是无效的
-			if( ($usr_info['token'] != null) 
+			//若用户给出的id为空,提交token为null，token和数据库不符，当前时间减去授予时间大于有效时间，则该token是无效的
+			if( ($usr_info['id'] !="")
+				&& ($usr_info['token'] != null) 
 				&& ($list['token']==$usr_info['token'])
 				&& (time()-strtotime($list['granttime'])) <= $list['expiretime']){
 				//更新token
@@ -188,15 +191,16 @@
 				session(C('SESSION_KEY_TOKEN'),$token);
 				$usr_info['token']=$token;
 				$usr_info['grantTime']=date('Y-m-d H:i:s', time());
+				cookie('login',array(id=>$usr_info["id"],token=>$token),$list['expiretime']);
 				//更新数据库token，和授予时间
 				$list=$usrs->where($map)->save($usr_info);
-				return  $token;
+				return  true;
 			}else{
 				return  false;
 			}
-		}else{
-			return  false;
 		}
+		
+		
 		return  false;
 	}
 	/**

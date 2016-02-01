@@ -1,15 +1,4 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="_CSS_metro.css" rel="stylesheet">
-    <link href="_CSS_metro-icons.css" rel="stylesheet">
-	
-	<script src="_SCRIPT_jquery-2.1.4.min.js"></script>
-    <script src="_SCRIPT_metro.js"></script>
-	<script src="_SCRIPT_public.js"></script>
-	<title>快件签收演示页面</title>
+<include file="Public:header" title="快件签收演示界面"/>
 	<script>
 		$(document).ready( function(){
 			//function checkOrder(){
@@ -18,7 +7,7 @@
 				if(userid.length<=6)return false;
 					$.ajax({
 						type: "post",
-						url: "/index.php/import/getUncheckList",
+						url: "_ENTER_import/getUncheckList",
 						data: {"usrId":userid},
 						dataType: "json",
 						success:
@@ -32,7 +21,7 @@
 			if(userid.length<=6)return false;
 				$.ajax({
 					type: "post",
-					url: "/index.php/import/getUncheckList",
+					url: "_ENTER_import/getUncheckList",
 					data: {"usrId":userid},
 					dataType: "json",
 					success:
@@ -77,7 +66,7 @@
 			if(list.length==0)return false;
 			$.ajax({
 				type: "post",
-				url: "/index.php/import/checkList",
+				url: "_ENTER_import/checkList",
 				data: {'checkOrder':list,'usrId':$("#userid").prop("value")},
 				dataType: "json",
 				success:

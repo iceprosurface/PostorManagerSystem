@@ -9,10 +9,11 @@ class GetController extends BaseController {
 	*/
 	public function _initialize(){
 		if(C('IS_AJAX')&& !IS_AJAX ){
-			$this->redirect("index/illegalRequirement");
+			$this->redirect("public/illegalRequirement");
 		}
 		$token=getClientLToken();
 		$this->token=$token;
+		$this->id=cookie('login')['id'];
 	}
 	
 	/*
@@ -22,7 +23,7 @@ class GetController extends BaseController {
 	*说明:0:数据创建失败，1:用户名称返回成功，2:用户名称返回失败
 	*/
 	public function getUsrName(){
-		$map['Id'] = getTokenKey($this->token);
+		$map['Id'] = $this->id;
 		$usrs = M('usr');
 		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
 		if($usrs->create($usr_info)){
@@ -37,7 +38,7 @@ class GetController extends BaseController {
 	*返回值@return response（错误信息提示），status（错误判断编s码），checkedCount，uncheckedCount
 	*/
 	public function getOrderNumber(){
-		$map['usrId'] = getTokenKey($this->token);
+		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "0";
 		$orders = M('orders');
 		$uncheckedCount=$orders->where($map)->select();
@@ -55,7 +56,7 @@ class GetController extends BaseController {
 		$page=I('post.page');
 		//处理page为大于0的数字
 		$page=(is_numeric($page))&&($page>0)?$page:1;
-		$map['usrId'] = getTokenKey($this->token);
+		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "0";
 		$orders = M('orders');
 		$orderlist=$orders->field(array('orderId','orderInfo','positionId','importTime','postorId'))->where($map)->select();
@@ -81,7 +82,7 @@ class GetController extends BaseController {
 		$page=I('post.page');
 		//处理page为大于0的数字
 		$page=(is_numeric($page))&&($page>0)?$page:1;
-		$map['usrId'] = getTokenKey($this->token);
+		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "1";
 		$orders = M('orders');
 		$orderlist=$orders->field(array('orderId','orderInfo','exportTime','postorId'))->where($map)->select();

@@ -5,13 +5,10 @@ class IndexController extends Controller {
     public function index(){
     	$this->display("login");
     }
-    public function illegalRequirement(){
-		$this->display("illegalRequirement");
-	}
+
 	public function test(){
-		$model=D(OrderUpdateView);
-		$list=$model->find();
-		$this->ajaxReturn(json_encode($list),'JSON');
+		// $res = session(C('SESSION_KEY_TOKEN'),null);
+		$res = session(C('SESSION_KEY_TOKEN'));
 		// $usrs = M('positions');
 		// for($i=1;$i<200;$i++){
 			// $s=array(
@@ -22,6 +19,7 @@ class IndexController extends Controller {
 			// $list=$usrs->add($s);
 			// echo $list."+".$s;
 		// }
+		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 }
 ?>

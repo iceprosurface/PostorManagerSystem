@@ -8,7 +8,7 @@ class LoginController extends Controller {
 	public function login(){
 		$login = getClientLToken();
 		$res=isTokenL($login);
-		if(is_bool($res) && $res){
+		if($res){
 			$this->redirect("logined");
 		}else{
 			$this->display("login");
@@ -38,14 +38,14 @@ class LoginController extends Controller {
 	*/
 	public function va(){
 		$usr_info = array(
-			'Id'=>I('post.usrid'),
-			'psw'=>I('post.psw'),
+			'id'=>I('post.usrid',0),
+			'psw'=>I('post.psw',0),
 			'lastLogin'=>date('Y-m-d H:i:s', time()),
 			'lastIp'=>get_client_ip()
 			);
 		$usrs = M('usr');
 		$map=array(
-			'Id='=>$usr_info['Id'],
+			'id'=>$usr_info['id'],
 			'psw'=>$usr_info['psw']);
 		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
 		if($usrs->create($usr_info)){
@@ -56,27 +56,20 @@ class LoginController extends Controller {
 				session(C('SESSION_KEY_TOKEN'),null);
 				//写入token（重新密码登录代表重新获取令牌）
 				session(C('SESSION_KEY_TOKEN'),$token);
-				$usr_info['token']=$token;
-				$usr_info['grantTime']=date('Y-m-d H:i:s', time());
-				$list=$usrs->where($map)->save($usr_info);
+				
+				$usr['token']=$token;
+				$usr['grantTime']=date('Y-m-d H:i:s', time());
+				$usr['lastLogin']=date('Y-m-d H:i:s', time());
+				$usr['lastIp']=get_client_ip();
+				
+				$list=$usrs->field(array('token','grantTime','lastLogin','lastIp'))->where($map)->save($usr);
+				$list=$usrs->field(array('id','expiretime'))->where($map)->find();
 				$res=array(response=>"登陆成功",status=>"1");
-				cookie('login',array(id=>$usr_info["id"],token=>$token),3600);
+				cookie('login',array(id=>$list["id"],token=>$token),$list['expiretime']);
 			}else{
 				$res=array(response=>"用户名密码验证信息错误",status=>"2");
 			}
 		}
-		$this->ajaxReturn(json_encode($res),'JSON');
-	}
-	
-	public function tlogin(){
-		$token = getClientLToken();
-		$res=isTokenL($token);
-		if(is_bool($res)){
-			$res= $res?array(response=>"token登陆成功。",status=>"1"):array(response=>"token登陆失败。",status=>"0");
-		}else{
-			$res= array(response=>"token登陆成功,但token信息需要更新。",status=>"3",cookie=>array('name'=>$usr_info['name'],'token'=>$res));
-		}
-		
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	public function loginOut(){

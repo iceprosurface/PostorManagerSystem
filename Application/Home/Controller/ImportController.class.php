@@ -79,12 +79,6 @@ class ImportController extends Controller {
 			$map['orderId']=$import_info['orderId'];
 			$list=$orders->where($map)->select();
 			$res=empty($list)?array(response=>"未能检索到指定订单。",status=>"10"):array(response=>"已检索到指定订单号。",status=>"11",result=>$list);
-			// if(empty($list)){
-				// $res=array(response=>"未能检索到指定订单。",status=>"10");
-			// }else{
-				// list分页操作
-				// $res=array(response=>"已检索到指定订单号。",status=>"11",result=>$list);
-			// }
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
