@@ -4,6 +4,7 @@ return array(
 	'ENCRYPT_KEY'		=>'sdeasq1230sd1',	//加密salt
 	'SESSION_KEY_TOKEN'	=>'UsedToken',		//login的储存cookie名称
 	'FROM_CHECK'		=>'ture',			//是否检查session来源
+	'COOKIE_KEY_TOKEN'	=>'login',			//配置token保存的名字
 	
 	// 配置邮件发送服务器
 	'MAIL_SMTP'			=>TRUE,						// smtp

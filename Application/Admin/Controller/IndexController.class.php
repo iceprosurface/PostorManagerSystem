@@ -11,7 +11,7 @@ class IndexController extends Controller {
 		if(isThisTokenLogin()){
 			$this->redirect(login/login);
 		}elseif(isPswCurrect()){
-			$this->redirect(login/login);
+			$this->display(login/login);
 		}
 		$this->display(login);
     }

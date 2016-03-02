@@ -13,59 +13,6 @@
 			return true;
 		}
 	}
-	/** 
-	* 加密字符串
-	* @param string $txt
-	* @param string $encrypt_key
-	* @return $token
-	*/ 
-	function keyED($txt, $encrypt_key) {
-		$encrypt_key = md5 ( $encrypt_key );
-		$ctr = 0;
-		$tmp = "";
-		for($i = 0; $i < strlen ( $txt ); $i ++) {
-			if ($ctr == strlen ( $encrypt_key ))$ctr = 0;
-			$tmp .= substr ( $txt, $i, 1 ) ^ substr ( $encrypt_key, $ctr, 1 );
-			$ctr ++;
-		}
-		return $tmp;
-    }
-	/** 
-	* 加密字符串
-	* @param $txt
-	* @param $key
-	* @return $token
-	*/ 
-	function encrypt($txt, $key) {
-		$encrypt_key = md5 ( (( float ) date ( "YmdHis" ) + rand ( 10000000000000000, 99999999999999999 )) . rand ( 100000, 999999 ) );
-		$ctr = 0;
-		$tmp = "";
-		for($i = 0; $i < strlen ( $txt ); $i ++) {
-			if ($ctr == strlen ( $encrypt_key ))$ctr = 0;
-			$tmp .= substr ( $encrypt_key, $ctr, 1 ) . (substr ( $txt, $i, 1 ) ^ substr ( $encrypt_key, $ctr, 1 ));
-			$ctr ++;
-		}
-		return ( preg_replace("/\\+/s","_", base64_encode ( keyED ( $tmp, $key ) ) ));
-	}
-	/** 
-	* 解密字符串
-	* @param string $txt
-	* @param string $key
-	* @return txt
-	*/ 
-	//base64 [A-Za-z0-9\+\/=]
-	function decrypt($txt, $key) {
-	if($txt == ""){ return false;}
-	//echo preg_replace("/_/s","+",$txt);
-	$txt = keyED (base64_decode ( preg_replace("/_/s","+", $txt) ), $key );
-	$tmp = "";
-	for($i = 0; $i < strlen ( $txt ); $i ++) {
-		$md5 = substr ( $txt, $i, 1 );
-		$i ++;
-		$tmp .= (substr ( $txt, $i, 1 ) ^ $md5);
-	}
-	return $tmp;
-	}
 	/**
     * 得到当前所有的token
     *
@@ -159,7 +106,7 @@
 	function isTokenL($token){
 		$usr_info=array(
 			'token'=>$token,
-			'id'=>cookie('login')['id'],
+			'id'=>cookie(C('COOKIE_KEY_TOKEN'))['id'],
 		);
 		
 		//判断是否有token若有必然在此次登录有效期内
@@ -191,7 +138,7 @@
 				session(C('SESSION_KEY_TOKEN'),$token);
 				$usr_info['token']=$token;
 				$usr_info['grantTime']=date('Y-m-d H:i:s', time());
-				cookie('login',array(id=>$usr_info["id"],token=>$token),$list['expiretime']);
+				cookie(C('COOKIE_KEY_TOKEN'),array(id=>$usr_info["id"],token=>$token),$list['expiretime']);
 				//更新数据库token，和授予时间
 				$list=$usrs->where($map)->save($usr_info);
 				return  true;
@@ -239,6 +186,6 @@
     * @return $value-token
     */
 	function getClientLToken(){
-		$value=cookie('login');
+		$value=cookie(C('COOKIE_KEY_TOKEN'));
 		return $value['token'];
 	}

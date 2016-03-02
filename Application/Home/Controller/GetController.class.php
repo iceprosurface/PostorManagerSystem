@@ -13,7 +13,7 @@ class GetController extends BaseController {
 		}
 		$token=getClientLToken();
 		$this->token=$token;
-		$this->id=cookie('login')['id'];
+		$this->id=cookie(C('COOKIE_KEY_TOKEN'))['id'];
 	}
 	
 	/*

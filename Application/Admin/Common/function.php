@@ -6,7 +6,7 @@
     */
 
     function getTokens(){
-		$tokens = session(C('SESSION_KEY_TOKEN'));
+		$tokens = session(C('SESSION_KEY_TOKEN_ADMIN'));
 		if (empty($tokens) && !is_array($tokens)) {
 			$tokens = array();
 		}
@@ -74,9 +74,9 @@
     */
 	function isThisTokenL($token){
 		//判断是否有token若有必然在此次登录有效期内
-		if(session(C('SESSION_KEY_TOKEN'))!=null){
+		if(session(C('SESSION_KEY_TOKEN_ADMIN'))!=null){
 			//判断是否和session一致，一致说明还处在本次登录有效期内
-			if(session(C('SESSION_KEY_TOKEN'))==$token){
+			if(session(C('SESSION_KEY_TOKEN_ADMIN'))==$token){
 				return  true;
 			}else{
 				return  false;
@@ -92,13 +92,13 @@
 	function isTokenL($token){
 		$admin_info=array(
 			'token'=>$token,
-			'id'=>cookie('login')['id'],
+			'id'=>cookie(C('COOKIE_KEY_TOKEN_ADMIN'))['id'],
 		);
 		
 		//判断是否有token若有必然在此次登录有效期内
-		if(session(C('SESSION_KEY_TOKEN'))!=null){
+		if(session(C('SESSION_KEY_TOKEN_ADMIN'))!=null){
 			//判断是否和session一致，一致说明还处在本次登录有效期内
-			if(session(C('SESSION_KEY_TOKEN'))==$admin_info['token']){
+			if(session(C('SESSION_KEY_TOKEN_ADMIN'))==$admin_info['token']){
 				return  true;
 			}else{
 				
@@ -119,9 +119,9 @@
 				//更新token
 				$token =createToken($admin_info['id']);
 				//session清空token
-				session(C('SESSION_KEY_TOKEN'),null);
+				session(C('SESSION_KEY_TOKEN_ADMIN'),null);
 				//session写入token
-				session(C('SESSION_KEY_TOKEN'),$token);
+				session(C('SESSION_KEY_TOKEN_ADMIN'),$token);
 				$admin_info['token']=$token;
 				$admin_info['grantTime']=date('Y-m-d H:i:s', time());
 				cookie('login',array(id=>$admin_info["id"],token=>$token),$list['expiretime']);
@@ -140,7 +140,7 @@
     * 从客户端获取登陆信息
     * @return $value-token
     */
-	function getClientLToken(){
-		$value=cookie('login');
+	function getAdminClientLToken(){
+		$value=cookie(C('COOKIE_KEY_TOKEN_ADMIN'));
 		return $value['token'];
 	}

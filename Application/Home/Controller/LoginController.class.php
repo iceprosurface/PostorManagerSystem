@@ -65,7 +65,7 @@ class LoginController extends Controller {
 				$list=$usrs->field(array('token','grantTime','lastLogin','lastIp'))->where($map)->save($usr);
 				$list=$usrs->field(array('id','expiretime'))->where($map)->find();
 				$res=array(response=>"登陆成功",status=>"1");
-				cookie('login',array(id=>$list["id"],token=>$token),$list['expiretime']);
+				cookie(C('COOKIE_KEY_TOKEN'),array(id=>$list["id"],token=>$token),$list['expiretime']);
 			}else{
 				$res=array(response=>"用户名密码验证信息错误",status=>"2");
 			}
