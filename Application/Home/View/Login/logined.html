@@ -31,106 +31,6 @@
             }
         }
     </style>
-	
-	<script>
-		//dialog and swizard
-		function respondDialog(id,title,text){
-			var dialog = $(id).data('dialog');
-			$(id).children().children()[0].innerHTML=text;
-			dialog.open();
-		}
-		function showDialog(id){
-			var dialog = $(id).data('dialog');
-			dialog.open();
-		}
-		function closeDialog(id){
-			//questionSub();
-			var dialog = $(id).data('dialog');
-			dialog.close();
-		}
-		$(function(){
-			$("#carousel").carousel();
-		});
-	   </script>
-    <script>
-        $(function(){
-            $(window).on('resize', function(){
-                if ($(this).width() <= 800) {
-                    $(".sidebar").addClass('compact');
-                } else {
-                    $(".sidebar").removeClass('compact');
-                }
-            });
-        });
-
-        function pushMessage(t){
-            var mes = '通知|你已经选择了全部订单';
-            $.Notify({
-                caption: mes.split("|")[0],
-                content: mes.split("|")[1],
-                type: 'success'
-            });
-        }
-        
-        $(function(){
-            $('.sidebar').on('click', 'li', function(){
-                if (!$(this).hasClass('active')) {
-                    $('.sidebar li').removeClass('active');
-                    $(this).addClass('active');
-                }
-            })
-        })
-    </script>
-    <script>
-	function selectCheckBox(t){
-		var mes = '通知|你已经选择了全部订单|你已经取消了全部订单';
-		$.Notify({
-			caption: mes.split("|")[0],
-			content: mes.split("|")[(t=='true'?1:2)],
-			type:(t=='true'?'info':'success')
-		});
-		var param=document.getElementsByClassName('uncheck');
-		$.each(param, function(i, item) {
-			item.checked=(t=='true'?true:false);
-		});
-  	 }
-	function delayOrders(){
-		var mes = '通知|你选择的订单已被延期处理';
-		$.Notify({
-		  caption: mes.split("|")[0],
-		  content: mes.split("|")[1],
-		  type:'warning'
-		});
-		var list= new Array();
-		var param=document.getElementsByClassName('uncheck');
-		$.each(param, function(i, item) {
-			if(item.checked==true){
-				list.push(item.value);
-			}
-		});
-		if(list.length==0)return false;
-			$.ajax({
-				type: "post",
-				url: "_ENTER_import/checkList",
-				data: {'checkOrder':list,'token':stringToJson(getCookie("login"))},
-				dataType: "json",
-				success:
-					function(data){turnReceived();}
-		});
- 	 }
-	 function msg(mes){
-		$.Notify({
-		  caption: mes.split("|")[0],
-		  content: mes.split("|")[1],
-		  type:'sucess'
-		});
-	}
-	$(document).ready(function(){
-		var tlogin;
-		sidebarRefresh(tlogin);
-	});
-	</script>
-	
 </head>
 <body class="bg-white" >
 	
@@ -280,4 +180,103 @@
 
     </div>
 </body>
+	
+<script>
+		//dialog and swizard
+		function respondDialog(id,title,text){
+			var dialog = $(id).data('dialog');
+			$(id).children().children()[0].innerHTML=text;
+			dialog.open();
+		}
+		function showDialog(id){
+			var dialog = $(id).data('dialog');
+			dialog.open();
+		}
+		function closeDialog(id){
+			//questionSub();
+			var dialog = $(id).data('dialog');
+			dialog.close();
+		}
+		$(function(){
+			$("#carousel").carousel();
+		});
+	   </script>
+    <script>
+        $(function(){
+            $(window).on('resize', function(){
+                if ($(this).width() <= 800) {
+                    $(".sidebar").addClass('compact');
+                } else {
+                    $(".sidebar").removeClass('compact');
+                }
+            });
+        });
+
+        function pushMessage(t){
+            var mes = '通知|你已经选择了全部订单';
+            $.Notify({
+                caption: mes.split("|")[0],
+                content: mes.split("|")[1],
+                type: 'success'
+            });
+        }
+        
+        $(function(){
+            $('.sidebar').on('click', 'li', function(){
+                if (!$(this).hasClass('active')) {
+                    $('.sidebar li').removeClass('active');
+                    $(this).addClass('active');
+                }
+            })
+        })
+    </script>
+    <script>
+	function selectCheckBox(t){
+		var mes = '通知|你已经选择了全部订单|你已经取消了全部订单';
+		$.Notify({
+			caption: mes.split("|")[0],
+			content: mes.split("|")[(t=='true'?1:2)],
+			type:(t=='true'?'info':'success')
+		});
+		var param=document.getElementsByClassName('uncheck');
+		$.each(param, function(i, item) {
+			item.checked=(t=='true'?true:false);
+		});
+  	 }
+	function delayOrders(){
+		var mes = '通知|你选择的订单已被延期处理';
+		$.Notify({
+		  caption: mes.split("|")[0],
+		  content: mes.split("|")[1],
+		  type:'warning'
+		});
+		var list= new Array();
+		var param=document.getElementsByClassName('uncheck');
+		$.each(param, function(i, item) {
+			if(item.checked==true){
+				list.push(item.value);
+			}
+		});
+		if(list.length==0)return false;
+			$.ajax({
+				type: "post",
+				url: "_ENTER_import/checkList",
+				data: {'checkOrder':list,'token':stringToJson(getCookie("login"))},
+				dataType: "json",
+				success:
+					function(data){turnReceived();}
+		});
+ 	 }
+	 function msg(mes){
+		$.Notify({
+		  caption: mes.split("|")[0],
+		  content: mes.split("|")[1],
+		  type:'sucess'
+		});
+	}
+	$(document).ready(function(){
+		var tlogin;
+		sidebarRefresh(tlogin);
+	});
+	</script>
 </html>

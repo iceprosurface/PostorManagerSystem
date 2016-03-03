@@ -136,6 +136,9 @@
 		
 		return  false;
 	}
+	function isPswCurrect(){
+		
+	}
 	/**
     * 从客户端获取登陆信息
     * @return $value-token
@@ -144,3 +147,5 @@
 		$value=cookie(C('COOKIE_KEY_TOKEN_ADMIN'));
 		return $value['token'];
 	}
+	
+	

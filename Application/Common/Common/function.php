@@ -52,4 +52,46 @@
 	}
 	return $tmp;
 	}
-	
+	/**
+	* 单表查询专用DAO
+	* @param type array 类型{key:查询字段,word:关键词,type:判断符号}
+	* @param map array 类型{查询字段:值,……}
+	* @param table string 需要查询的数据源（也就是表）
+	* @param pagination int 是否分页{int<40}大于40或小于0或其他字符认为不需要分页
+	* @param query string 需要手工录入的query字段,若无则输入array()
+	* @param field array 需要查询的field,默认返回所有字段
+	* @param page int 当且仅当pagination生效时需要填写
+	*
+	*/
+	function getDataByKeyWords($type,$map,$table,$pagination,$field="*",$page=1,$query=array()){
+		$where=array();
+		//设定查询对象
+		$where[$type['key']]=array($type['type'],$type['word']);
+		$model = M($table);
+		//判断field是否为空，空则获取所有字段
+		// $field=(empty($field))?"*":$field;
+		
+		if ( is_numeric( $pagination ) && ( $pagination <= 40 || $pagination >= 0 ) ) {
+			$count=$model->field( array( "id" ) )->where( $where )->Count();
+			$pages=intval ( $count / $pagination );
+			//判断页数设置
+			if ( isset( $page ) ){
+				$page = intval($page);
+			}
+			else{
+				//否则，设置为第一页
+				$page = 1; 
+			}
+			if ( $count % $pagination )
+				$pages++;
+			$offset = $pagination*($page - 1);
+			$limit = $offset.",".$pagination;
+		}
+		if(isset($limit)){
+			return array("list"=>$model->field($field)->where($where)->where($query)->where($map)->limit($limit)->select(),"max"=>$pages);
+		}else{
+			return $model->field($field)->where($where)->where($query)->where($map)->select();
+		}
+		
+		
+	}

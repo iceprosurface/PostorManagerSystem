@@ -43,7 +43,7 @@ class GetController extends BaseController {
 		$orders = M('orders');
 		$uncheckedCount=$orders->where($map)->select();
 		$map['haveSAR'] = "1";
-		$checkedCount=$orders->field(array('orderId','orderInfo','exportTime','postorId'))->where($map)->select();
+		$checkedCount=$orders->field(array('orderId'))->where($map)->select();
 		$res=array(response=>"用户昵称",status=>"1",checkedCount=>count($checkedCount),uncheckedCount=>count($uncheckedCount));
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
@@ -53,24 +53,20 @@ class GetController extends BaseController {
 	*返回值@return array orders
 	*/
 	public function getUnchecked(){
+		//传入page
 		$page=I('post.page');
-		//处理page为大于0的数字
-		$page=(is_numeric($page))&&($page>0)?$page:1;
+		//设定分页数目
+		$pagination=10;
+		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "0";
-		$orders = M('orders');
-		$orderlist=$orders->field(array('orderId','orderInfo','positionId','importTime','postorId'))->where($map)->select();
-		//计算长度
-		$length = count($orderlist);
-		//计算页数,10为一页
-		$maxPage = ceil( $length  / 10 );
-		//若page大于最大页数则取最大页数
-		$page= $page > $maxPage? $maxPage:$page;
-		//返回orderRetuen
-		for($i=10*($page-1);$i<(($page==$maxPage)?$length-10*($page-1):10*($page));$i++){
-			$orderReturn[]=$orderlist[$i];
-		}
-		$res=array(response=>"用户昵称",status=>"1",orders=>$orderReturn,page=>$page,maxPage=>$maxPage);
+		//设定表
+		$table='orders';
+		//设定返回字段
+		$field=array('orderId','orderInfo','positionId','importTime','postorId');
+		$type=array();
+		$orderlist=getDataByKeyWords($type,$map,$table,$pagination,$field,$page);
+		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
@@ -79,24 +75,20 @@ class GetController extends BaseController {
 	*返回值@return array orders
 	*/
 	public function getChecked(){
+		//传入page
 		$page=I('post.page');
-		//处理page为大于0的数字
-		$page=(is_numeric($page))&&($page>0)?$page:1;
+		//设定分页数目
+		$pagination=10;
+		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "1";
-		$orders = M('orders');
-		$orderlist=$orders->field(array('orderId','orderInfo','exportTime','postorId'))->where($map)->select();
-		//计算长度
-		$length = count($orderlist);
-		//计算页数,10为一页
-		$maxPage = ceil( $length  / 10 );
-		//若page大于最大页数则取最大页数
-		$page= $page > $maxPage? $maxPage:$page;
-		//返回orderRetuen
-		for($i=10*($page-1);$i<(($page==$maxPage)?$length-10*($page-1):10*($page));$i++){
-			$orderReturn[]=$orderlist[$i];
-		}
-		$res=array(response=>"用户昵称",status=>"1",orders=>$orderReturn,page=>$page,maxPage=>$maxPage);
+		//设定表
+		$table='orders';
+		//设定返回字段
+		$field=array('orderId','orderInfo','positionId','exportTime','postorId');
+		$type=array();
+		$orderlist=getDataByKeyWords($type,$map,$table,$pagination,$field,$page);
+		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
