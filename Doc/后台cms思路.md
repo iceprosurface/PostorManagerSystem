@@ -13,6 +13,8 @@
 			|-@param where (必要属性) array 关键字段(eq){"0":{key:value}}
 			|-@param field (必要属性如果不提交则认为不查询任何) array 需要查询字段，类型为{"0"=>{field,value},……}
 			|-@param from (必要属性) string 查询的表（后端检验）
+			|-@param pagination 分页数目
+			|-@param page 页码
 		|-编辑操作
 			|-@param id (必要属性) int 
 			|-@param type (必要属性) string 操作类型 包括以下几种类型{update,delete}
