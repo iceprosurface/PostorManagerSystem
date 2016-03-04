@@ -95,3 +95,11 @@
 		
 		
 	}
+	function setDataByKeyWords(){
+		
+		$pagination=I("post.pagination");
+		$count=$model->field( array( "id" ) )->where( $where )->Count();
+		$pages=intval ( $count / $pagination );
+		
+		array("list"=>$model->field($field)->where($where)->where($map)->limit($limit)->select(),"max"=>$pages);
+	}
