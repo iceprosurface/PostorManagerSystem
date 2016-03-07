@@ -1,18 +1,4 @@
 <?php
-	/** 
-	* 检查用户是否是合法用户
-	* @param array $map 含有用户id和密码的表
-	* @return true合法用户，false，无效用户
-	*/ 
-	function checkUsr($map){
-		$usrs = M('usr');
-		$list = $usrs -> where($map) -> find();
-		if( empty( $list ) ){
-			return false;
-		}else{
-			return true;
-		}
-	}
 	/**
     * 得到当前所有的token
     *
@@ -20,7 +6,7 @@
     */
 
     function getTokens(){
-		$tokens = session(C('SESSION_KEY_TOKEN'));
+		$tokens = session(C('SESSION_KEY_TOKEN_ADMIN'));
 		if (empty($tokens) && !is_array($tokens)) {
 			$tokens = array();
 		}
@@ -88,9 +74,9 @@
     */
 	function isThisTokenL($token){
 		//判断是否有token若有必然在此次登录有效期内
-		if(session(C('SESSION_KEY_TOKEN'))!=null){
+		if(session(C('SESSION_KEY_TOKEN_ADMIN'))!=null){
 			//判断是否和session一致，一致说明还处在本次登录有效期内
-			if(session(C('SESSION_KEY_TOKEN'))==$token){
+			if(session(C('SESSION_KEY_TOKEN_ADMIN'))==$token){
 				return  true;
 			}else{
 				return  false;
@@ -104,15 +90,15 @@
     * @return boolean
     */
 	function isTokenL($token){
-		$usr_info=array(
+		$admin_info=array(
 			'token'=>$token,
-			'id'=>cookie(C('COOKIE_KEY_TOKEN'))['id'],
+			'id'=>cookie(C('COOKIE_KEY_TOKEN_ADMIN'))['id'],
 		);
 		
 		//判断是否有token若有必然在此次登录有效期内
-		if(session(C('SESSION_KEY_TOKEN'))!=null){
+		if(session(C('SESSION_KEY_TOKEN_ADMIN'))!=null){
 			//判断是否和session一致，一致说明还处在本次登录有效期内
-			if(session(C('SESSION_KEY_TOKEN'))==$usr_info['token']){
+			if(session(C('SESSION_KEY_TOKEN_ADMIN'))==$admin_info['token']){
 				return  true;
 			}else{
 				
@@ -121,26 +107,26 @@
 		}
 		
 		//查询数据库
-		$usrs = M('usr');
-		if($usrs->create($usr_info)){
-			$map['Id']=$usr_info['Id'];
+		$usrs = M('admin');
+		if($usrs->create($admin_info)){
+			$map['Id']=$admin_info['Id'];
 			$list=$usrs->where($map)->find();
 			//若用户给出的id为空,提交token为null，token和数据库不符，当前时间减去授予时间大于有效时间，则该token是无效的
-			if( ($usr_info['id'] !="")
-				&& ($usr_info['token'] != null) 
-				&& ($list['token']==$usr_info['token'])
+			if( ($admin_info['id'] !="")
+				&& ($admin_info['token'] != null) 
+				&& ($list['token']==$admin_info['token'])
 				&& (time()-strtotime($list['granttime'])) <= $list['expiretime']){
 				//更新token
-				$token =createToken($usr_info['id']);
+				$token =createToken($admin_info['id']);
 				//session清空token
-				session(C('SESSION_KEY_TOKEN'),null);
+				session(C('SESSION_KEY_TOKEN_ADMIN'),null);
 				//session写入token
-				session(C('SESSION_KEY_TOKEN'),$token);
-				$usr_info['token']=$token;
-				$usr_info['grantTime']=date('Y-m-d H:i:s', time());
-				cookie(C('COOKIE_KEY_TOKEN'),array(id=>$usr_info["id"],token=>$token),$list['expiretime']);
+				session(C('SESSION_KEY_TOKEN_ADMIN'),$token);
+				$admin_info['token']=$token;
+				$admin_info['grantTime']=date('Y-m-d H:i:s', time());
+				cookie('login',array(id=>$admin_info["id"],token=>$token),$list['expiretime']);
 				//更新数据库token，和授予时间
-				$list=$usrs->where($map)->save($usr_info);
+				$list=$usrs->where($map)->save($admin_info);
 				return  true;
 			}else{
 				return  false;
@@ -150,42 +136,16 @@
 		
 		return  false;
 	}
-	/**
-	 * 邮件发送函数
-	 */
-	function sendMail($to, $subject, $content) {
-		Vendor('PHPMailer.PHPMailerAutoload'); 
-		$mail = new PHPMailer();
-		// 装配邮件服务器
-		if (C('MAIL_SMTP')) {
-			$mail->IsSMTP();
-		}
-		$mail->Host = C('MAIL_HOST');
-		$mail->SMTPAuth = C('MAIL_SMTPAUTH');
-		$mail->Username = C('MAIL_USERNAME');
-		$mail->Password = C('MAIL_PASSWORD');
-		$mail->SMTPSecure = C('MAIL_SECURE');
-		$mail->CharSet = C('MAIL_CHARSET');
-		// 装配邮件头信息
-		$mail->From = C('MAIL_USERNAME');
-		$mail->AddAddress($to);
-		$mail->FromName = '快件管理中心';
-		$mail->IsHTML(C('MAIL_ISHTML'));
-		// 装配邮件正文信息
-		$mail->Subject = $subject;
-		$mail->Body = $content;
-		// 发送邮件
-		if (!$mail->Send()) {
-			return FALSE;
-		} else {
-			return TRUE;
-		}
+	function isPswCurrect(){
+		
 	}
 	/**
     * 从客户端获取登陆信息
     * @return $value-token
     */
-	function getClientLToken(){
-		$value=cookie(C('COOKIE_KEY_TOKEN'));
+	function getAdminClientLToken(){
+		$value=cookie(C('COOKIE_KEY_TOKEN_ADMIN'));
 		return $value['token'];
 	}
+	
+	
