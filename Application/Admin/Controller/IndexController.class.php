@@ -5,10 +5,10 @@ class IndexController extends Controller {
     public function test(){
 		
 		// $this->display(index);
-		var_dump(getDataByKeyWords(array('key'=>'usrid','word'=>'111111','type'=>'EQ'),,'orders',3,array('orderid'),1));
+		var_dump(getDataByKeyWords(array('key'=>'usrid','word'=>'111111','type'=>'EQ'),'orders',3,array('orderid'),1));
     }
 	public function index(){
-		
+		$this->display(index); 
 	}
 	public function login(){
 		//判断登陆成功（此处只需要session 2小时，不需要记住登陆状态）
