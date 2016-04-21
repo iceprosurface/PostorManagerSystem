@@ -22,10 +22,14 @@ class EditController extends Controller {
 		$page=I("post.page",1);
 		$pagination=I("post.pagination",20);
 		//设定查询内容
-		foreach($where as $i){
-			$map[$i["key"]] = $i["value"];
-			
+		if(isset($where)){
+			foreach($where as $i){
+				$map[$i["key"]] = $i["value"];
+			}
+		}else{
+			$map=Array();
 		}
+		
 		//初始化返回
 		$returns=array();
 		if(in_array($from,array("orders","positions","postor","usr"))){
@@ -78,7 +82,27 @@ class EditController extends Controller {
 		
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
-	
+	function maxPages(){
+		$pagination=I("post.pagination",40);
+		$model = M("positions");
+		$count=$model->field( array( "id" ) )->where( $where )->Count();
+		$maxpage=intval ( $count / $pagination );
+		for($i=1;$i<=$maxpage;$i++){
+			$pages[] = array("id"=>$i);
+		}
+		$this->ajaxReturn(json_encode($pages),'JSON');
+	}
+	// function create(){
+		// $model = M("positions");
+		
+		// for($i=1;$i<=400;$i++){
+			// $data["haveProduct"]=false;
+			// $data["positionId"]=$i;
+			// $model->create($data);
+			// $model_result=$model->add($data);
+		// }
+		
+	// }
 }
 
 

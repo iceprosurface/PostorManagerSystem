@@ -48,21 +48,36 @@ appModule = angular.module('appModule', ['ngRoute'],function($httpProvider){
 appModule.factory('ipcService', function($http,$q) {
 
 	return {
-		"id":function(){
-				var defer = $q.defer();
-				$http.post('/admin/edit/query', {
-					"where": [{"key":"usrId","value":1325115}],
-					"field": ["orderId"],
-					"from": "orders",
-					"pagination": 10,
-					"page": 1
-				}).success(function(data) {
-					defer.resolve(JSON.parse(data)["list"]);
-				}).error(function(err) {
-					defer.reject(err);
-				});
-				return defer.promise;
+		"positions":(page)=>
+		{
+			page = isNaN(parseInt(page)) ? 1 : parseInt(page);
+			var defer = $q.defer();
+			$http.post('/admin/edit/query', {
+				
+				"field": ["positionId","haveProduct"],
+				"from": "positions",
+				"pagination": 40,
+				"page": page
+			}).success(function(data) {
+				defer.resolve(JSON.parse(data)["list"]);
+			}).error(function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		"positionPages":()=>
+		{
+			var defer = $q.defer();
+			$http.post('/admin/edit/maxPages', {
+				"pagination": 40
 			}
+			).success(function(data) {
+				defer.resolve(JSON.parse(data));
+			}).error(function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		}
 	}
 });
 
@@ -96,6 +111,7 @@ appModule.config(function($routeProvider){
 		});
 		
 });
+
 var containerStatusController = appModule.controller('containerStatusController',
 	function($scope){
 		
@@ -128,9 +144,18 @@ var orderConfController = appModule.controller('orderConfController',
 );
 var IndexController = appModule.controller('IndexController',
 	function($scope,ipcService){
-		var promise = ipcService.id();
-		promise.then(function(data) {
-			$scope.id = data ;
+		$scope.nowPage = "1";
+		ipcService.positions($scope.nowPage).then(function(data) {
+			$scope.positions = data ;
+		});
+		ipcService.positionPages($scope.nowPage).then(function(data) {
+			$scope.pages = data;
+		});
+		$scope.$watch('nowPage',function(newVal){
+			$scope.nowPage = newVal;
+			ipcService.positions($scope.nowPage).then(function(data) {
+				$scope.positions = data ;
+			});
 		});
 	}
 );
