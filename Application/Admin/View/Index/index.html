@@ -22,20 +22,20 @@
 		<div class="row cells8">
 			<div class="">
 				<ul class="v-menu">
-				<li class="menu-title">首页</li>
-				<li><a href="#index"><span class="mif-home icon"></span> 首页</a></li>
-				<li class="divider"></li>
-				<li class="menu-title">货柜操作</li>
-				<li><a href="#containerStatus"><span class="mif-stack3 icon"></span> 货柜状态</a></li>
-				<li><a href="#unnoticed"><span class="mif-event-busy icon"></span> 未提醒件</a></li>
-				<li><a href="#backOrder"><span class="mif-bin icon"></span> 退货件</a></li>
-				<li class="divider"></li>
-				<li class="menu-title">会员操作<</li>
-				<li><a href="#usrStatus"><span class="mif-user icon"></span> 会员状态修改</a></li>
-				<li><a href="#usrOrder"><span class="mif-compass icon"></span> 对应快件</a></li>
-				<li class="divider"></li>
-				<li class="menu-title">快件操作</li>
-				<li><a href="#orderConf"><span class="mif-tags icon"></span> 快件信息修改</a></li>
+					<li class="menu-title">首页</li>
+					<li class="sub-title"><a href="#index"><span class="mif-home icon"></span> 首页</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">货柜操作</li>
+					<li class="sub-title"><a href="#containerStatus"><span class="mif-stack3 icon"></span> 货柜状态</a></li>
+					<li class="sub-title"><a href="#unnoticed"><span class="mif-event-busy icon"></span> 未提醒件</a></li>
+					<li class="sub-title"><a href="#backOrder"><span class="mif-bin icon"></span> 退货件</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">会员操作<</li>
+					<li class="sub-title"><a href="#usrStatus"><span class="mif-user icon"></span> 会员状态修改</a></li>
+					<li class="sub-title"><a href="#usrOrder"><span class="mif-compass icon"></span> 对应快件</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">快件操作</li>
+					<li class="sub-title"><a href="#orderConf"><span class="mif-tags icon"></span> 快件信息修改</a></li>
 				</ul>
 			</div>
 			<div class="cell colspan6 content fg-black" >
@@ -48,6 +48,13 @@
 	</div>
 	
 </div>
-
+<script>
+$(".v-menu .sub-title").click(function(){
+	$(".v-menu .sub-title").each(function(){
+		$(this).removeClass("active");
+	});
+	$(this).addClass("active");
+});
+</script>
 </body>
 </html>

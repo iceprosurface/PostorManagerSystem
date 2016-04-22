@@ -41,10 +41,10 @@ class EditController extends Controller {
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	/*
-	* @param id (必要属性) int 
-	* @param type (必要属性) string 操作类型 包括以下几种类型{update,delete,add}
-	* @param field (如果为更新则是必要属性，填空则不操作任何字段) array 需要操作的字段，类型为{"0"=>{field,value},……}
-	* @param from (必要属性) string 查询的类型（后端检验）
+	* @param id (必要属性) {int}
+	* @param type (必要属性) {string} 操作类型 包括以下几种类型{update,delete,add}
+	* @param field (如果为更新则是必要属性，填空则不操作任何字段) {array} 需要操作的字段，类型为{"0"=>{field,value},……}
+	* @param from (必要属性) {string} 查询的类型（后端检验）
 	*/
 	function edit(){
 		//有限判定是否为有效操作

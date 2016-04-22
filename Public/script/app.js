@@ -44,7 +44,7 @@ appModule = angular.module('appModule', ['ngRoute'],function($httpProvider){
 	return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
 	}];
 });
-
+//拉取工厂，用于从服务端拉取信息，该个项目应该尽可能的减少因为大量使用该项目将会引起性能问题
 appModule.factory('ipcService', function($http,$q) {
 
 	return {
@@ -58,9 +58,9 @@ appModule.factory('ipcService', function($http,$q) {
 				"from": "positions",
 				"pagination": 40,
 				"page": page
-			}).success(function(data) {
+			}).success((data)=>{
 				defer.resolve(JSON.parse(data)["list"]);
-			}).error(function(err) {
+			}).error((err)=>{
 				defer.reject(err);
 			});
 			return defer.promise;
@@ -71,9 +71,26 @@ appModule.factory('ipcService', function($http,$q) {
 			$http.post('/admin/edit/maxPages', {
 				"pagination": 40
 			}
-			).success(function(data) {
+			).success((data)=>{
 				defer.resolve(JSON.parse(data));
-			}).error(function(err) {
+			}).error((err)=>{
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		"unnoticedOrders":(page)=>
+		{
+			var defer = $q.defer();
+			$http.post('/admin/edit/query', {
+				"where":[{"key":"haveNoticed","value":0}],
+				"field": ["orderId","usrPhoneNumber"],
+				"from": "orders",
+				"pagination": 20,
+				"page": page
+			}
+			).success((data)=>{
+				defer.resolve(JSON.parse(data)["list"]);
+			}).error((err)=>{
 				defer.reject(err);
 			});
 			return defer.promise;
@@ -111,15 +128,38 @@ appModule.config(function($routeProvider){
 		});
 		
 });
-
+//库存系统控制器
 var containerStatusController = appModule.controller('containerStatusController',
-	function($scope){
-		
+	function($scope,ipcService){
+		//库存箱子编号
+		$scope.nowPage = "1";
+		ipcService.positions($scope.nowPage).then((data)=>{
+			$scope.positions = data ;
+		});
+		ipcService.positionPages($scope.nowPage).then((data)=>{
+			$scope.pages = data;
+		});
+		//监视库存编号，如果有改变，则更新
+		$scope.$watch('nowPage',(newVal)=>{
+			// $scope.nowPage = newVal;
+			ipcService.positions($scope.nowPage).then((data)=>{
+				$scope.positions = data ;
+			});
+		});
 	}
 );
+//未发送信息列表控制器
 var unnoticedController = appModule.controller('unnoticedController',
-	function($scope){
-		
+	function($scope,ipcService){
+		$scope.nowPage = "1";
+		ipcService.unnoticedOrders($scope.nowPage).then((data)=>{
+			$scope.unnoticedOrders = data;
+		});
+		$scope.$watch('nowPage',(newVal)=>{
+			ipcService.unnoticedOrders($scope.nowPage).then((data)=>{
+				$scope.unnoticedOrders = data ;
+			});
+		});
 	}
 );
 var backOrderController = appModule.controller('backOrderController',
@@ -143,19 +183,7 @@ var orderConfController = appModule.controller('orderConfController',
 	}
 );
 var IndexController = appModule.controller('IndexController',
-	function($scope,ipcService){
-		$scope.nowPage = "1";
-		ipcService.positions($scope.nowPage).then(function(data) {
-			$scope.positions = data ;
-		});
-		ipcService.positionPages($scope.nowPage).then(function(data) {
-			$scope.pages = data;
-		});
-		$scope.$watch('nowPage',function(newVal){
-			$scope.nowPage = newVal;
-			ipcService.positions($scope.nowPage).then(function(data) {
-				$scope.positions = data ;
-			});
-		});
+	function($scope){
+		
 	}
 );
