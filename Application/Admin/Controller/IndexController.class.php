@@ -8,7 +8,7 @@ class IndexController extends Controller {
 		var_dump(getDataByKeyWords(array('key'=>'usrid','word'=>'111111','type'=>'EQ'),'orders',3,array('orderid'),1));
     }
 	public function index(){
-		$this->display(index); 
+		$this->display(login); 
 	}
 	public function login(){
 		//判断登陆成功（此处只需要session 2小时，不需要记住登陆状态）
@@ -56,11 +56,12 @@ class IndexController extends Controller {
 				$list=$usrs->field(array('token','grantTime','lastLogin','lastIp'))->where($map)->save($usr);
 				$list=$usrs->field(array('id','expiretime'))->where($map)->find();
 				$res=array(response=>"登陆成功",status=>"1");
-				cookie(C('COOKIE_KEY_TOKEN'),array(id=>$list["id"],token=>$token),$list['expiretime']);
+				cookie(C('COOKIE_KEY_TOKEN_ADMIN'),array(id=>$list["id"],token=>$token),$list['expiretime']);
 			}else{
 				$res=array(response=>"用户名密码验证信息错误",status=>"2");
 			}
 		}
-		$this->redirect(Edit/logined);
+		$this->ajaxReturn(json_encode($res),'JSON');
+		// $this->redirect(Edit/logined);
 	}
 }

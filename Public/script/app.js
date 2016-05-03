@@ -44,7 +44,7 @@ appModule = angular.module('appModule', ['ngRoute'],function($httpProvider){
 	return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
 	}];
 });
-//拉取工厂，用于从服务端拉取信息，该个项目应该尽可能的减少因为大量使用该项目将会引起性能问题
+//拉取工厂，用于从服务端拉取信息
 appModule.factory('ipcService', function($http,$q) {
 
 	return {
@@ -90,6 +90,27 @@ appModule.factory('ipcService', function($http,$q) {
 			}
 			).success((data)=>{
 				defer.resolve(JSON.parse(data)["list"]);
+			}).error((err)=>{
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		"order":(orderid)=>
+		{
+			var defer = $q.defer();
+			$http.post('/admin/edit/query', {
+				"where":[{"key":"orderId","value":orderid}],
+				"field": ["orderId","usrPhoneNumber","orderInfo","usrId","positionId","importTime","exportTime"],
+				"from": "orders"
+			}
+			).success((data)=>{
+				var json = JSON.parse(data);
+				if(json["status"]==1){
+					defer.resolve(json["list"]);
+				}else if(json["status"]==2){
+					defer.resolve({"response":json["response"],"failed":true})
+				}
+				
 			}).error((err)=>{
 				defer.reject(err);
 			});
@@ -151,10 +172,12 @@ var containerStatusController = appModule.controller('containerStatusController'
 //未发送信息列表控制器
 var unnoticedController = appModule.controller('unnoticedController',
 	function($scope,ipcService){
+		//页码
 		$scope.nowPage = "1";
 		ipcService.unnoticedOrders($scope.nowPage).then((data)=>{
 			$scope.unnoticedOrders = data;
 		});
+		//监视页码，如果有改变，则更新
 		$scope.$watch('nowPage',(newVal)=>{
 			ipcService.unnoticedOrders($scope.nowPage).then((data)=>{
 				$scope.unnoticedOrders = data ;
@@ -172,9 +195,24 @@ var usrStatusController = appModule.controller('usrStatusController',
 		
 	}
 );
+//用户订单修改控制器
 var usrOrderController = appModule.controller('usrOrderController',
-	function($scope){
-		
+	function($scope,ipcService,$http){
+		//订单号
+		$scope.orderid = "";
+		ipcService.order($scope.nowPage).then((data)=>{
+			$scope.order = data;
+		});
+		// 监视订单号，如果满足12位数字则查询（减小压力）
+		$scope.$watch('orderid',(newVal)=>{
+			var regex = /\b\d{12}\b/g;//正则表达式，可修改为需要的内容
+			if(newVal.toString().match(regex)!=null){
+				ipcService.order($scope.orderid).then((data)=>{
+					$scope.order = data;
+				});
+			}
+			
+		});
 	}
 );
 var orderConfController = appModule.controller('orderConfController',

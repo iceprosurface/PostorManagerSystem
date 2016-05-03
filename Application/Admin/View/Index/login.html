@@ -1,0 +1,83 @@
+<include file="Public:header" title="登陆系统"/>
+<style>
+        .login-form {
+            width: 25rem;
+            height: 18.75rem;
+            position: fixed;
+            top: 50%;
+            margin-top: -9.375rem;
+            left: 50%;
+            margin-left: -12.5rem;
+            background-color: #ffffff;
+            opacity: 0;
+            -webkit-transform: scale(.8);
+            transform: scale(.8);
+        }
+    </style>
+
+    <script>
+		
+        $(function(){
+            var form = $(".login-form");
+
+            form.css({
+                opacity: 1,
+                "-webkit-transform": "scale(1)",
+                "transform": "scale(1)",
+                "-webkit-transition": ".5s",
+                "transition": ".5s"
+            });
+        });
+        </script>
+        <script>
+			$(function(){
+				$('.login').click(function(){
+					var params = $("#login").serialize();
+					$.post(
+						"_ADMIN_index/va", 
+						params,
+						function(data){
+							json = eval('('+data+')');
+							if(json.status==1){
+								window.location="_ADMIN_edit/index";
+								//return true;
+							}else{
+								alert('error');
+							}
+						});
+				});
+			});
+			
+
+    </script>
+</head>
+<body class="bg-darkTeal">
+    <div class="login-form padding20 block-shadow">
+        <form id="login" onsubmit="return false;">
+            <h1 class="text-light">快件管理系统后台</h1>
+            <hr class="thin"/>
+            <br />
+            <div class="input-control text full-size" data-role="input">
+                <label for="user_id">User id:</label>
+                <input type="text" name ="usrid" id="user_id"  value="">
+                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <br />
+            <br />
+            <div class="input-control password full-size" data-role="input">
+                <label for="user_psw">UserInfo password:</label>
+                <input type="password" name ="psw"  id="user_psw"  value="">
+                <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+            </div>
+            <br />
+            <br />
+            <div class="form-actions">
+                <button type="button" class="button primary login">登录</button>
+                <button type="button" class="button link">返回</button>
+                <button type="button" class="button link">忘记密码</button>
+            </div>
+        </form>
+    </div>
+    <div id="ss"></div>
+</body>
+</html>

@@ -1,8 +1,8 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class EditController extends Controller {
-// class EditController extends BaseController {
+class EditController extends BaseController {
+// class EditController extends Controller {
 	function logined(){
 		$this->display(logined);
 	}
@@ -34,7 +34,12 @@ class EditController extends Controller {
 		$returns=array();
 		if(in_array($from,array("orders","positions","postor","usr"))){
 			$returns=getDataByKeyWords($type,$map,$from,$pagination,$field,$page);
-			$res=array(response=>"query",status=>"1","list"=>$returns["list"],page=>$page,maxPage=>$returns["max"]);
+			if($returns["list"]!=null){
+				$res=array(response=>"query",status=>"1","list"=>$returns["list"],page=>$page,maxPage=>$returns["max"]);
+			}else{
+				$res=array(response=>"fail",status=>"2");
+			}
+			
 		}else{
 			$res=array(response=>"fail",status=>"2");
 		}
