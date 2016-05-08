@@ -3,7 +3,9 @@ return array(
 	//'配置项'=>'配置值'
 		// 数据库配置信息
 		'DB_TYPE'			=>'mysql', 		// 数据库类型
-		'DB_HOST'			=>'localhost', 	// 服务器地址
+		// host配置在linux/unix环境下可能需要调整为127.0.0.1
+		// win环境下通常可以使用localhost访问
+		'DB_HOST'			=>'127.0.0.1', 	// 服务器地址
 		'DB_NAME'			=>'postor', 	// 数据库名
 		'DB_USER'			=>'root', 		// 用户名
 		'DB_PWD'			=>'', 			// 密码
