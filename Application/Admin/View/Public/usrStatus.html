@@ -1,0 +1,38 @@
+<div class="input-control text">
+    <input type="text"  ng-model="usrid" required placeholder="请输入用户id">
+</div>
+
+<p ng-show="datahave">查无此人</p>
+
+<table ng-show="datahave">
+	<tr>
+		<td>用户名</td>
+		<td ng-bind="usr['name']"></td>
+		<td>修改</td>
+	</tr>
+	<tr>
+		<td>密码</td>
+		<td ng-bind="usr['psw']"></td>
+		<td>修改</td>
+	</tr>
+	<tr>
+		<td>id</td>
+		<td ng-bind="usr['id']"></td>
+		<td>修改</td>
+	</tr>
+	<tr>
+		<td>手机</td>
+		<td ng-bind="usr['phonenumber']"></td>
+		<td>修改</td>
+	</tr>
+	<tr>
+		<td>上次登录时间</td>
+		<td ng-bind="usr['lastlogin']"></td>
+		<td>修改</td>
+	</tr>
+	<tr>
+		<td>上次登陆ip</td>
+		<td ng-bind="usr['lastip']"></td>
+		<td>修改</td>
+	</tr>
+</table>

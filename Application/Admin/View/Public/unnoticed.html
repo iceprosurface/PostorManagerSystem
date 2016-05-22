@@ -1,0 +1,10 @@
+<h2>未通知快件列表</h2>
+<table class="table striped hovered cell-hovered border bordered">
+	<thead>
+		<tr><th>订单号</th><th>手机号码</th></tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="unnoticedOrder in unnoticedOrders"><td ng-bind="unnoticedOrder['orderid']"></td><td ng-bind="unnoticedOrder['usrphonenumber']"></td></tr>
+	</tbody>
+</table>
+

@@ -1,4 +1,18 @@
 <?php
+	/** 
+	* 检查用户是否是合法用户
+	* @param array $map 含有用户id和密码的表
+	* @return true合法用户，false，无效用户
+	*/ 
+	function checkUsr($map){
+		$usrs = M('admin');
+		$list = $usrs -> where($map) -> find();
+		if( empty( $list ) ){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	/**
     * 得到当前所有的token
     *
@@ -124,7 +138,7 @@
 				session(C('SESSION_KEY_TOKEN_ADMIN'),$token);
 				$admin_info['token']=$token;
 				$admin_info['grantTime']=date('Y-m-d H:i:s', time());
-				cookie('login',array(id=>$admin_info["id"],token=>$token),$list['expiretime']);
+				cookie(C("COOKIE_KEY_TOKEN_ADMIN"),array(id=>$admin_info["id"],token=>$token),$list['expiretime']);
 				//更新数据库token，和授予时间
 				$list=$usrs->where($map)->save($admin_info);
 				return  true;
