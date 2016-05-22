@@ -115,6 +115,21 @@ appModule.factory('ipcService', function($http,$q) {
 				defer.reject(err);
 			});
 			return defer.promise;
+		},
+		"usr":(name)=>
+		{
+			var defer = $q.defer();
+			$http.post('/admin/edit', {
+				"where":[{"key":"name","value":name}],
+				"field": ["usrId","usrPhoneNumber","psw","lastIp","name","lastLogin"],
+				"from": "usr"
+			}
+			).success((data)=>{
+			    defer.resolve(JSON.parse(data));
+			}).error((err)=>{
+			    	defer.reject(err);
+			});
+			return defer.promise;
 		}
 	}
 });
@@ -190,9 +205,17 @@ var backOrderController = appModule.controller('backOrderController',
 		
 	}
 );
+//用户信息控制器
 var usrStatusController = appModule.controller('usrStatusController',
-	function($scope){
+	function($scope,ipcService){
+		$scope.datahave = false;
+		ipcService.usr(name).then( ( data ) => {
 		
+			$scope.usr = data["list"];
+
+			$scope.datahave = parseInt( data["lenght"] ) > 0 ? true : false;
+		
+		});
 	}
 );
 //用户订单修改控制器
@@ -217,7 +240,7 @@ var usrOrderController = appModule.controller('usrOrderController',
 );
 var orderConfController = appModule.controller('orderConfController',
 	function($scope){
-		
+				
 	}
 );
 var IndexController = appModule.controller('IndexController',
