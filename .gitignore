@@ -1,3 +1,4 @@
+
 #################
 ## Eclipse
 #################
@@ -218,6 +219,17 @@ pip-log.txt
 #############
 ## ThinkPHP
 #############
+
 Runtime/
 Cashe/
 *.log
+
+############
+## Gulp
+############
+/node_modules
+/bower_components
+/test
+/test2
+/dest
+/dist

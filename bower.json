@@ -1,0 +1,26 @@
+{
+  "name": "chat",
+  "description": "",
+  "main": "",
+  "authors": [
+    "iceprosurface <775846939@qq.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "^2.2.0",
+    "jquery": "^2.2.4",
+    "angular": "angularjs#^1.5.6",
+    "bootstrap": "^3.3.6",
+    "flatui": "*",
+    "angular-animate": "^1.5.6",
+    "angular-resource": "^1.5.6"
+  }
+}
