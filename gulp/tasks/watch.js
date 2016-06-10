@@ -10,7 +10,10 @@ gulp.task('watch', function(){
     watch(config.html.all,function(){
     	gulp.start('html');
     })
-    watch(config.css.all,function(){
+    watch(config.css.src,function(){
     	gulp.start('css');
+    })
+    watch(config.js.src,function(){
+    	gulp.start('js');
     })
 })

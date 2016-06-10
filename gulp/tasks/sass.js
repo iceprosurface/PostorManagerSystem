@@ -11,9 +11,9 @@ var config = require('../config').sass;
 
 gulp.task('sass', function(){
     return gulp.src(config.src)
-    	.pipe(sourcemaps.init())
-        .pipe(sass(config.settings).on('error', sass.logError))
-        .pipe(sourcemaps.write('./maps'))
+    	//.pipe(sourcemaps.init())
+        .pipe(sass(config.settings))
+        //.pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest(config.dest))
         .pipe(rename({ suffix: '.min' }))
         .pipe(minifycss())
