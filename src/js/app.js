@@ -1,6 +1,4 @@
-/** @const */
 (function () {
-    "use strict";
     // the rest of your file goes here...
 	var appModule = angular.module('appModule', ['ngRoute'],function($httpProvider){
 		// 官方提供的类似于$.ajax形式的提交
@@ -52,7 +50,7 @@
 	appModule.factory('ipcService', ['$http','$q',function($http,$q) {
 	
 			return {
-				"positions": function(page)
+				"positions": (page)=>
 				{
 					page = isNaN(parseInt(page)) ? 1 : parseInt(page);
 					var defer = $q.defer();
@@ -250,4 +248,4 @@
 							
 				}]
 	);
-}());
+}(angular));

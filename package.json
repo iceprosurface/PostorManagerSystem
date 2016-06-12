@@ -7,6 +7,8 @@
   "homepage": "",
   "author": "icepro",
   "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "gulp-babel": "^6.1.2",
     "gulp-file-include": "^0.13.7",
     "gulp-processhtml": "^1.1.0",
     "gulp-replace": "^0.5.4",

@@ -147,5 +147,28 @@ module.exports = {
 				}
 			],
 			dependences: []
+		},
+		
+		//
+		metro: {
+			patten:
+			[
+				{
+					name: 'fonts',
+					path: './bower_components/metro/build/fonts/*',
+					dest: lib + '/metro/fonts'
+				},
+				{
+					name: 'css',
+					path: './bower_components/metro/build/css/*.css',
+					dest: lib + '/metro/css'
+				},
+				{
+					name: 'js',
+					path: './bower_components/metro/build/js/*.js',
+					dest: lib + '/metro/js'
+				}
+			],
+			dependences: ['jquery']
 		}
 	}

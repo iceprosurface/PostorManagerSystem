@@ -26,17 +26,19 @@ module.exports = {
 	//在html中css优先级高于sass编译完成文件
 	css: {
 		src: src + '/css/*.css',
+		all: src + '/css/*.css',
 		dest: dest + '/css'
 	},
 	//js文件仅对module进行合并所以需要确保所有添加的js为独立模块
 	js: {
 		src: src + '/js/*.js',
+		all: src + '/js/*.js',
 		dest: dest + '/js'
 	},
 
 
 	font: lib + '/fonts',
 
-	librarys: ['angularRoute','jquery','flatui'],
+	librarys: ['angularRoute','metro'],
 
 }
