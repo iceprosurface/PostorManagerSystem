@@ -1,3 +1,4 @@
+/*登陆*/
 .login-form {
     width: 25rem;
     height: 18.75rem;
@@ -10,4 +11,84 @@
     opacity: 0;
     -webkit-transform: scale(.8);
     transform: scale(.8);
+}
+
+.body{
+    height:100%;
+    width:100%;
+    font-family:"Sans-serif";
+}
+font{
+    font-family:"Sans-serif";
+}
+.page-content {
+    padding-top: 3.125rem;
+    min-height: 100%;
+    height: 100%;
+}
+.table .input-control.checkbox {
+    line-height: 1;
+    min-height: 0;
+    height: auto;
+}
+
+@media screen and (max-width: 800px){
+    #cell-sidebar {
+        flex-basis: 52px;
+    }
+}
+.footor{
+    height:400px;
+    p {
+        text-align: center;
+        font-size: 15px;
+        line-height: 25px;
+        color:#fff;
+    }
+}
+.frame{
+    text-align:left;
+    img {
+        max-width:400px;
+    }
+}
+.text-left{
+    text-align:left;
+}
+.text-center{
+    text-align:center;
+}
+.border-right{
+    border: 1px dashed #CCC;
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+}
+.border-nomal{
+    border: 1px solid #CCC;
+}
+.tag {
+    &.SUCCESS {
+      background-color: #60a917;
+      color: #ffffff;
+    }
+    &.ALERT {
+      background-color: #ce352c;
+      color: #ffffff;
+    }
+    &.INFO {
+      background-color: #1ba1e2;
+      color: #ffffff;
+    }
+    &.WARNING {
+      background-color: #fa6800;
+      color: #ffffff;
+    }  
+}
+a.tag {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.hight3{
+    height:3px;
 }

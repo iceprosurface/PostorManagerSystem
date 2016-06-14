@@ -17,7 +17,8 @@ module.exports = {
 
 	//html的设置
 	html: {
-		all: [src + "/html/**/*.html","!" + src + "/html/public/"], //所有的html文件
+		all: src + "/html/**/*.html",
+		src: [src + "/html/**/*.html","!" + src + "/html/public"], //所有的html文件
 		dest: dest + "/"
 	},
 

@@ -2,31 +2,14 @@
 	<title>登陆</title>
 </head>
 <body class="bg-darkTeal">
-<div class="login-form padding20 block-shadow">
-    <form id="login" onsubmit="return false;">
-        <h1 class="text-light">登录</h1>
-        <hr class="thin"/>
-        <br />
-        <div class="input-control text full-size" data-role="input">
-            <label for="user_id">User id:</label>
-            <input type="text" name ="usrid" id="user_id"  value="">
-            <button class="button helper-button clear"><span class="mif-cross"></span></button>
-        </div>
-        <br />
-        <br />
-        <div class="input-control password full-size" data-role="input">
-            <label for="user_psw">UserInfo password:</label>
-            <input type="password" name ="psw"  id="user_psw"  value="">
-            <button class="button helper-button reveal"><span class="mif-looks"></span></button>
-        </div>
-        <br />
-        <br />
-        <div class="form-actions">
-            <button type="button" class="button primary login">登录</button>
-            <button type="button" class="button link">返回</button>
-            <button type="button" class="button link">忘记密码</button>
-        </div>
-    </form>
-</div>
-<div id="ss"></div>
-@@include('public/footer.html')
+    <div class="padding20 block-shadow bg-white">
+        <p><a href='login.html'><label>login</label></a></p>
+		<p><a href='import.html'><label>import</label></a></p>
+		<p><a href='check.html'><label>check</label></a></p>
+        <p><a href='email.html'><label>email</label></a></p>
+        <p><a href='index.html'><label>admin</label></a></p>
+    </div>
+    <div id="ss"></div>
+@@include('public/script.html')
+</body>
+</html>
