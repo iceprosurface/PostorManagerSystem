@@ -231,5 +231,7 @@ Cashe/
 /bower_components
 /test
 /test2
-/dest
 /dist
+node_module/
+node_modules/
+*.log
