@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- common css -->
+    <link href="/css/main.css?rev=a1164f683e5920f2d262a9668de0b00c" rel="stylesheet">
+    <link href="/css/all.css?rev=deaf258087b6c91d0c9c5f5b9a0cb755" rel="stylesheet">
+    <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
+    <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
+<script>	
+	function demo(){
+		$("#pre").fadeOut();
+		$("#demo").fadeIn(3000);
+	}
+	function hideDemo(){
+		$("#demo").hide();
+	}
+	$(function(){
+        $('.import').click(function(){
+			var params = $("#importTable").serialize();
+			$.post(
+				"_ENTER_import/va", 
+				params,
+				function(data){
+					json = eval('('+data+')');
+					if(json.status==1){
+						window.location="_ENTER_import/detail?orderId="+json.orderId;
+					}else{
+						alert('error');
+					}
+			});
+		});
+	});
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>这是一个邮件录入的demo演示</title>
+</head>
+<body onload="hideDemo()">
+<div id ="pre">
+<h3>这是一个邮件录入的demo演示</h3>
+<p>  在本个演示用，提交了对于录入阶段表单，该表单主要信息包括
+	<p>
+		<ol>
+  			<li>快递员信息</li>
+  				<ul>
+ 					<li>快递员编号</li>
+ 				</ul>
+ 			<li>包裹信息</li>
+ 				<ul>
+ 					<li>包裹编号</li>
+ 					<li>包裹信息</li>
+ 					<li>收件人姓名</li>
+ 					<li>收件人手机号码</li>
+ 				</ul>
+ 			<li>仓库信息</li>
+ 				<ul>
+ 					<li>仓库编号</li>
+ 				</ul>
+	</ol>
+</p>
+<input value = "单击此处开始demo预演" type = "button" onClick="demo()">
+</div>
+<div id ="demo">
+	<h3>这是一个递交表单，这里的开放action接口可以通过终端递交相同的request请求来获得数据</h3>
+	<form id="importTable" type="post" onsubmit="return false" action="#">
+		<table>
+			
+			<tr>
+				<td>postor id</td><td><input name="postorId"></td>
+			</tr>
+			<tr>
+				<td>ordeId</td><td><input name="orderId"></td>
+			</tr>
+			<tr>
+				<td>usrPhoneNumber</td><td><input name="usrPhoneNumber"></td>
+			</tr>
+			<tr>
+				<td>usrId</td><td><input name="usrId"></td>
+			</tr>
+			<tr>
+				<td>usrName</td><td><input name="usrName"></td>
+			</tr>
+			<tr>
+				<td>orderInfo</td><td><input name="orderInfo"></td>
+			</tr>
+			<tr>
+				<td>positionId</td><td><input name="positionId"></td>
+			</tr>
+		</table>
+		<div >
+			<button class="import">录入</button>
+		</div>
+	</form>
+</div>
+	<!-- common js -->
+	<script src="/js/jquery.min.js?rev=f9c7afd05729f10f55b689f36bb20172"></script>
+    <script src="/js/metro.min.js?rev=57f1dbca946d6500d3cfc9baabbabc57"></script>
+	<script src="/js/angular.min.js?rev=7d49cc2dec45fc1e654fb0173039ba64"></script>
+	<script src="/js/appes5.js?rev=d0899642fa7a14fa0c83165f3e98a4c6"></script>
+	<script src="/js/alles5.js?rev=8971778a9cc0ad74eeea6d9ed8a7b87f"></script>
+
+</body>
+</html>
