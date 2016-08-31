@@ -18,6 +18,7 @@ return array(
 		'DEFAULT_FILTER'	=>'strip_tags',		// 默认的拦截器
 		'API_KEY'			=>'',				// 设置短信平台的验证码
 		
+		'URL_CASE_INSENSITIVE' => false,
 		// 'TMPL_PARSE_STRING' =>array(
 		// 	'_CSS_'			=>'/public/css/', 		// css文件地址
 		// 	'_SCRIPT_' 		=>'/public/script/',	// js文件地址
