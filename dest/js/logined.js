@@ -200,7 +200,7 @@ function delayOrders(){
 	if(list.length==0)return false;
 		$.ajax({
 			type: "post",
-			url: "_ENTER_import/checkList",
+			url: "/api/import/checkList",
 			data: {'checkOrder':list,'token':stringToJson(getCookie("login"))},
 			dataType: "json",
 			success:

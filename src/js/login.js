@@ -17,7 +17,7 @@ $(function(){
 	$('.login').click(function(){
 		var params = $("#login").serialize();
 		$.post(
-			"/api/home/login/va", 
+			"/api/login/va", 
 			params,
 			function(data){
 				json = eval('('+data+')');

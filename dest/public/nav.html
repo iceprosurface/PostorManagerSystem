@@ -1,0 +1,33 @@
+	<!-- 上边栏 -->
+    <div class="app-bar fixed-top darcula" data-role="appbar">
+        <a class="app-bar-element branding">快件管理系统</a>
+        <span class="app-bar-divider"></span>
+        <ul class="app-bar-menu">
+            <li><a href=""><span class="mif-home icon"></span></a></li>
+            <li><a href="">设置</a></li>
+            <li><a href="">app下载</a></li>
+            <li>
+                <a href="" class="dropdown-toggle">帮助</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="">联系管理员</a></li>
+                    <li><a href="">技术支持</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">关于</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="app-bar-element place-right">
+            <span class="dropdown-toggle" id="username">[name]<span class="mif-cog"></span></span>
+            <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow" data-role="dropdown" data-no-close="true" style="width: 220px">
+                <h2 class="text-light">个人中心</h2>
+                <ul class="unstyled-list">
+                    <li><a href="#page=showDialog" class="fg-white fg-hover-yellow" onclick="showDialog('#dialog');">更改信息</a></li>
+                    <li><a href="" class="fg-white fg-hover-yellow">通知</a></li>
+                    <li onclick="loginOut();"><a class="fg-white fg-hover-yellow">登出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+				
+	
