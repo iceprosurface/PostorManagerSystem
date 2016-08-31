@@ -30,4 +30,6 @@ return array(
 		'DEFAULT_C_LAYER'	=>'Controller', 			// 默认的控制器层名称
 		'MODULE_ALLOW_LIST'	=>array('Home','Admin'), 	// 分组列表
 		'DEFAULT_MODULE'	=>'Home', 					// 默认分组
+		
+		'URL_MODEL'=>2,  //关于URL更多说明请参考Tinkphp/Common/convention.php
 );

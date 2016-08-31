@@ -9,7 +9,7 @@ class EditController extends BaseController {
 	/**
 	*查询模块，用于获取数据
 	*@param where (必要属性) array 关键字段(eq){key:value}
-	*@param field (必要属性如果不提交则认为不查询任何) array 需要查询字段，类型为{"0":value,……}
+	*@param field (必要属性如果不提交则认为不查询任何数据) array 需要查询字段，类型为{"0":value,……}
 	*@param from (必要属性) string 查询的表（后端检验）
 	*@param pagination (必要属性) int 分页
 	*@param page int 页码
