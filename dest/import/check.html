@@ -29,7 +29,7 @@
 			<td>库存位置</td>
 		</tr>
 		<tbody id="import">
-			<tr><td  colspan="3">暂无快件<td></tr>
+			<tr><td  colspan="4" style="text-align: center;">暂无快件<td></tr>
 		</tbody>
 	</table>
 </div>
@@ -77,22 +77,26 @@
 	function loadInfo(data) {
         $("#import").html("");//清空info内容
 		var json = JSON.parse(data);
-		$.each(json.result, function(i, item) {
-			$("#import").append(
-					"<tr></tr>"+
-					"<tr>"+
-						"<td  style='text-align: center;'>"+
-							"<label class='input-control checkbox'>"+
-								"<input type='checkbox' class='uncheck' id='check_" + i + "'"+" value='"+item.orderid+"'>"+
-								"<span class='check'></span>"+
-								"<span class='caption'></span>"+
-							"</label>"+
-						"</td>"+ 
-						"<td>" + item.orderid + "</td>"+
-						"<td>" + item.importtime + "</td>"+
-						"<td>" + item.positionid +"</td>"+
-					"/<tr>");
-		});
+		if(json.result){
+			$.each(json.result, function(i, item) {
+				$("#import").append(
+						"<tr></tr>"+
+						"<tr>"+
+							"<td  style='text-align: center;'>"+
+								"<label class='input-control checkbox'>"+
+									"<input type='checkbox' class='uncheck' id='check_" + i + "'"+" value='"+item.orderid+"'>"+
+									"<span class='check'></span>"+
+									"<span class='caption'></span>"+
+								"</label>"+
+							"</td>"+ 
+							"<td>" + item.orderid + "</td>"+
+							"<td>" + item.importtime + "</td>"+
+							"<td>" + item.positionid +"</td>"+
+						"/<tr>");
+			});
+		}else{
+			$("#import").append('<tr><td  colspan="4" style="text-align: center;">暂无快件<td></tr>')
+		}
 	}
 </script>
 <script>
