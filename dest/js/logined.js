@@ -1,11 +1,11 @@
 function sidebarRefresh(tlogin) {
     //检测邮件数目使用
-    if (tlogin != "") {
+    if (tlogin !== "") {
         $.post(
             "/api/get/getOrderNumber",
             tlogin,
             function(data) {
-                json = eval('(' + data + ')');
+                var json = JSON.parse(data);
                 $("#checkedCount").text(json.checkedCount);
                 $("#uncheckCount").text(json.uncheckedCount);
                 var allCount = json.checkedCount + json.uncheckedCount;
@@ -41,7 +41,7 @@ function loginOut() {
             "/api/login/loginOut",
             tlogin,
             function(data) {
-                json = eval('(' + data + ')');
+                var json = JSON.parse(data);
                 if (json.status == 1) {
                     window.location = "/login?respond=1";
                 } else {
@@ -59,7 +59,7 @@ function loadChecked() {
     $.post(
         "/api/get/getChecked", { 'page': '1' },
         function(data) {
-            data = eval('(' + data + ')');
+            data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
             $.each(data.orders, function(i, item) {
                 $("#OrderTable").append(
@@ -86,7 +86,7 @@ function loadUnchecked(page) {
     $.post(
         "/api/get/getUnchecked", { 'page': page },
         function(data) {
-            data = eval('(' + data + ')');
+            data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
             $.each(data.orders, function(i, item) {
                 $("#OrderTable").append(
@@ -171,8 +171,8 @@ $(function() {
             $('.sidebar li').removeClass('active');
             $(this).addClass('active');
         }
-    })
-})
+    });
+});
 
 function selectCheckBox(t) {
     var mes = '通知|你已经选择了全部订单|你已经取消了全部订单';
@@ -194,14 +194,14 @@ function delayOrders() {
         content: mes.split("|")[1],
         type: 'warning'
     });
-    var list = new Array();
+    var list = [];
     var param = document.getElementsByClassName('uncheck');
     $.each(param, function(i, item) {
-        if (item.checked == true) {
+        if (item.checked === true) {
             list.push(item.value);
         }
     });
-    if (list.length == 0) return false;
+    if (list.length === 0) return false;
     $.ajax({
         type: "post",
         url: "/api/import/checkList",
