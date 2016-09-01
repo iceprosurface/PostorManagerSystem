@@ -3,73 +3,76 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<!-- common css -->
-    <link href="/css/main.css?rev=a1164f683e5920f2d262a9668de0b00c" rel="stylesheet">
-    <link href="/css/all.css?rev=deaf258087b6c91d0c9c5f5b9a0cb755" rel="stylesheet">
+    <link href="/css/main.min.css?rev=1337fb3036ef2192fc9c5adc09bdf41e" rel="stylesheet">
+    <link href="/css/all.min.css?rev=baecbcaf1e3b5606a9407654dc4fd6fc" rel="stylesheet">
     <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
     <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
-	<script>
-		$(document).ready(function(){
-			var orderId = getUrlParam("orderId");
-			$.ajax({
-				type: "post",
-				url: "_ENTER_import/getOrder",
-				data: {"orderId":orderId},
-				dataType: "text",
-				success:
-					function(data){
-						data=eval('('+data+')');
-						loadInfo(data);
-					}
-			});
-		});
-	</script>
-	<script>
-		function loadInfo(data) {
-	        $("#import").html("");//清空info内容
-			var json = eval('('+data+')');
-	            $("#import").append(
-                   		"</td>"+
-	    					"<td>" + json.result.postorid + "</td>"+
-	    					"<td>" + json.result.importtime + "</td>"+
-	    					"<td>" + json.result.exporttime + "</td>"+
-	    					"<td>" + json.result.positionid    +"</td>"+
-	    					"<td>" + json.result.orderinfo + "</td>"+
-	    					"<td>" + json.result.usrname + "</td>"+
-	    					"<td>" + json.result.usrphonenumber + "</td>"+
-	    					"<td>" + json.result.usrid + "</td>"+
-	    					"<td>" + json.result.orderid + "</td>");
+<script>
+$(document).ready(function() {
+    var orderId = getUrlParam("orderId");
+    $.ajax({
+        type: "post",
+        url: "/api/import/getOrder",
+        data: {
+            "orderId": orderId
+        },
+        dataType: "text",
+        success: function(data) {
+            data = eval('(' + data + ')');
+            loadInfo(data);
+        }
+    });
+});
+</script>
+<script>
+function loadInfo(data) {
+    $("#import").html(""); //清空info内容
+    var json = eval('(' + data + ')');
+    $("#import").append(
+        "</td>" +
+        "<td>" + json.result.postorid + "</td>" +
+        "<td>" + json.result.importtime + "</td>" +
+        "<td>" + json.result.exporttime + "</td>" +
+        "<td>" + json.result.positionid + "</td>" +
+        "<td>" + json.result.orderinfo + "</td>" +
+        "<td>" + json.result.usrname + "</td>" +
+        "<td>" + json.result.usrphonenumber + "</td>" +
+        "<td>" + json.result.usrid + "</td>" +
+        "<td>" + json.result.orderid + "</td>");
 
-		}
-	</script>
-	<title>你的邮件已经录入成功了</title>
+}
+</script>
+<title>你的邮件已经录入成功了</title>
 </head>
+
 <body>
-	<h3>你的邮件已经录入成功了</h3>
-	<p>详细情况如下所示</p>
-	<table border="1" cellspacing="0" cellpadding="0">
-		<tr><th>录入单</th></tr>
-		<tr>
-			<td>邮递员编号</td>
-			<td>录入时间</td>
-			<td>取件时间</td>
-			<td>库存位置</td>
-			<td>订单信息</td>
-			<td>客户名称</td>
-			<td>客户电话</td>
-			<td>客户id</td>
-			<td>订单号</td>
-		</tr>
-		<tr id="import">
-			
-		</tr>
-		
-	</table>
-	<!-- common js -->
+    <h3>你的邮件已经录入成功了</h3>
+    <p>详细情况如下所示</p>
+    <table border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>录入单</th>
+        </tr>
+        <tr>
+            <td>邮递员编号</td>
+            <td>录入时间</td>
+            <td>取件时间</td>
+            <td>库存位置</td>
+            <td>订单信息</td>
+            <td>客户名称</td>
+            <td>客户电话</td>
+            <td>客户id</td>
+            <td>订单号</td>
+        </tr>
+        <tr id="import">
+        </tr>
+    </table>
+    	<!-- common js -->
 	<script src="/js/jquery.min.js?rev=f9c7afd05729f10f55b689f36bb20172"></script>
     <script src="/js/metro.min.js?rev=57f1dbca946d6500d3cfc9baabbabc57"></script>
-	<script src="/js/angular.min.js?rev=7d49cc2dec45fc1e654fb0173039ba64"></script>
+	<script src="/js/angular.min.js?rev=931b680a7a7790cb5d9be60b79374770"></script>
 	<script src="/js/app.min.js?rev=d0f54bb0121dce76dde755d1a167ca0c"></script>
-	<script src="/js/all.min.js?rev=8971778a9cc0ad74eeea6d9ed8a7b87f"></script>
+	<script src="/js/all.min.js?rev=d41d8cd98f00b204e9800998ecf8427e"></script>
 
 </body>
+
 </html>

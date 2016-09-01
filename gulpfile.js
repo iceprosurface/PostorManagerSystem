@@ -1,7 +1,3 @@
-// var requireDir = require('require-dir');
-
-// requireDir('./gulp/tasks', { recurse: true});
-
 // gulpfile.js
 var gulp = require('gulp');
 var sass = require('gulp-sass');
@@ -30,32 +26,30 @@ var rev = require('gulp-rev-append');
 //js压缩
 var uglify = require('gulp-uglify');
 
-var jshintConfig = { "undef": false, "esnext": true, "predef": ["$","window","jQuery"]};
+var jshintConfig = { "undef": false, "esnext": true, "predef": ["$", "window", "jQuery"] };
 gulp.task('default', ['server']);
 
 gulp.task('sass', function() {
     return gulp.src("src/sass/main.scss")
-        //.pipe(sourcemaps.init())
         .pipe(sass({ style: 'expanded' }))
         .on('error', function(err) {
-            gutil.log('sass Error!', err.message)
-            this.emit('end')
+            gutil.log('sass Error!', err.message);
+            this.emit('end');
         })
-        //.pipe(sourcemaps.write('css/maps'))
         .pipe(gulp.dest("dest/css"))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss({keepSpecialComments:"*",processImportFrom:['!fonts.googleapis.com']}))
+        .pipe(minifycss({ keepSpecialComments: "*", processImportFrom: ['!fonts.googleapis.com'] }))
         .pipe(gulp.dest("dest/css"))
-        .pipe(reload({ stream: true }))
+        .pipe(reload({ stream: true }));
 });
 gulp.task('css', function() {
     return gulp.src("src/css/**/*.css")
         .pipe(sass({ style: 'expanded' }))
         .pipe(gulp.dest("dest/css"))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(minifycss({keepSpecialComments:"*",processImportFrom:['!fonts.googleapis.com']}))
+        .pipe(minifycss({ keepSpecialComments: "*", processImportFrom: ['!fonts.googleapis.com'] }))
         .pipe(gulp.dest("dest/css"))
-        .pipe(reload({ stream: true }))
+        .pipe(reload({ stream: true }));
 });
 gulp.task('html', function() {
     gulp.src(["src/html/**/*.html", "!src/html/public"])
@@ -63,38 +57,39 @@ gulp.task('html', function() {
         .pipe(gulp.dest("dest"))
         .pipe(rev())
         .on('error', function(err) {
-            gutil.log('html Error!', err.message)
-            this.emit('end')
+            gutil.log('html Error!', err.message);
+            this.emit('end');
         })
         .pipe(gulp.dest("dest"))
-        .on("change", reload);
+        .pipe(reload({ stream: true }));
 });
 gulp.task('script', function() {
     return gulp.src("src/js/**/*.js")
         .pipe(gulp.dest("dest/js"))
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .on('error', function(err) {
-            gutil.log('js Error!', err.message)
-            this.emit('end')
-        })
-        .pipe(jshint(jshintConfig)) //{"esnext" : true}))
-        .pipe(jshint.reporter('default'))
+        // .pipe(babel({
+        //     presets: ['es2015']
+        // }))
+        // .on('error', function(err) {
+        //     gutil.log('js Error!', err.message);
+        //     this.emit('end');
+        // })
+        // .pipe(jshint(jshintConfig)) //{"esnext" : true}))
+        // .pipe(jshint.reporter('default'))
         .pipe(uglify())
         .on('error', function(err) {
-            gutil.log('js Error!', err.message)
-            this.emit('end')
+            gutil.log('js Error!', err.message);
+            this.emit('end');
         })
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest("dest/js"))
-        .pipe(reload({ stream: true }))
+        .pipe(reload({ stream: true }));
 });
 // 浏览器重载
 gulp.task('script-watch', ['script'], reload);
+// gulp.task('html-watch', ['html'], reload);
 
 // 静态服务器
-gulp.task('server', ['html', 'sass', 'script','css'], function() {
+gulp.task('server', ['html', 'sass', 'script', 'css'], function() {
     // 从这个项目的根目录启动服务器
     browserSync.init({
         server: {
@@ -102,28 +97,39 @@ gulp.task('server', ['html', 'sass', 'script','css'], function() {
             index: "./index.html"
         },
         //禁止网络模式
-        online: false,
-        //静止ui模式
-        ui: false
+        online: false
+            //静止ui模式
+            // ui: false
 
     });
 
     // 添加 browserSync.reload 到任务队列里
     // 所有的浏览器重载后任务完成。
-    gulp.start('watch');
+    watch("src/sass/**/*.scss", function() { //监听所有sass
+        gulp.start('sass'); //出现修改、立马执行sass任务
+    });
+    watch("src/js/**/*.js", function() { //监听所有js
+        gulp.start('script-watch'); //出现修改、立马执行js任务
+    });
+    watch("src/html/**/*.html", function() { //监听所有html
+        gulp.start('html').on('change', reload); //出现修改、立马执行html任务
+    });
+    watch("src/css/**/*.css", function() { //监听所有css
+        gulp.start('css'); //出现修改、立马执行css任务
+    });
 });
 
 gulp.task('watch', function() {
     watch("src/sass/**/*.scss", function() { //监听所有sass
         gulp.start('sass'); //出现修改、立马执行sass任务
-    })
+    });
     watch("src/js/**/*.js", function() { //监听所有js
         gulp.start('script-watch'); //出现修改、立马执行js任务
-    })
+    });
     watch("src/html/**/*.html", function() { //监听所有html
-        gulp.start('html'); //出现修改、立马执行html任务
-    })
+        gulp.start('html').on('change', reload); //出现修改、立马执行html任务
+    });
     watch("src/css/**/*.css", function() { //监听所有css
         gulp.start('css'); //出现修改、立马执行css任务
-    })
-})
+    });
+});

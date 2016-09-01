@@ -21,7 +21,7 @@
 			<td>库存位置</td>
 		</tr>
 		<tbody id="import">
-			<tr><td  colspan="4" style="text-align: center;">暂无快件<td></tr>
+			<tr><td  colspan="4" style="text-align: center;">暂无快件</td></tr>
 		</tbody>
 	</table>
 </div>
@@ -63,7 +63,7 @@
 	function loadInfo(data) {
         $("#import").html("");//清空info内容
 		var json = JSON.parse(data);
-		if(json.result){
+		if(json.result != [] ){
 			$.each(json.result, function(i, item) {
 				$("#import").append(
 						"<tr></tr>"+
@@ -81,7 +81,7 @@
 						"/<tr>");
 			});
 		}else{
-			$("#import").append('<tr><td  colspan="4" style="text-align: center;">暂无快件<td></tr>')
+			$("#import").append('<tr><td  colspan="4" style="text-align: center;">暂无快件</td></tr>')
 		}
 	}
 </script>
@@ -108,7 +108,7 @@
 				}
 		});
 	}
-	
+	;
 </script>
 </body>
 </html>

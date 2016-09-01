@@ -85,3 +85,24 @@ a.tag {
 
 .hight3 {
   height: 3px; }
+
+#pre,
+#demo {
+  width: 70%;
+  height: 70%;
+  margin-top: -35%;
+  margin-left: -35%;
+  top: 85%;
+  left: 50%;
+  position: fixed;
+  text-align: center; }
+  #pre ol,
+  #demo ol {
+    width: 70%;
+    margin: auto;
+    text-align: left; }
+
+#demo table {
+  width: 70%;
+  text-align: center;
+  margin: auto; }
