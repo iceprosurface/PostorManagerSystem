@@ -15,7 +15,7 @@ function sidebarRefresh(tlogin) {
 }
 //切换到尚未收件列表
 function turnUnreceived() {
-    $("#main").load("/tpl/Unchecked.html", function() { loadUnchecked(1); });
+    $("#main").load("/tpl/UncheckedPage.html", function() { loadUnchecked(1); });
 }
 //切换到设置页面
 function changeToConfig() {
@@ -23,15 +23,15 @@ function changeToConfig() {
 }
 //切换到已经收件列表
 function turnReceived() {
-    $("#main").load("/tpl/Checked.html", function() { loadChecked(); });
+    $("#main").load("/tpl/CheckedPage.html", function() { loadChecked(); });
 }
 //切换到垃圾箱
 function turnBin() {
-    $("#main").load("/tpl/Bin.html");
+    $("#main").load("/tpl/UsrBin.html");
 }
 //切换到全部收件列表
 function turnAll() {
-    $("#main").load("/tpl/All.html");
+    $("#main").load("/tpl/AllTable.html");
 }
 //登出
 function loginOut() {
@@ -229,7 +229,7 @@ $(document).ready(function() {
             data = JSON.parse(data);
             var name = $('#username');
             name[0].innerHTML = "";
-            name.append('<span class="mif-cog">' + data["name"]);
+            name.append('<span class="mif-cog"></span><span>' + data["name"]+"</span>");
         },
 
         dataType: 'json'
