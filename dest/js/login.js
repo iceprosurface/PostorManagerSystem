@@ -20,7 +20,7 @@ $(function() {
             "/api/login/va",
             params,
             function(data) {
-                json = eval('(' + data + ')');
+                var json = JSON.parse(data);
                 if (json.status == 1) {
                     //return true;
                     window.location = "/logined.html";
