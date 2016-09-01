@@ -43,7 +43,7 @@ class GetController extends BaseController {
 		$usr_info['id'] = $this->id;
 		$map['haveSAR'] = "0";
 		$orders = M('orders');
-		$uncheckedCount=$orders->where($map)->select();
+		$uncheckedCount=$orders->field(array('orderId'))->where($map)->select();
 		$map['haveSAR'] = "1";
 		$checkedCount=$orders->field(array('orderId'))->where($map)->select();
 		$res=array(response=>"用户昵称",status=>"1",checkedCount=>count($checkedCount),uncheckedCount=>count($uncheckedCount));
