@@ -73,8 +73,8 @@ gulp.task('script', function() {
             gutil.log('js Error!', err.message);
             this.emit('end');
         })
-        .pipe(jshint(jshintConfig)) //{"esnext" : true}))
-        .pipe(jshint.reporter('default'))
+        // .pipe(jshint(jshintConfig)) //{"esnext" : true}))
+        // .pipe(jshint.reporter('default'))
         .pipe(uglify())
         .on('error', function(err) {
             gutil.log('js Error!', err.message);
