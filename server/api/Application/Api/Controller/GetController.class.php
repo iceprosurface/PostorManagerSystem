@@ -24,7 +24,7 @@ class GetController extends BaseController {
 	*/
 	public function getUsrName(){
 		$map['Id'] = $this->id;
-		$usr_info['Id'] = $this->id;
+		$usr_info['id'] = $this->id;
 		$usrs = M('usr');
 		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
 		if($usrs->create($usr_info)){
@@ -40,7 +40,7 @@ class GetController extends BaseController {
 	*/
 	public function getOrderNumber(){
 		$map['usrId'] = $this->id;
-		$usr_info['Id'] = $this->id;
+		$usr_info['id'] = $this->id;
 		$map['haveSAR'] = "0";
 		$orders = M('orders');
 		$uncheckedCount=$orders->where($map)->select();
