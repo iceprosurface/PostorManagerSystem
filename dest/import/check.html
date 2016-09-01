@@ -7,89 +7,9 @@
     <link href="/css/all.css?rev=deaf258087b6c91d0c9c5f5b9a0cb755" rel="stylesheet">
     <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
     <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
-	<script>
-		$(document).ready( function(){
-			//function checkOrder(){
-			$("#userid").keyup(function(){
-				var userid = $("#userid").prop("value");
-				if(userid.length<=6)return false;
-					$.ajax({
-						type: "post",
-						url: "_ENTER_import/getUncheckList",
-						data: {"usrId":userid},
-						dataType: "json",
-						success:
-							function(data){
-								//data=eval('('+data+')');
-								loadInfo(data);
-							}
-					});
-			});
-			var userid = $("#userid").prop("value");
-			if(userid.length<=6)return false;
-				$.ajax({
-					type: "post",
-					url: "_ENTER_import/getUncheckList",
-					data: {"usrId":userid},
-					dataType: "json",
-					success:
-						function(data){
-							//data=eval('('+data+')');
-							loadInfo(data);
-						}
-				});
-		});
-	</script>
-	<script>
-		function loadInfo(data) {
-	        $("#import").html("");//清空info内容
-			var json = eval('('+data+')');
-			$.each(json.result, function(i, item) {
-				$("#import").append(
-						"<tr></tr>"+
-						"<tr>"+
-							"<td  style='text-align: center;'>"+
-								"<label class='input-control checkbox'>"+
-									"<input type='checkbox' class='uncheck' id='check_" + i + "'"+" value='"+item.orderid+"'>"+
-									"<span class='check'></span>"+
-									"<span class='caption'></span>"+
-								"</label>"+
-							"</td>"+ 
-							"<td>" + item.orderid + "</td>"+
-							"<td>" + item.importtime + "</td>"+
-							"<td>" + item.positionid +"</td>"+
-						"/<tr>");
-			});
-		}
-	</script>
-	<script>
-		function checkPost(){
-			var list= new Array();
-			var param=document.getElementsByClassName('uncheck');
-			$.each(param, function(i, item) {
-				if(item.checked==true){
-					list.push(item.value);
-				}
-			});
-			if(list.length==0)return false;
-			$.ajax({
-				type: "post",
-				url: "_ENTER_import/checkList",
-				data: {'checkOrder':list,'usrId':$("#userid").prop("value")},
-				dataType: "json",
-				success:
-					function(data){
-							var json = eval('('+data+')');
-							if(json.status==1)
-								location.reload();
-					}
-			});
-		}
-		
-	</script>
 </head>
 <body>
-<div class="padding20" style="width:40%;">
+<div class="padding20" style="width:40%;margin:auto;">
 	<div class="input-control text full-size" data-role="input">
 		<label for="userid">userid</label>
 		<input type="text" name ="usrId" id="userid"  value="">
@@ -113,5 +33,92 @@
 		</tbody>
 	</table>
 </div>
+	<!-- common js -->
+	<script src="/js/jquery.min.js?rev=f9c7afd05729f10f55b689f36bb20172"></script>
+    <script src="/js/metro.min.js?rev=57f1dbca946d6500d3cfc9baabbabc57"></script>
+	<script src="/js/angular.min.js?rev=7d49cc2dec45fc1e654fb0173039ba64"></script>
+	<script src="/js/app.min.js?rev=d0f54bb0121dce76dde755d1a167ca0c"></script>
+	<script src="/js/all.min.js?rev=8971778a9cc0ad74eeea6d9ed8a7b87f"></script>
+
+<script>
+	$(document).ready( function(){
+		//function checkOrder(){
+		$("#userid").keyup(function(){
+			var userid = $("#userid").prop("value");
+			if(userid.length<6)return false;
+				$.ajax({
+					type: "post",
+					url: "/api/import/getUncheckList",
+					data: {"usrId":userid},
+					dataType: "json",
+					success:
+						function(data){
+							//data=eval('('+data+')');
+							loadInfo(data);
+						}
+				});
+		});
+		var userid = $("#userid").prop("value");
+		if(userid.length<6)return false;
+			$.ajax({
+				type: "post",
+				url: "/api/import/getUncheckList",
+				data: {"usrId":userid},
+				dataType: "json",
+				success:
+					function(data){
+						//data=eval('('+data+')');
+						loadInfo(data);
+					}
+			});
+	});
+</script>
+<script>
+	function loadInfo(data) {
+        $("#import").html("");//清空info内容
+		var json = eval('('+data+')');
+		$.each(json.result, function(i, item) {
+			$("#import").append(
+					"<tr></tr>"+
+					"<tr>"+
+						"<td  style='text-align: center;'>"+
+							"<label class='input-control checkbox'>"+
+								"<input type='checkbox' class='uncheck' id='check_" + i + "'"+" value='"+item.orderid+"'>"+
+								"<span class='check'></span>"+
+								"<span class='caption'></span>"+
+							"</label>"+
+						"</td>"+ 
+						"<td>" + item.orderid + "</td>"+
+						"<td>" + item.importtime + "</td>"+
+						"<td>" + item.positionid +"</td>"+
+					"/<tr>");
+		});
+	}
+</script>
+<script>
+	function checkPost(){
+		var list= new Array();
+		var param=document.getElementsByClassName('uncheck');
+		$.each(param, function(i, item) {
+			if(item.checked==true){
+				list.push(item.value);
+			}
+		});
+		if(list.length==0)return false;
+		$.ajax({
+			type: "post",
+			url: "/api/import/checkList",
+			data: {'checkOrder':list,'usrId':$("#userid").prop("value")},
+			dataType: "json",
+			success:
+				function(data){
+						var json = eval('('+data+')');
+						if(json.status==1)
+							location.reload();
+				}
+		});
+	}
+	
+</script>
 </body>
 </html>
