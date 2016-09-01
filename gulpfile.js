@@ -62,6 +62,10 @@ gulp.task('html', function() {
         .pipe(fileinclude())
         .pipe(gulp.dest("dest"))
         .pipe(rev())
+        .on('error', function(err) {
+            gutil.log('html Error!', err.message)
+            this.emit('end')
+        })
         .pipe(gulp.dest("dest"))
         .on("change", reload);
 });

@@ -23,7 +23,7 @@ $(function() {
                 json = eval('(' + data + ')');
                 if (json.status == 1) {
                     //return true;
-                    window.location = "logined";
+                    window.location = "/logined.html";
                 } else {
                     alert('error');
                 }
