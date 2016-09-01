@@ -65,7 +65,7 @@ function loadChecked() {
                     "<tr>" +
                     "<td>" +
                     "<label class='input-control checkbox small-check no-margin'>" +
-                    "<input type='checkbox' id='checkBox_" + i + "''>" +
+                    "<input type='checkbox' id='checkBox_" + i + "'>" +
                     "<span class='check'></span>" +
                     "</label>" +
                     "</td>" +
@@ -91,7 +91,7 @@ function loadUnchecked(page) {
                     "<tr>" +
                     "<td>" +
                     "<label class='input-control checkbox small-check no-margin'>" +
-                    "<input type='checkbox' class='uncheck' id='checkBox_" + i + "''>" +
+                    "<input type='checkbox' class='uncheck' id='checkBox_" + i + "' data-id='" + item.orderid + "'>" +
                     "<span class='check'></span>" +
                     "</label>" +
                     "</td>" +
@@ -196,14 +196,14 @@ function delayOrders() {
     var param = document.getElementsByClassName('uncheck');
     $.each(param, function(i, item) {
         if (item.checked === true) {
-            list.push(item.value);
+            list.push($(item).data("id"));
         }
     });
     if (list.length === 0) return false;
     $.ajax({
         type: "post",
-        url: "/api/import/checkList",
-        data: { 'checkOrder': list, 'token': stringToJson(getCookie("login")) },
+        url: "/api/get/delay",
+        data: { "orderlist": list },
         dataType: "json",
         success: function(data) { turnReceived(); }
     });
@@ -213,7 +213,7 @@ function msg(mes) {
     $.Notify({
         caption: mes.split("|")[0],
         content: mes.split("|")[1],
-        type: 'sucess'
+        type: 'success'
     });
 }
 $(document).ready(function() {
@@ -227,7 +227,7 @@ $(document).ready(function() {
             data = JSON.parse(data);
             var name = $('#username');
             name[0].innerHTML = "";
-            name.append('<span class="mif-cog"></span><span>' + data["name"]+"</span>");
+            name.append('<span class="mif-cog"></span><span>' + data["name"] + "</span>");
         },
 
         dataType: 'json'

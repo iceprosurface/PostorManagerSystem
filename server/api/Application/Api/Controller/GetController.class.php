@@ -100,6 +100,16 @@ class GetController extends Controller {
 		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
+	public function delay() {
+		$map['usrid'] = $this->id;
+		$array = I('post.orderlist');
+		$orders = M('orders');
+		//对于orderlist的选择
+		$map['orderid'] = array('in' => $array ); 
+		$result = $orders->where($map)->setField('delay',true);
+		$res=array(response=>$result,status=>"1");
+		$this->ajaxReturn(json_encode($res),'JSON');
+	}
 	/*
 	*获取load的页面
 	*传入参数:@param page
