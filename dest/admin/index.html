@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- common css -->
+    <link href="/css/main.min.css?rev=21bca968d1864673d3b9b25e5128c37e" rel="stylesheet">
+    <link href="/css/all.min.css?rev=baecbcaf1e3b5606a9407654dc4fd6fc" rel="stylesheet">
+    <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
+    <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
+<title>后台管理系统</title>
+<style>
+.login-form {
+    width: 25rem;
+    height: 18.75rem;
+    position: fixed;
+    top: 50%;
+    margin-top: -9.375rem;
+    left: 50%;
+    margin-left: -12.5rem;
+    background-color: #ffffff;
+    opacity: 0;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
+}
+</style>
+</head>
+
+<body>
+    <div class="login-form padding20 block-shadow">
+        <form id="login" onsubmit="return false;">
+            <h1 class="text-light">快件管理系统后台</h1>
+            <hr class="thin" />
+            <br />
+            <div class="input-control text full-size" data-role="input">
+                <label for="user_id">User id:</label>
+                <input type="text" name="usrid" id="user_id" value="">
+                <button class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <br />
+            <br />
+            <div class="input-control password full-size" data-role="input">
+                <label for="user_psw">UserInfo password:</label>
+                <input type="password" name="psw" id="user_psw" value="">
+                <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+            </div>
+            <br />
+            <br />
+            <div class="form-actions">
+                <button type="button" class="button primary login">登录</button>
+                <button type="button" class="button link">返回</button>
+                <button type="button" class="button link">忘记密码</button>
+            </div>
+        </form>
+    </div>
+    	<!-- common js -->
+	<script src="/js/jquery.min.js?rev=f9c7afd05729f10f55b689f36bb20172"></script>
+    <script src="/js/metro.min.js?rev=57f1dbca946d6500d3cfc9baabbabc57"></script>
+	<script src="/js/angular.min.js?rev=931b680a7a7790cb5d9be60b79374770"></script>
+	<script src="/js/app.min.js?rev=d0f54bb0121dce76dde755d1a167ca0c"></script>
+	<script src="/js/all.min.js?rev=d41d8cd98f00b204e9800998ecf8427e"></script>
+
+    <script>
+    $(function() {
+        var form = $(".login-form");
+
+        form.css({
+            opacity: 1,
+            "-webkit-transform": "scale(1)",
+            "transform": "scale(1)",
+            "-webkit-transition": ".5s",
+            "transition": ".5s"
+        });
+    });
+    </script>
+    <script>
+    $(function() {
+        $('.login').click(function() {
+            var params = $("#login").serialize();
+            $.post(
+                "/api/admin/va",
+                params,
+                function(data) {
+                    json = eval('(' + data + ')');
+                    if (json.status == 1) {
+                        window.location = "/admin/edit";
+                        //return true;
+                    } else {
+                        alert('error');
+                    }
+                });
+        });
+    });
+    </script>
+</body>
+
+</html>

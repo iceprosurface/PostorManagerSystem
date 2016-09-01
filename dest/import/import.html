@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<!-- common css -->
-    <link href="/css/main.min.css?rev=1337fb3036ef2192fc9c5adc09bdf41e" rel="stylesheet">
+    <link href="/css/main.min.css?rev=21bca968d1864673d3b9b25e5128c37e" rel="stylesheet">
     <link href="/css/all.min.css?rev=baecbcaf1e3b5606a9407654dc4fd6fc" rel="stylesheet">
     <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
     <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
@@ -12,7 +12,7 @@
 
 <body>
     <div id="pre">
-        <h3>这是一个邮件录入的demo演示1s1</h3>
+        <h3>这是一个邮件录入的demo演示</h3>
         <p> 在本个演示用，提交了对于录入阶段表单，该表单主要信息包括
             <p>
                 <ol>
@@ -33,10 +33,10 @@
                     </ul>
                 </ol>
             </p>
-            <input value="单击此处开始demo预演" type="button" onClick="demo()">
+            <input value="单击此处开始" type="button" onClick="demo()">
     </div>
     <div id="demo">
-        <h3>这是一个递交表单，这里的开放action接口可以通过终端递交相同的request请求来获得数据</h3>
+        <h3>这是一个递交表单的demo，这里的开放action接口可以通过终端递交相同的request请求来获得数据</h3>
         <form id="importTable" type="post" onsubmit="return false" action="#">
             <table>
                 <tr>
@@ -100,8 +100,8 @@
         $("#demo").fadeIn(3000);
     }
 
-    function hideDemo() {
-        $("#demo").hide();
+    function showDemo() {
+        $("#pre").show();
     }
     $(function() {
         $('.import').click(function() {
@@ -118,7 +118,7 @@
                     }
                 });
         });
-        hideDemo();
+        showDemo();
     });
     ;
     </script>

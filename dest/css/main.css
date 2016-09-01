@@ -95,7 +95,8 @@ a.tag {
   top: 85%;
   left: 50%;
   position: fixed;
-  text-align: center; }
+  text-align: center;
+  display: none; }
   #pre ol,
   #demo ol {
     width: 70%;

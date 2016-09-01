@@ -3,7 +3,7 @@ function sidebarRefresh(tlogin){
 	//检测邮件数目使用
 	if(tlogin!=""){
 		$.post(
-		"/index.php/home/get/getOrderNumber", 
+		"/api/get/getOrderNumber", 
 		tlogin,
 		function(data){
 			json = eval('('+data+')');
@@ -16,48 +16,48 @@ function sidebarRefresh(tlogin){
 }
 //切换到尚未收件列表
 function turnUnreceived(){
-	$("#main").load("/index.php/home/get/load?page=TurnUnchecked",function(){loadUnchecked(1);});
+	$("#main").load("/api/get/load?page=TurnUnchecked",function(){loadUnchecked(1);});
 }
 //切换到设置页面
 function changeToConfig(){
-	$("#main").load("/index.php/home/get/load?page=ChangeToConfig");
+	$("#main").load("/api/get/load?page=ChangeToConfig");
 }
 //切换到已经收件列表
 function turnReceived(){
-	$("#main").load("/index.php/home/get/load?page=TurnChecked",function(){loadChecked();});
+	$("#main").load("/api/get/load?page=TurnChecked",function(){loadChecked();});
 }
 //切换到垃圾箱
 function turnBin(){
-	$("#main").load("/index.php/home/get/load?page=TurnBin");
+	$("#main").load("/api/get/load?page=TurnBin");
 }
 //切换到全部收件列表
 function turnAll(){
-	$("#main").load("/index.php/home/get/load?page=TurnAll");
+	$("#main").load("/api/get/load?page=TurnAll");
 }
 //登出
 function loginOut(){
 	var tlogin;
 	if(tlogin!=""){
 		$.post(
-			"/index.php/home/login/loginOut", 
+			"/api/login/loginOut", 
 			tlogin,
 			function(data){
 				json = eval('('+data+')');
 				if(json.status==1){
-					window.location="/index.php/home/login/login?respond=1";
+					window.location="/login?respond=1";
 				}else{
 					alert('没有成功登出');
 				}
 			});
 	}else{
-		window.location="/index.php/home/login/login?respond=1";
+		window.location="/login?respond=1";
 	}
 	
 }
 function loadChecked(){
 	var tlogin;
 	$.post(
-		"/index.php/home/get/getChecked",
+		"/api/get/getChecked",
 		{'page':'1'},
 		function(data){
 			data = eval('('+data+')');
@@ -84,7 +84,7 @@ function loadChecked(){
 function loadUnchecked(page){
 	var tlogin;
 	$.post(
-		"/index.php/home/get/getUnchecked",
+		"/api/get/getUnchecked",
 		{'page':page},
 		function(data){
 			data = eval('('+data+')');
