@@ -43,19 +43,18 @@ function loginOut() {
             function(data) {
                 var json = JSON.parse(data);
                 if (json.status == 1) {
-                    window.location = "/login?respond=1";
+                    window.location = "/login.html?respond=1";
                 } else {
                     alert('没有成功登出');
                 }
             });
     } else {
-        window.location = "/login?respond=1";
+        window.location = "/login.html?respond=1";
     }
 
 }
 
 function loadChecked() {
-    var tlogin;
     $.post(
         "/api/get/getChecked", { 'page': '1' },
         function(data) {
@@ -82,7 +81,6 @@ function loadChecked() {
 }
 
 function loadUnchecked(page) {
-    var tlogin;
     $.post(
         "/api/get/getUnchecked", { 'page': page },
         function(data) {

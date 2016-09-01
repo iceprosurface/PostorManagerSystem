@@ -2,18 +2,6 @@
 namespace Api\Controller;
 use Think\Controller;
 class ImportController extends Controller {
-	//快件detail界面
-	public function detail(){
-		$this->display(detail);
-	}
-	//快件录入界面
-	public function import(){
-		$this->display(import);
-	}
-	//快件签收界面
-	public function check(){
-		$this->display(check);
-	}
 	/*
 	*验证是否存在
 	*返回值@return response（错误信息提示），status（错误判断编码）

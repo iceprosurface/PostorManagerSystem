@@ -110,9 +110,10 @@
 		);
 		
 		//判断是否有token若有必然在此次登录有效期内
-		if(session(C('SESSION_KEY_TOKEN'))!=null){
+		if(session(C('SESSION_KEY_TOKEN'))!= null){
 			//判断是否和session一致，一致说明还处在本次登录有效期内
 			if(session(C('SESSION_KEY_TOKEN'))==$usr_info['token']){
+				cookie(C('COOKIE_KEY_TOKEN'),array(id=>$usr_info['id'],token=>$usr_info['token']),3600);
 				return  true;
 			}else{
 				

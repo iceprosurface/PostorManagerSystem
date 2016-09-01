@@ -1,19 +1,27 @@
 <?php
 namespace Api\Controller;
 use Think\Controller;
-class GetController extends BaseController {
+class GetController extends Controller {
 	/*
 	*此控制器用于ajax获取各种类型的数据
 	*不包含验证信息在内的相关数据
 	*函数名遵循getXXX
 	*/
 	public function _initialize(){
+		$token=getClientLToken();
+		if(!isTokenL($token)){
+			$this->redirect("public/illegalRequirement");
+		}
 		if(C('IS_AJAX')&& !IS_AJAX ){
 			$this->redirect("public/illegalRequirement");
 		}
 		$token=getClientLToken();
 		$this->token=$token;
-		$this->id=cookie(C('COOKIE_KEY_TOKEN'))['id'];
+		if(cookie(C('COOKIE_KEY_TOKEN'))['id']){
+			$this->id = cookie(C('COOKIE_KEY_TOKEN'))['id'];
+		}else{
+			$this->id = -1;
+		}
 	}
 	
 	/*
@@ -23,13 +31,13 @@ class GetController extends BaseController {
 	*说明:0:数据创建失败，1:用户名称返回成功，2:用户名称返回失败
 	*/
 	public function getUsrName(){
-		$map['Id'] = $this->id;
+		$map['id'] = $this->id;
 		$usr_info['id'] = $this->id;
 		$usrs = M('usr');
 		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
 		if($usrs->create($usr_info)){
 			$list=$usrs->field(array('name'))->where($map)->find();
-			$res=array(response=>$map['Id'],status=>"1",name=>$list['name']);
+			$res=array(response=>$map['id'],status=>"1",name=>$list['name']);
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
@@ -40,7 +48,6 @@ class GetController extends BaseController {
 	*/
 	public function getOrderNumber(){
 		$map['usrId'] = $this->id;
-		$usr_info['id'] = $this->id;
 		$map['haveSAR'] = "0";
 		$orders = M('orders');
 		$uncheckedCount=$orders->field(array('orderId'))->where($map)->select();
