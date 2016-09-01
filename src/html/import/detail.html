@@ -1,39 +1,4 @@
 @@include('../public/header.html')
-<script>
-$(document).ready(function() {
-    var orderId = getUrlParam("orderId");
-    $.ajax({
-        type: "post",
-        url: "/api/import/getOrder",
-        data: {
-            "orderId": orderId
-        },
-        dataType: "text",
-        success: function(data) {
-            data = eval('(' + data + ')');
-            loadInfo(data);
-        }
-    });
-});
-</script>
-<script>
-function loadInfo(data) {
-    $("#import").html(""); //清空info内容
-    var json = eval('(' + data + ')');
-    $("#import").append(
-        "</td>" +
-        "<td>" + json.result.postorid + "</td>" +
-        "<td>" + json.result.importtime + "</td>" +
-        "<td>" + json.result.exporttime + "</td>" +
-        "<td>" + json.result.positionid + "</td>" +
-        "<td>" + json.result.orderinfo + "</td>" +
-        "<td>" + json.result.usrname + "</td>" +
-        "<td>" + json.result.usrphonenumber + "</td>" +
-        "<td>" + json.result.usrid + "</td>" +
-        "<td>" + json.result.orderid + "</td>");
-
-}
-</script>
 <title>你的邮件已经录入成功了</title>
 </head>
 
@@ -59,6 +24,41 @@ function loadInfo(data) {
         </tr>
     </table>
     @@include('../public/script.html')
+    <script>
+    $(document).ready(function() {
+        var orderId = getUrlParam("orderId");
+        $.ajax({
+            type: "post",
+            url: "/api/import/getOrder",
+            data: {
+                "orderId": orderId
+            },
+            dataType: "text",
+            success: function(data) {
+                data = JSON.parse( data);
+                loadInfo(data);
+            }
+        });
+    });
+    </script>
+    <script>
+    function loadInfo(data) {
+        $("#import").html(""); //清空info内容
+        var json = JSON.parse( data);
+        $("#import").append(
+            "</td>" +
+            "<td>" + json.result.postorid + "</td>" +
+            "<td>" + json.result.importtime + "</td>" +
+            "<td>" + json.result.exporttime + "</td>" +
+            "<td>" + json.result.positionid + "</td>" +
+            "<td>" + json.result.orderinfo + "</td>" +
+            "<td>" + json.result.usrname + "</td>" +
+            "<td>" + json.result.usrphonenumber + "</td>" +
+            "<td>" + json.result.usrid + "</td>" +
+            "<td>" + json.result.orderid + "</td>");
+
+    }
+    </script>
 </body>
 
 </html>

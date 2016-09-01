@@ -7,41 +7,6 @@
     <link href="/css/all.min.css?rev=baecbcaf1e3b5606a9407654dc4fd6fc" rel="stylesheet">
     <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
     <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
-<script>
-$(document).ready(function() {
-    var orderId = getUrlParam("orderId");
-    $.ajax({
-        type: "post",
-        url: "/api/import/getOrder",
-        data: {
-            "orderId": orderId
-        },
-        dataType: "text",
-        success: function(data) {
-            data = eval('(' + data + ')');
-            loadInfo(data);
-        }
-    });
-});
-</script>
-<script>
-function loadInfo(data) {
-    $("#import").html(""); //清空info内容
-    var json = eval('(' + data + ')');
-    $("#import").append(
-        "</td>" +
-        "<td>" + json.result.postorid + "</td>" +
-        "<td>" + json.result.importtime + "</td>" +
-        "<td>" + json.result.exporttime + "</td>" +
-        "<td>" + json.result.positionid + "</td>" +
-        "<td>" + json.result.orderinfo + "</td>" +
-        "<td>" + json.result.usrname + "</td>" +
-        "<td>" + json.result.usrphonenumber + "</td>" +
-        "<td>" + json.result.usrid + "</td>" +
-        "<td>" + json.result.orderid + "</td>");
-
-}
-</script>
 <title>你的邮件已经录入成功了</title>
 </head>
 
@@ -73,6 +38,41 @@ function loadInfo(data) {
 	<script src="/js/app.min.js?rev=d0f54bb0121dce76dde755d1a167ca0c"></script>
 	<script src="/js/all.min.js?rev=d41d8cd98f00b204e9800998ecf8427e"></script>
 
+    <script>
+    $(document).ready(function() {
+        var orderId = getUrlParam("orderId");
+        $.ajax({
+            type: "post",
+            url: "/api/import/getOrder",
+            data: {
+                "orderId": orderId
+            },
+            dataType: "text",
+            success: function(data) {
+                data = JSON.parse( data);
+                loadInfo(data);
+            }
+        });
+    });
+    </script>
+    <script>
+    function loadInfo(data) {
+        $("#import").html(""); //清空info内容
+        var json = JSON.parse( data);
+        $("#import").append(
+            "</td>" +
+            "<td>" + json.result.postorid + "</td>" +
+            "<td>" + json.result.importtime + "</td>" +
+            "<td>" + json.result.exporttime + "</td>" +
+            "<td>" + json.result.positionid + "</td>" +
+            "<td>" + json.result.orderinfo + "</td>" +
+            "<td>" + json.result.usrname + "</td>" +
+            "<td>" + json.result.usrphonenumber + "</td>" +
+            "<td>" + json.result.usrid + "</td>" +
+            "<td>" + json.result.orderid + "</td>");
+
+    }
+    </script>
 </body>
 
 </html>
