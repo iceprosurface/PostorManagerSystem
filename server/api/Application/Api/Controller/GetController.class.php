@@ -106,7 +106,7 @@ class GetController extends Controller {
 		$orders = M('orders');
 		\Think\Log::record('where的内容为'.join(",",$array),'WARN');
 		//对于orderlist的选择
-		$map = array('orderid',array('in', join(",",$array) )); 
+		$map['orderid'] = array('in', join(",",$array)); 
 		$result = $orders->where($map)->setField('delay',true);
 		$res=array(response=>$result,status=>"1");
 		$this->ajaxReturn(json_encode($res),'JSON');
