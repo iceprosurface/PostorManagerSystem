@@ -66,15 +66,15 @@ gulp.task('html', function() {
 gulp.task('script', function() {
     return gulp.src("src/js/**/*.js")
         .pipe(gulp.dest("dest/js"))
-        // .pipe(babel({
-        //     presets: ['es2015']
-        // }))
-        // .on('error', function(err) {
-        //     gutil.log('js Error!', err.message);
-        //     this.emit('end');
-        // })
-        // .pipe(jshint(jshintConfig)) //{"esnext" : true}))
-        // .pipe(jshint.reporter('default'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .on('error', function(err) {
+            gutil.log('js Error!', err.message);
+            this.emit('end');
+        })
+        .pipe(jshint(jshintConfig)) //{"esnext" : true}))
+        .pipe(jshint.reporter('default'))
         .pipe(uglify())
         .on('error', function(err) {
             gutil.log('js Error!', err.message);
