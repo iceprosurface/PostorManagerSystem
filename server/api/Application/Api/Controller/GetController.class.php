@@ -101,7 +101,7 @@ class GetController extends Controller {
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
 	public function delay() {
-		$map['usrid'] = $this->id;
+		// $map['usrid'] = $this->id;
 		$array = I('post.orderlist');
 		$orders = M('orders');
 		//对于orderlist的选择
