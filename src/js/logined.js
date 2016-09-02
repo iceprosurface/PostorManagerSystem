@@ -205,7 +205,7 @@ function delayOrders() {
         url: "/api/get/delay",
         data: { "orderlist": list },
         dataType: "json",
-        success: function(data) { turnReceived(); }
+        success: function(data) { turnUnreceived(); }
     });
 }
 

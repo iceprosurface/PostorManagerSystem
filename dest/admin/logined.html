@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- common css -->
+    <link href="/css/main.min.css?rev=21bca968d1864673d3b9b25e5128c37e" rel="stylesheet">
+    <link href="/css/all.min.css?rev=baecbcaf1e3b5606a9407654dc4fd6fc" rel="stylesheet">
+    <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
+    <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
+<title>后台管理系统-已登录</title>
+</head>
+<body ng-app="appModule">
+<div class="bg-gray fg-white">
+	<div class="grid" style="margin: 0px;">
+		<div class="row cells8">
+			<div class="cell colspan3 text-center">
+				<h2>后台管理系统</h2>
+			</div>
+			
+			<div class="cell offset6 colspan2">
+				<div class="tile-area-controls">
+					<button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">用户名</span> <span class="icon mif-user"></span></button>
+					<button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showSearch()"><span class="mif-search"></span></button>
+					<button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showSettings()"><span class="mif-cog"></span></button>
+					<a href="" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="grid bg-white">
+		<div class="row cells8">
+			<div class="">
+				<ul class="v-menu">
+					<li class="menu-title">首页</li>
+					<li class="sub-title"><a href="#index"><span class="mif-home icon"></span> 首页</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">货柜操作</li>
+					<li class="sub-title"><a href="#containerStatus"><span class="mif-stack3 icon"></span> 货柜状态</a></li>
+					<li class="sub-title"><a href="#unnoticed"><span class="mif-event-busy icon"></span> 未提醒件</a></li>
+					<li class="sub-title"><a href="#backOrder"><span class="mif-bin icon"></span> 退货件</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">会员操作<</li>
+					<li class="sub-title"><a href="#usrStatus"><span class="mif-user icon"></span> 会员状态修改</a></li>
+					<li class="sub-title"><a href="#usrOrder"><span class="mif-compass icon"></span> 对应快件</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">快件操作</li>
+					<li class="sub-title"><a href="#orderConf"><span class="mif-tags icon"></span> 快件信息修改</a></li>
+				</ul>
+			</div>
+			<div class="cell colspan6 content fg-black" >
+				<ng-view>
+					
+				</ng-view>
+			</div>
+		</div>
+	
+	</div>
+	
+</div>
+	<!-- common js -->
+	<script src="/js/jquery.min.js?rev=cccc7fc56e1d2b59e4e4fe7f9861d8ba"></script>
+    <script src="/js/metro.min.js?rev=57f1dbca946d6500d3cfc9baabbabc57"></script>
+	<script src="/js/all.min.js?rev=8971778a9cc0ad74eeea6d9ed8a7b87f"></script>
+
+<script src="/js/select2.min.js?rev=6f47675542bb309d68a31726782c6d7e"></script>
+<script src="/js/angular.min.js?rev=7d49cc2dec45fc1e654fb0173039ba64"></script>
+<script src="/js/angular-resource.min.js?rev=1b943b9b37fdc9a3a8de1eb911600f6e"></script>
+<script src="/js/angular-route.min.js?rev=fd84260f51a034031887b81f9b86b4ac"></script>
+<script src="/js/app.min.js?rev=9aaec599baed6bcc8412f186f1748b99"></script>
+
+<script>
+$(".v-menu .sub-title").click(function(){
+	$(".v-menu .sub-title").each(function(){
+		$(this).removeClass("active");
+	});
+	$(this).addClass("active");
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<h2>库存系统</h2>
+<div class="input-control" data-role="select">
+	<select class="select2" ng-model="nowPage" ng-options=" page.id as page.id  for page in pages">
+		<option value="">选择……</option>  
+	</select>
+</div>
+<div ng-repeat="position in positions">
+	<p><span ng-bind="position['positionid']"></span>|<span ng-bind="position['haveproduct']"></span></p>
+</div>

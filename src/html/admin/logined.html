@@ -1,0 +1,65 @@
+@@include('../public/header.html')
+<title>后台管理系统-已登录</title>
+</head>
+<body ng-app="appModule">
+<div class="bg-gray fg-white">
+	<div class="grid" style="margin: 0px;">
+		<div class="row cells8">
+			<div class="cell colspan3 text-center">
+				<h2>后台管理系统</h2>
+			</div>
+			
+			<div class="cell offset6 colspan2">
+				<div class="tile-area-controls">
+					<button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">用户名</span> <span class="icon mif-user"></span></button>
+					<button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showSearch()"><span class="mif-search"></span></button>
+					<button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showSettings()"><span class="mif-cog"></span></button>
+					<a href="" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="grid bg-white">
+		<div class="row cells8">
+			<div class="">
+				<ul class="v-menu">
+					<li class="menu-title">首页</li>
+					<li class="sub-title"><a href="#index"><span class="mif-home icon"></span> 首页</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">货柜操作</li>
+					<li class="sub-title"><a href="#containerStatus"><span class="mif-stack3 icon"></span> 货柜状态</a></li>
+					<li class="sub-title"><a href="#unnoticed"><span class="mif-event-busy icon"></span> 未提醒件</a></li>
+					<li class="sub-title"><a href="#backOrder"><span class="mif-bin icon"></span> 退货件</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">会员操作<</li>
+					<li class="sub-title"><a href="#usrStatus"><span class="mif-user icon"></span> 会员状态修改</a></li>
+					<li class="sub-title"><a href="#usrOrder"><span class="mif-compass icon"></span> 对应快件</a></li>
+					<li class="divider"></li>
+					<li class="menu-title">快件操作</li>
+					<li class="sub-title"><a href="#orderConf"><span class="mif-tags icon"></span> 快件信息修改</a></li>
+				</ul>
+			</div>
+			<div class="cell colspan6 content fg-black" >
+				<ng-view>
+					
+				</ng-view>
+			</div>
+		</div>
+	
+	</div>
+	
+</div>
+@@include('../public/script.html')
+<script src="/js/select2.min.js?rev=@@hash"></script>
+@@include('../public/admin/script.html')
+
+<script>
+$(".v-menu .sub-title").click(function(){
+	$(".v-menu .sub-title").each(function(){
+		$(this).removeClass("active");
+	});
+	$(this).addClass("active");
+});
+</script>
+</body>
+</html>

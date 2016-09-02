@@ -54,6 +54,10 @@ gulp.task('css', function() {
 gulp.task('html', function() {
     gulp.src(["src/html/**/*.html", "!src/html/public"])
         .pipe(fileinclude())
+        .on('error', function(err) {
+            gutil.log('html Error!', err.message);
+            this.emit('end');
+        })
         .pipe(gulp.dest("dest"))
         .pipe(rev())
         .on('error', function(err) {

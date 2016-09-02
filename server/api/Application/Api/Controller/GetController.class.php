@@ -72,7 +72,7 @@ class GetController extends Controller {
 		//设定表
 		$table='orders';
 		//设定返回字段
-		$field=array('orderId','orderInfo','positionId','importTime','postorId');
+		$field=array('orderId','orderInfo','positionId','importTime','postorId','delay');
 		$type=array();
 		$orderlist=getDataByKeyWords($type,$map,$table,$pagination,$field,$page);
 		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
