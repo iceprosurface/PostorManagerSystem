@@ -1,6 +1,6 @@
 (function(angular) {
     // the rest of your file goes here...
-    var appModule = angular.module('appModule', ['ngRoute'], ['$httpProvider',function($httpProvider) {
+    var appModule = angular.module('appModule', ['ngRoute'], ['$httpProvider', function($httpProvider) {
         // 官方提供的类似于$.ajax形式的提交
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -49,10 +49,10 @@
     appModule.factory('ipcService', ['$http', '$q', function($http, $q) {
 
         return {
-            "positions": function(page){
+            "positions": function(page) {
                 page = isNaN(parseInt(page)) ? 1 : parseInt(page);
                 var defer = $q.defer();
-                $http.post('/admin/query', {
+                $http.post('/api/admin/query', {
                     "field": ["positionId", "haveProduct"],
                     "from": "positions",
                     "pagination": 40,
@@ -193,10 +193,8 @@
     //用户信息控制器
     var usrStatusController = appModule.controller('usrStatusController', ['$scope', 'ipcService', function($scope, ipcService) {
         $scope.datahave = false;
-        ipcService.usr(name).then(function(data) {
-
+        ipcService.usr($scope.usrid).then(function(data) {
             $scope.usr = data.list;
-
             $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
 
         });
@@ -217,11 +215,15 @@
                         $scope.order = data;
                     });
                 }
-
             });
         }
     );
     var orderConfController = appModule.controller('orderConfController', ['$scope', function($scope) {
+        $scope.datahave = false;
+        ipcService.order($scope.orderid).then(function(data) {
+            $scope.order = data;
+        });
+        
 
     }]);
     var IndexController = appModule.controller('IndexController', ['$scope', function($scope) {

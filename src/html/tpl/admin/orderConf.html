@@ -1,1 +1,11 @@
- orderconfig
+<div class="input-control text">
+    <input type="text" ng-model="orderid" required placeholder="请输入订单编号">
+</div>
+<p ng-show="datahave">查无次订单号</p>
+<table ng-show="datahave">
+    <tr>
+        <td>订单编号</td>
+        <td ng-bind="order['orderid']"></td>
+        <td>修改</td>
+    </tr>
+</table>
