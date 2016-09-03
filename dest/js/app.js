@@ -49,7 +49,7 @@
     appModule.factory('ipcService', ['$http', '$q', function($http, $q) {
 
         return {
-            "positions": function(page) {
+            positions: function(page) {
                 page = isNaN(parseInt(page)) ? 1 : parseInt(page);
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
@@ -64,7 +64,7 @@
                 });
                 return defer.promise;
             },
-            "positionPages": function() {
+            positionPages: function() {
                 var defer = $q.defer();
                 $http.post('/api/admin/maxPages', {
                     "pagination": 40
@@ -75,7 +75,7 @@
                 });
                 return defer.promise;
             },
-            "unnoticedOrders": function(page) {
+            unnoticedOrders: function(page) {
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
                     "where": [{ "key": "haveNoticed", "value": 0 }],
@@ -90,7 +90,7 @@
                 });
                 return defer.promise;
             },
-            "order": function(orderid) {
+            order: function(orderid) {
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
                     "where": [{ "key": "orderId", "value": orderid }],
@@ -109,14 +109,23 @@
                 });
                 return defer.promise;
             },
-            "usr": function(name) {
+            usr: function(name) {
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
                     "where": [{ "key": "name", "value": name }],
-                    "field": ["usrId", "usrPhoneNumber", "psw", "lastIp", "name", "lastLogin"],
+                    "field": ["id", "usrPhoneNumber", "psw", "lastIp", "name", "lastLogin"],
                     "from": "usr"
                 }).success(function(data) {
                     defer.resolve(JSON.parse(data));
+                }).error(function(err) {
+                    defer.reject(err);
+                });
+                return defer.promise;
+            },
+            adminName: function() {
+                var defer = $q.defer();
+                $http.post('/api/admin/getRootName', {}).success(function(data) {
+                    defer.resolve(JSON.parse(data).name);
                 }).error(function(err) {
                     defer.reject(err);
                 });
@@ -173,6 +182,13 @@
             });
         });
     }]);
+    //msgController
+    var msgController = appModule.controller('msgController', ['$scope', 'ipcService', function($scope, ipcService) {
+        $scope.username = "root";
+        ipcService.adminName().then(function(data) {
+            $scope.username = data;
+        });
+    }]);
     //未发送信息列表控制器
     var unnoticedController = appModule.controller('unnoticedController', ['$scope', 'ipcService', function($scope, ipcService) {
         //页码
@@ -200,25 +216,25 @@
         });
     }]);
     //用户订单修改控制器
-    var usrOrderController = appModule.controller('usrOrderController',
-        ['$scope','ipcService','$http',function($scope, ipcService, $http) {
-            //订单号
-            $scope.orderid = "";
-            ipcService.order($scope.nowPage).then(function(data) {
-                $scope.order = data;
-            });
-            // 监视订单号，如果满足12位数字则查询（减小压力）
-            $scope.$watch('orderid', function(newVal) {
-                var regex = /\b\d{12}\b/g; //正则表达式，可修改为需要的内容
-                if (newVal.toString().match(regex) !== null) {
-                    ipcService.order($scope.orderid).then(function(data) {
-                        $scope.order = data;
-                    });
-                }
-            });
-        }]
-    );
-    var orderConfController = appModule.controller('orderConfController', ['$scope', function($scope) {
+    var usrOrderController = appModule.controller('usrOrderController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
+        //订单号
+        $scope.orderid = "";
+        //表单显示情况
+        $scope.datahave = false;
+        ipcService.order($scope.nowPage).then(function(data) {
+            $scope.order = data;
+        });
+        // 监视订单号，如果满足12位数字则查询（减小压力）
+        $scope.$watch('orderid', function(newVal) {
+            var regex = /\b\d{12}\b/g; //正则表达式，可修改为需要的内容
+            if (newVal.toString().match(regex) !== null) {
+                ipcService.order($scope.orderid).then(function(data) {
+                    $scope.order = data;
+                });
+            }
+        });
+    }]);
+    var orderConfController = appModule.controller('orderConfController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
         $scope.datahave = false;
         ipcService.order($scope.orderid).then(function(data) {
             $scope.datahave = parseInt(data.lenght) > 0 ? true : false;

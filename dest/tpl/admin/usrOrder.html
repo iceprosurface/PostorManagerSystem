@@ -1,5 +1,45 @@
+<p style="padding-top:15px;">您现在的位置是:   <a href="#/usrOrder">会员操作</a>>><a href="#/usrOrder">对应快件</a></p>
 <div class="input-control text">
     <input type="text"  ng-model="orderid" required placeholder="请输入订单号">
 </div>
-<div>
-</div>
+
+<p ng-hide="datahave">查无此订单号</p>
+<table ng-show="datahave">
+    <tr>	
+        <td>订单编号</td>
+        <td ng-bind="order['orderid']"></td>
+        <td>修改</td>
+    </tr>    
+    <tr>
+        <td>用户手机号</td>
+        <td ng-bind="order['usrphonenumber']"></td>
+        <td>修改</td>
+    </tr>
+    <tr>
+        <td>订单信息</td>
+        <td ng-bind="order['orderinfo']"></td>
+        <td>修改</td>
+    </tr>
+
+    <tr>
+        <td>用户id</td>
+        <td ng-bind="order['usrid']"></td>
+        <td>修改</td>
+    </tr>
+    <tr>
+        <td>所在箱子</td>
+        <td ng-bind="order['positionid']"></td>
+        <td>修改</td>
+    </tr>
+
+    <tr>
+        <td>送达时间</td>
+        <td ng-bind="order['importtime']"></td>
+        <td>修改</td>
+    </tr>
+    <tr>
+        <td>取件时间</td>
+        <td ng-bind="order['exporttime']"></td>
+        <td>修改</td>
+    </tr>
+</table>

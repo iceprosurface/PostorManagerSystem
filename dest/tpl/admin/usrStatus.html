@@ -1,12 +1,12 @@
+<p style="padding-top:15px;">您现在的位置是:   <a href="#/usrStatus">会员操作</a>>><a href="#/usrStatus">会员状态修改</a></p>	
 <div class="input-control text">
     <input type="text"  ng-model="usrid" required placeholder="请输入用户id">
 </div>
 
-<p ng-show="datahave">查无此人</p>
+<p ng-hide="datahave">查无此人</p>
 
 <table ng-show="datahave">
-	<tr>
-		<td>用户名</td>
+			<td>用户名</td>
 		<td ng-bind="usr['name']"></td>
 		<td>修改</td>
 	</tr>

@@ -9,9 +9,9 @@
                 <div class="cell colspan3 text-center">
                     <h2>后台管理系统</h2>
                 </div>
-                <div class="cell offset6 colspan2">
+                <div class="cell offset6 colspan2" ng-controller="msgController">
                     <div class="tile-area-controls">
-                        <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light">用户名</span> <span class="icon mif-user"></span></button>
+                        <button class="image-button icon-right bg-transparent fg-white bg-hover-dark no-border"><span class="sub-header no-margin text-light" ng-bind="username">用户名</span> <span class="icon mif-user"></span></button>
                         <button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showSearch()"><span class="mif-search"></span></button>
                         <button class="square-button bg-transparent fg-white bg-hover-dark no-border" onclick="showSettings()"><span class="mif-cog"></span></button>
                         <a href="" class="square-button bg-transparent fg-white bg-hover-dark no-border"><span class="mif-switch"></span></a>

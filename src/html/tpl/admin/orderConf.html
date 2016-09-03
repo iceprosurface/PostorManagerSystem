@@ -1,7 +1,9 @@
+<p style="padding-top:15px;">您现在的位置是:   <a href="#/orderConf">快件操作</a>>><a href="#/orderConf">快件信息修改</a></p>
+<hr class="thin bg-grayLighter">
 <div class="input-control text">
     <input type="text" ng-model="orderid" required placeholder="请输入订单编号">
 </div>
-<p ng-show="datahave">查无次订单号</p>
+<p ng-hide="datahave">查无次订单号</p>
 <table ng-show="datahave">
     <tr>
         <td>订单编号</td>
