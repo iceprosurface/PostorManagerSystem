@@ -31,7 +31,7 @@ function turnBin() {
 }
 //切换到全部收件列表
 function turnAll() {
-    $("#main").load("/tpl/AllTable.html");
+    $("#main").load("/tpl/AllTable.html", loadAll);
 }
 //登出
 function loginOut() {
@@ -97,6 +97,35 @@ function loadUnchecked(page) {
                     "</td>" +
                     "<td>" + item.orderid + "</td>" +
                     "<td>" + item.importtime + "</td>" +
+                    "<td>" + item.positionid + "</td>" +
+                    "<td>" + item.orderinfo + "</td>" +
+                    "<td>" + item.postorid + "</td>" +
+                    "</tr>");
+            });
+            loadConvertButton(data);
+        }
+    );
+}
+
+function getAllTable() {
+    var page = 1;
+    $.post(
+        "/api/get/getAll", { 'page': page },
+        function(data) {
+            data = JSON.parse(data);
+            $("#OrderTable").html(""); //清空info内容
+            $.each(data.orders, function(i, item) {
+                $("#OrderTable").append(
+                    "<tr>" +
+                    "<td>" +
+                    "<label class='input-control checkbox small-check no-margin'>" +
+                    "<input type='checkbox' class='uncheck' id='checkBox_" + i + "' data-id='" + item.orderid + "'>" +
+                    "<span class='check'></span>" +
+                    "</label>" +
+                    "</td>" +
+                    "<td>" + item.orderid + "</td>" +
+                    "<td>" + item.importtime + "</td>" +
+                    "<td>" + item.exporttime + "</td>" +
                     "<td>" + item.positionid + "</td>" +
                     "<td>" + item.orderinfo + "</td>" +
                     "<td>" + item.postorid + "</td>" +

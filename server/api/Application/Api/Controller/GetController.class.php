@@ -100,14 +100,40 @@ class GetController extends Controller {
 		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
+	/*
+	*获取全部快件列表
+	*传入参数:@param int page @param string token
+	*返回值@return array orders
+	*/
+	public function getAllTable(){
+		//传入page
+		$page=I('post.page');
+		//设定分页数目
+		$pagination=10;
+		//设定查询内容
+		$map['usrId'] = $this->id;
+		//设定表
+		$table='orders';
+		//设定返回字段
+		$field=array('orderId','orderInfo','positionId','exportTime','importTime','postorId');
+		$type=array();
+		$orderlist=getDataByKeyWords($type,$map,$table,$pagination,$field,$page);
+		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
+		$this->ajaxReturn(json_encode($res),'JSON');
+	}
+	/**************************
+	* 延期功能
+	*
+	****************************/
 	public function delay() {
-		// $map['usrid'] = $this->id;
+		//强制限定id范围（）
+		$id['usrid'] = $this->id;
 		$array = I('post.orderlist');
 		$orders = M('orders');
 		\Think\Log::record('where的内容为'.join(",",$array),'WARN');
 		//对于orderlist的选择
 		$map['orderId'] = array('in', join(",",$array)); 
-		$result = $orders->where($map)->setField('delay',true);
+		$result = $orders->where($map)->where($id)->setField('delay',true);
 		$res=array(response=>$result,status=>"1");
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}

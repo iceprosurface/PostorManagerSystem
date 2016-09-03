@@ -111,7 +111,7 @@
             },
             "usr": function(name) {
                 var defer = $q.defer();
-                $http.post('/api/admin', {
+                $http.post('/api/admin/query', {
                     "where": [{ "key": "name", "value": name }],
                     "field": ["usrId", "usrPhoneNumber", "psw", "lastIp", "name", "lastLogin"],
                     "from": "usr"
@@ -201,7 +201,7 @@
     }]);
     //用户订单修改控制器
     var usrOrderController = appModule.controller('usrOrderController',
-        function($scope, ipcService, $http) {
+        ['$scope','ipcService','$http',function($scope, ipcService, $http) {
             //订单号
             $scope.orderid = "";
             ipcService.order($scope.nowPage).then(function(data) {
@@ -216,14 +216,15 @@
                     });
                 }
             });
-        }
+        }]
     );
     var orderConfController = appModule.controller('orderConfController', ['$scope', function($scope) {
         $scope.datahave = false;
         ipcService.order($scope.orderid).then(function(data) {
+            $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
             $scope.order = data;
         });
-        
+
 
     }]);
     var IndexController = appModule.controller('IndexController', ['$scope', function($scope) {
