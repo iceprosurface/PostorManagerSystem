@@ -191,15 +191,18 @@
     }]);
     //未发送信息列表控制器
     var unnoticedController = appModule.controller('unnoticedController', ['$scope', 'ipcService', function($scope, ipcService) {
+        $scope.datahave = false;
         //页码
         $scope.nowPage = "1";
         ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
             $scope.unnoticedOrders = data;
+            $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
         });
         //监视页码，如果有改变，则更新
         $scope.$watch('nowPage', function(newVal) {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
                 $scope.unnoticedOrders = data;
+                $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
             });
         });
     }]);
@@ -214,6 +217,14 @@
             $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
 
         });
+        $scope.$watch('usrid', function(newVal) {
+            ipcService.usr($scope.usrid).then(function(data) {
+                $scope.usr = data.list;
+                $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
+
+            });
+        })
+
     }]);
     //用户订单修改控制器
     var usrOrderController = appModule.controller('usrOrderController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
@@ -240,7 +251,12 @@
             $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
             $scope.order = data;
         });
-
+        $scope.$watch('orderid', function(newVal) {
+            ipcService.order($scope.orderid).then(function(data) {
+                $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
+                $scope.order = data;
+            });
+        });
 
     }]);
     var IndexController = appModule.controller('IndexController', ['$scope', function($scope) {

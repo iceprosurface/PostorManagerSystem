@@ -2,8 +2,16 @@
 namespace Api\Controller;
 use Think\Controller;
 class AdminController extends Controller {
+	/*
+	*此控制器用于ajax获取各种类型的数据
+	*不包含验证信息在内的相关数据
+	*函数名遵循getXXX
+	*/
+	public function _initialize(){
+		//TODO: 初始化检测，ajax状态检测，cookie检测，登录检测
+	}
 	public function index () {
-
+		//一个index方法
 	}
 	
 	/**
@@ -15,7 +23,7 @@ class AdminController extends Controller {
 	*@param page int 页码
 	*@return list array返回查询列表{"0":{array}……}
 	*/
-	function query(){
+	public function query(){
 		$where=I("post.where");
 		$field=I("post.field");
 		$from=I("post.from");
@@ -51,7 +59,7 @@ class AdminController extends Controller {
 	* @param field (如果为更新则是必要属性，填空则不操作任何字段) {array} 需要操作的字段，类型为{"0"=>{field,value},……}
 	* @param from (必要属性) {string} 查询的类型（后端检验）
 	*/
-	function edit(){
+	public function edit(){
 		//有限判定是否为有效操作
 		if(isset($type)){
 			$where["id"]=I("post.id");
@@ -87,13 +95,17 @@ class AdminController extends Controller {
 		
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
-	function maxPages(){
+	public function getRootName() {
+		//TODO:admin用户账户的检测（may权限系统）
+		$this->ajaxReturn(json_encode(array('name' => "icepro" )));
+	}
+	public function maxPages(){
 		$pagination=I("post.pagination",40);
 		$model = M("positions");
 		$count=$model->field( array( "id" ) )->where( $where )->Count();
 		$maxpage=intval ( $count / $pagination );
 		for($i=1;$i<=$maxpage;$i++){
-			$pages[] = array("id"=>$i);
+			$pages[$i] = array("id"=>$i);
 		}
 		$this->ajaxReturn(json_encode($pages),'JSON');
 	}
