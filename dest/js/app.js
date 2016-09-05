@@ -194,7 +194,7 @@
         var load = function() {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
                 $scope.unnoticedOrders = data;
-                $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
+                $scope.datahave = parseInt(data.length) > 0 ? true : false;
             });
         };
         //监视页码，如果有改变，则更新
@@ -209,7 +209,7 @@
         var load = function() {
             ipcService.usr($scope.usrid).then(function(data) {
                 $scope.usr = data.list;
-                $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
+                $scope.datahave = parseInt(data.length) > 0 ? true : false;
 
             });
         };
@@ -239,7 +239,7 @@
         $scope.datahave = false;
         var load = function() {
             ipcService.order($scope.orderid).then(function(data) {
-                $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
+                $scope.datahave = parseInt(data.length) > 0 ? true : false;
                 $scope.order = data[0];
             });
         };
