@@ -168,19 +168,16 @@
     var containerStatusController = appModule.controller('containerStatusController', ['$scope', 'ipcService', function($scope, ipcService) {
         //库存箱子编号
         $scope.nowPage = "1";
-        ipcService.positions($scope.nowPage).then(function(data) {
-            $scope.positions = data;
-        });
-        ipcService.positionPages($scope.nowPage).then(function(data) {
-            $scope.pages = data;
-        });
-        //监视库存编号，如果有改变，则更新
-        $scope.$watch('nowPage', function(newVal) {
-            // $scope.nowPage = newVal;
+        var loadPositions = function() {
             ipcService.positions($scope.nowPage).then(function(data) {
                 $scope.positions = data;
             });
-        });
+            ipcService.positionPages($scope.nowPage).then(function(data) {
+                $scope.pages = data;
+            });
+        };
+        //监视库存编号，如果有改变，则更新
+        $scope.$watch('nowPage', loadPositions);
     }]);
     //msgController
     var msgController = appModule.controller('msgController', ['$scope', 'ipcService', function($scope, ipcService) {
@@ -194,17 +191,14 @@
         $scope.datahave = false;
         //页码
         $scope.nowPage = "1";
-        ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
-            $scope.unnoticedOrders = data;
-            $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
-        });
-        //监视页码，如果有改变，则更新
-        $scope.$watch('nowPage', function(newVal) {
+        var load = function() {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
                 $scope.unnoticedOrders = data;
                 $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
             });
-        });
+        };
+        //监视页码，如果有改变，则更新
+        $scope.$watch('nowPage', load);
     }]);
     var backOrderController = appModule.controller('backOrderController', ['$scope', function($scope) {
 
@@ -212,18 +206,14 @@
     //用户信息控制器
     var usrStatusController = appModule.controller('usrStatusController', ['$scope', 'ipcService', function($scope, ipcService) {
         $scope.datahave = false;
-        ipcService.usr($scope.usrid).then(function(data) {
-            $scope.usr = data.list;
-            $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
-
-        });
-        $scope.$watch('usrid', function(newVal) {
+        var load = function() {
             ipcService.usr($scope.usrid).then(function(data) {
                 $scope.usr = data.list;
                 $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
 
             });
-        })
+        };
+        $scope.$watch('usrid', load);
 
     }]);
     //用户订单修改控制器
@@ -232,34 +222,41 @@
         $scope.orderid = "";
         //表单显示情况
         $scope.datahave = false;
-        ipcService.order($scope.nowPage).then(function(data) {
-            $scope.order = data;
-        });
+        var load = function() {
+            ipcService.order($scope.nowPage).then(function(data) {
+                $scope.order = data;
+            });
+        };
         // 监视订单号，如果满足12位数字则查询（减小压力）
         $scope.$watch('orderid', function(newVal) {
             var regex = /\b\d{12}\b/g; //正则表达式，可修改为需要的内容
             if (newVal.toString().match(regex) !== null) {
-                ipcService.order($scope.orderid).then(function(data) {
-                    $scope.order = data;
-                });
+                load();
             }
         });
     }]);
     var orderConfController = appModule.controller('orderConfController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
         $scope.datahave = false;
-        ipcService.order($scope.orderid).then(function(data) {
-            $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
-            $scope.order = data;
-        });
-        $scope.$watch('orderid', function(newVal) {
+        var load = function() {
             ipcService.order($scope.orderid).then(function(data) {
                 $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
                 $scope.order = data;
             });
-        });
+        };
+        //首次进入不需要重载
+        //load();
+        //监视订单号，变化则重载
+        $scope.$watch('orderid', load);
+        $scope.edit = function(type) {
+            ipcService.order().then(function(data) {
 
+            });
+            //编辑完重载数据
+            load();
+        };
     }]);
     var IndexController = appModule.controller('IndexController', ['$scope', function($scope) {
 
     }]);
 }(angular));
+$.post("/test", {}, function(data) { console.log(JSON.parse(data)); }, 'json');

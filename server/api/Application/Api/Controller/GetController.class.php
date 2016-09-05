@@ -123,7 +123,7 @@ class GetController extends Controller {
 	}
 	/**************************
 	* 延期功能
-	*
+	* 返回值@return array result
 	****************************/
 	public function delay() {
 		//强制限定id范围（）
