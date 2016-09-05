@@ -240,7 +240,7 @@
         var load = function() {
             ipcService.order($scope.orderid).then(function(data) {
                 $scope.datahave = parseInt(data.lenght) > 0 ? true : false;
-                $scope.order = data;
+                $scope.order = data[0];
             });
         };
         //首次进入不需要重载
@@ -259,4 +259,3 @@
 
     }]);
 }(angular));
-$.post("/test", {}, function(data) { console.log(JSON.parse(data)); }, 'json');
