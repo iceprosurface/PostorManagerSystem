@@ -194,7 +194,7 @@
         var load = function() {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
                 $scope.unnoticedOrders = data;
-                $scope.datahave = parseInt(data.length) > 0 ? true : false;
+                $scope.datahave = parseInt(data.length) > 0;
             });
         };
         //监视页码，如果有改变，则更新
@@ -209,8 +209,7 @@
         var load = function() {
             ipcService.usr($scope.usrid).then(function(data) {
                 $scope.usr = data.list;
-                $scope.datahave = parseInt(data.length) > 0 ? true : false;
-
+                $scope.datahave = parseInt(data.length) > 0;
             });
         };
         $scope.$watch('usrid', load);
@@ -236,17 +235,28 @@
         });
     }]);
     var orderConfController = appModule.controller('orderConfController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
-        $scope.datahave = false;
-        var load = function() {
-            ipcService.order($scope.orderid).then(function(data) {
-                $scope.datahave = parseInt(data.length) > 0 ? true : false;
-                $scope.order = data[0];
-            });
+        // $scope.datahave = false;
+        $scope.datahave = true;
+        $scope.order = {
+            "orderid":115,
+            "usrphonenumber":11234511351,
+            "orderinfo":"this is some infomation",
+            "usrid":1234521852,
+            "positionid":1123445,
+            "importtime":"2016-17-6 13:14:55",
+            "exporttime":"2016-17-6 15:14:55",
+
         };
+        // var load = function() {
+        //     ipcService.order($scope.orderid).then(function(data) {
+        //         $scope.datahave = parseInt(data.length) > 0;
+        //         // $scope.order = data[0];
+        //     });
+        // };
         //首次进入不需要重载
         //load();
         //监视订单号，变化则重载
-        $scope.$watch('orderid', load);
+        // $scope.$watch('orderid', load);
         $scope.edit = function(type) {
             ipcService.order().then(function(data) {
 

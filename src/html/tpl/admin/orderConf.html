@@ -4,47 +4,53 @@
     <input type="text" ng-model="orderid" required placeholder="请输入订单编号">
 </div>
 <p ng-hide="datahave">查无次订单号</p>
-<table ng-show="datahave">
+<table ng-show="datahave" class="table striped hovered cell-hovered border bordered">
+    <tbody>
+        <tr><th>项目</th><th>内容</th><th>修改按钮</th></tr>
+    </tbody>
     <tr>
         <td>订单编号</td>
         <td ng-bind="order['orderid']"></td>
-        <td><button ng-click="editDisplay=true;nowSelect='orderid'">修改</button></td>
+        <td><button  class="button danger" ng-click="editDisplay=true;nowSelect='orderid'">修改</button></td>
     </tr>    
     <tr>
         <td>用户手机号</td>
         <td ng-bind="order['usrphonenumber']"></td>
-        <td><button ng-click="editDisplay=true;nowSelect='usrphonenumber'">修改</button></td>
+        <td><button  class="button danger"ng-click="editDisplay=true;nowSelect='usrphonenumber'">修改</button></td>
     </tr>    
     <tr>
         <td>订单信息</td>
         <td ng-bind="order['orderinfo']"></td>
-        <td><button ng-click="editDisplay=true;nowSelect='orderinfo'">修改</button></td>
+        <td><button  class="button danger"ng-click="editDisplay=true;nowSelect='orderinfo'">修改</button></td>
     </tr>
 
     <tr>
         <td>用户id</td>
         <td ng-bind="order['usrid']"></td>
-        <td><button ng-click="editDisplay=true;nowSelect='usrid'">修改</button></td>
+        <td><button  class="button danger"ng-click="editDisplay=true;nowSelect='usrid'">修改</button></td>
     </tr>
     <tr>
         <td>所在箱子</td>
         <td ng-bind="order['positionid']"></td>
-        <td><button ng-click="editDisplay=true;nowSelect='positionid'">修改</button></td>
+        <td><button  class="button danger"ng-click="editDisplay=true;nowSelect='positionid'">修改</button></td>
     </tr>
 
     <tr>
         <td>送达时间</td>
         <td ng-bind="order['importtime']"></td>
-        <td><button ng-click="editDisplay=true;nowSelect='importtime'">修改</button></td>
+        <td><button  class="button danger"ng-click="editDisplay=true;nowSelect='importtime'">修改</button></td>
     </tr>
     <tr>
         <td>取件时间</td>
         <td ng-bind="order['exporttime']"></td>
-        <td><button ng-click="editDisplay=true;nowSelect='exporttime'">修改</button></td>
+        <td><button  class="button danger"ng-click="editDisplay=true;nowSelect='exporttime'">修改</button></td>
     </tr>
 </table>
-<!-- TODO:弹出框 -->
-<div ng-show="editDisplay" ng-init="editDisplay=false">
-this is edit box!
-<div>
+    <!-- TODO:弹出框 -->
+    <div class="ice-modals" ng-show="editDisplay" ng-init="editDisplay=false">
+        <div class="masked">
+            this is edit box!
+        </div>
+        <div class="mask"></div>
+    </div>
 </div>
