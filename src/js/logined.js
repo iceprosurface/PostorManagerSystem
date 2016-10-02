@@ -241,7 +241,7 @@ function msg(mes) {
     });
 }
 $(document).ready(function() {
-    $("#tishi").load("/api/get/usrconfig");
+    $("#tishi").load("/api/get/usrconfig",function(){$("#carousel").carousel();});
     var tlogin;
     sidebarRefresh(tlogin);
     $.ajax({
@@ -258,7 +258,6 @@ $(document).ready(function() {
         dataType: 'json'
 
     });
-    $("#carousel").carousel();
     $(window).on('resize', function() {
         if ($(this).width() <= 800) {
             $(".sidebar").addClass('compact');
