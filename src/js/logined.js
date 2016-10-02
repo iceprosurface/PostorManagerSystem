@@ -1,3 +1,4 @@
+var nowpositon = "default";
 function sidebarRefresh(tlogin) {
     //检测邮件数目使用
     if (tlogin !== "") {
@@ -13,25 +14,37 @@ function sidebarRefresh(tlogin) {
             });
     }
 }
+
 //切换到尚未收件列表
-function turnUnreceived() {
-    $("#main").load("/tpl/UncheckedPage.html", function() { loadUnchecked(1); });
+function turnUnreceived(page) {
+    nowpositon = "Unreceived";
+    $("#main").load("/tpl/UncheckedPage.html", function() {
+        loadUnchecked(page);
+    });
 }
 //切换到设置页面
 function changeToConfig() {
+    nowpositon = "Config";
     $("#main").load("/tpl/UsrConfig.html");
 }
 //切换到已经收件列表
-function turnReceived() {
-    $("#main").load("/tpl/CheckedPage.html", function() { loadChecked(); });
+function turnReceived(page) {
+    nowpositon = "Received";
+    $("#main").load("/tpl/CheckedPage.html", function() {
+        loadChecked(page);
+    });
 }
 //切换到垃圾箱
 function turnBin() {
-    $("#main").load("/tpl/UsrBin.html");
+    nowpositon = "Bin";
+    $("#main").load("/tpl/UsrBin.html", loadBin);
 }
 //切换到全部收件列表
-function turnAll() {
-    $("#main").load("/tpl/AllTable.html", loadAll);
+function turnAll(page) {
+    nowpositon = "All";
+    $("#main").load("/tpl/AllTable.html", function(){
+        loadAll(page);
+    });
 }
 //登出
 function loginOut() {
@@ -54,9 +67,10 @@ function loginOut() {
 
 }
 
-function loadChecked() {
+function loadChecked(page) {
+    if (!page) page = 1;
     $.post(
-        "/api/get/getChecked", { 'page': '1' },
+        "/api/get/getChecked", { 'page': page },
         function(data) {
             data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
@@ -75,12 +89,14 @@ function loadChecked() {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
+            iniPages(data.maxPage,data.page);
             loadConvertButton(data);
         }
     );
 }
 
 function loadUnchecked(page) {
+    if (!page) page = 1;
     $.post(
         "/api/get/getUnchecked", { 'page': page },
         function(data) {
@@ -109,15 +125,16 @@ function loadUnchecked(page) {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
+            iniPages(data.maxPage,data.page);
             loadConvertButton(data);
         }
     );
 }
 
-function getAllTable() {
-    var page = 1;
+function loadAll(page) {
+    if (!page) page = 1;
     $.post(
-        "/api/get/getAll", { 'page': page },
+        "/api/get/getAllTables", { 'page': page },
         function(data) {
             data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
@@ -138,6 +155,7 @@ function getAllTable() {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
+            iniPages(data.maxPage,data.page);
             loadConvertButton(data);
         }
     );
@@ -177,18 +195,6 @@ function closeDialog(id) {
     var dialog = $(id).data('dialog');
     dialog.close();
 }
-$(function() {
-    $("#carousel").carousel();
-});
-$(function() {
-    $(window).on('resize', function() {
-        if ($(this).width() <= 800) {
-            $(".sidebar").addClass('compact');
-        } else {
-            $(".sidebar").removeClass('compact');
-        }
-    });
-});
 
 function pushMessage(t) {
     var mes = '通知|你已经选择了全部订单';
@@ -253,7 +259,7 @@ function msg(mes) {
     });
 }
 $(document).ready(function() {
-    $("#tishi").load("/api/get/usrconfig");
+    $("#tishi").load("/api/get/usrconfig", function() { $("#carousel").carousel(); });
     var tlogin;
     sidebarRefresh(tlogin);
     $.ajax({
@@ -266,9 +272,45 @@ $(document).ready(function() {
             name[0].innerHTML = "";
             name.append('<span class="mif-cog"></span><span>' + data["name"] + "</span>");
         },
-
         dataType: 'json'
-
     });
-
+    $(window).on('resize', function() {
+        if ($(this).width() <= 800) {
+            $(".sidebar").addClass('compact');
+        } else {
+            $(".sidebar").removeClass('compact');
+        }
+    });
 });
+
+function iniPages(maxpage,curr) {
+    var pages = $("#pages");
+    var settings = {
+        cont: $("#pagecont"), //容器。值支持id名、原生dom对象，jquery对象,
+        pages: maxpage, //可叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是100
+        skip: true, //是否开启跳页
+        skin: '#01a0e1', //#16aaff
+        curr: curr || 1, //当前页
+        groups: 5, //连续显示分页数
+        jump: function(obj,first) {
+            if(!first){
+                var currentPage = obj.curr;
+                switch (nowpositon) {
+                    case 'Unreceived':
+                        loadUnchecked(currentPage);
+                        break;
+                    case 'All':
+                        loadAll(currentPage);
+                        break;
+                    case 'Received':
+                        loadChecked(currentPage);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            pages.html('当前：第' + obj.curr + '页，总计：' + obj.pages + '页');
+        }
+    };
+    laypage(settings);
+}

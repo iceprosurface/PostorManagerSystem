@@ -1,7 +1,8 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class GetController extends BaseController {
+// class GetController extends BaseController {
+class GetController extends Controller {
 	/*
 	*此控制器用于ajax获取各种类型的数据
 	*不包含验证信息在内的相关数据
@@ -12,6 +13,9 @@ class GetController extends BaseController {
 			$this->redirect("public/illegalRequirement");
 		}
 		$token=getClientLToken();
+		if(!isTokenL($token)){
+			$this->redirect("login/login");
+		}
 		$this->token=$token;
 		$this->id=cookie(C('COOKIE_KEY_TOKEN'))['id'];
 	}
@@ -56,7 +60,7 @@ class GetController extends BaseController {
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "0";
@@ -78,7 +82,7 @@ class GetController extends BaseController {
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "1";
@@ -86,6 +90,27 @@ class GetController extends BaseController {
 		$table='orders';
 		//设定返回字段
 		$field=array('orderId','orderInfo','positionId','exportTime','postorId');
+		$type=array();
+		$orderlist=getDataByKeyWords($type,$map,$table,$pagination,$field,$page);
+		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
+		$this->ajaxReturn(json_encode($res),'JSON');
+	}
+	/*
+	*获取已经收件列表
+	*传入参数:@param int page @param string token
+	*返回值@return array orders
+	*/
+	public function getAllTables(){
+		//传入page
+		$page=I('post.page');
+		//设定分页数目
+		$pagination=6;
+		//设定查询内容
+		$map['usrId'] = $this->id;
+		//设定表
+		$table='orders';
+		//设定返回字段
+		$field=array('orderId','orderInfo','positionId','importTime','exportTime','postorId');
 		$type=array();
 		$orderlist=getDataByKeyWords($type,$map,$table,$pagination,$field,$page);
 		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
