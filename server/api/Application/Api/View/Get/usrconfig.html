@@ -1,0 +1,94 @@
+<div data-role="dialog" id="dialog" class="padding20 container auto-size" data-windows-style="true" data-height="80%" data-width="100%" data-overlay="true" data-overlay-color="op-dark" data-close-button="true" data-overlay="true">
+    <div class="carousel" id="carousel" style="height:100%" data-duration="200" data-controls="false" data-stop="false" data-auto="false" data-height="100%">
+        <div class="slide padding20">
+            <h2> 你的信息</h2>
+            <hr></hr>
+            <div class="listview-outlook" data-role="listview">
+                <div class="list-group collapsed">
+                    <span class="list-group-toggle">用户名</span>
+                    <div class="list-group-content">
+                        <div class="list">
+                            <div class="list-content">
+                                <span class="title">更改用户名</span>
+                                <span class="mif-chevron-right fg-green"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list-content">
+                        <span class="list-title">你上一次的登陆IP为：{$list.lastip}</span>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list-content">
+                        <span class="list-title">你上一次的登陆日期为：{$list.lastlogin}</span>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list-content">
+                        <span class="list-title">你现在的登陆有效期为：{$list['expiretime']/3600}小时
+                        <input type="button" value="更改"   onclick="">
+                    </span>
+                        <div class="input-control" data-role="select" id="expiretime">
+                            <select class="select">
+                                <option value="3600">1小时</option>
+                                <option value="43200">12小时</option>
+                                <option value="86400">24小时</option>
+                                <option value="172800">2天</option>
+                                <option value="1296000">15天</option>
+                                <option value="2592000">30天</option>
+                            </select>
+                        </div>
+                        <input type="button" value="保存">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--./slide -->
+        <div class="slide padding20">
+            <h2> 安全</h2>
+            <hr></hr>
+            <div class="margin15 padding20">
+                <div class="listview-outlook" data-role="listview">
+                    <div class="list-group collapsed">
+                        <span class="list-group-toggle">密码</span>
+                        <div class="list-group-content">
+                            <div class="list">
+                                <div class="list-content">
+                                    <span class="list-title">还记得原密码</span>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="list-content">
+                                    <span class="list-title">密码重置邮件</span>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="list-content">
+                                    <span class="list-title">手机验证重置密码</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="bg-red"></hr>
+                    <div class="list">
+                        <div class="list-content" onclick="msg('通知|重新发送成功')">
+                            <span class="list-title">邮箱尚未激活(点击以重新发送验证邮件)</span>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-content">
+                            <span class="list-title">手机尚未激活</span>
+                            <input type="button" value="点击以发送验证短信" onclick="msg('通知|重新发送成功')">
+                            <br/>
+                            <input type="text">
+                            <input type="button" value="验证" onclick="msg('通知|重新发送成功')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--./slide -->
+    </div>
+</div>

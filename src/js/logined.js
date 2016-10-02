@@ -88,9 +88,9 @@ function loadUnchecked(page) {
             $("#OrderTable").html(""); //清空info内容
             $.each(data.orders, function(i, item) {
                 var endTime;
-                if(item.delay == '1'){
-                    endTime = new Date(new Date(item.importtime).valueOf() + 24*3600*1000);
-                }else{
+                if (item.delay == '1') {
+                    endTime = new Date(new Date(item.importtime).valueOf() + 24 * 3600 * 1000);
+                } else {
                     endTime = new Date(item.importtime);
                 }
                 $("#OrderTable").append(
@@ -103,7 +103,7 @@ function loadUnchecked(page) {
                     "</td>" +
                     "<td>" + item.orderid + "</td>" +
                     "<td>" + item.importtime + "</td>" +
-                    "<td>" + endTime.getFullYear() + "-" + (endTime.getMonth()+1) + "-" + endTime.getDate() + endTime.toTimeString() + "</td>" +
+                    "<td>" + endTime.getFullYear() + "-" + (endTime.getMonth() + 1) + "-" + endTime.getDate() + " " + endTime.toTimeString() + "</td>" +
                     "<td>" + item.positionid + "</td>" +
                     "<td>" + item.orderinfo + "</td>" +
                     "<td>" + item.postorid + "</td>" +
@@ -253,6 +253,7 @@ function msg(mes) {
     });
 }
 $(document).ready(function() {
+    $("#tishi").load("/api/get/usrconfig");
     var tlogin;
     sidebarRefresh(tlogin);
     $.ajax({
@@ -269,4 +270,5 @@ $(document).ready(function() {
         dataType: 'json'
 
     });
+
 });

@@ -137,6 +137,14 @@ class GetController extends Controller {
 		$res=array(response=>$result,status=>"1");
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
+	public function usrconfig(){
+		$id['usrid'] = $this->id;
+		$map['Id'] = getTokenKey($login['token']);
+		$usrs = M('usr');
+		$list=$usrs->where($map)->find();
+		$this->assign("list",$list);
+		$this->display();
+	}
 	/*
 	*获取load的页面
 	*传入参数:@param page
