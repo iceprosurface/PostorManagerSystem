@@ -177,18 +177,6 @@ function closeDialog(id) {
     var dialog = $(id).data('dialog');
     dialog.close();
 }
-$(function() {
-    $("#carousel").carousel();
-});
-$(function() {
-    $(window).on('resize', function() {
-        if ($(this).width() <= 800) {
-            $(".sidebar").addClass('compact');
-        } else {
-            $(".sidebar").removeClass('compact');
-        }
-    });
-});
 
 function pushMessage(t) {
     var mes = '通知|你已经选择了全部订单';
@@ -270,5 +258,12 @@ $(document).ready(function() {
         dataType: 'json'
 
     });
-
+    $("#carousel").carousel();
+    $(window).on('resize', function() {
+        if ($(this).width() <= 800) {
+            $(".sidebar").addClass('compact');
+        } else {
+            $(".sidebar").removeClass('compact');
+        }
+    });
 });
