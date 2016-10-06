@@ -13,6 +13,7 @@ function sidebarRefresh(tlogin) {
             });
     }
 }
+
 //切换到尚未收件列表
 function turnUnreceived() {
     $("#main").load("/tpl/UncheckedPage.html", function() { loadUnchecked(1); });
@@ -241,7 +242,7 @@ function msg(mes) {
     });
 }
 $(document).ready(function() {
-    $("#tishi").load("/api/get/usrconfig",function(){$("#carousel").carousel();});
+    $("#dialog").load("/api/get/usrconfig",function(){$("#carousel").carousel();});
     var tlogin;
     sidebarRefresh(tlogin);
     $.ajax({
