@@ -255,9 +255,7 @@ $(document).ready(function() {
             name[0].innerHTML = "";
             name.append('<span class="mif-cog"></span><span>' + data["name"] + "</span>");
         },
-
         dataType: 'json'
-
     });
     $(window).on('resize', function() {
         if ($(this).width() <= 800) {
