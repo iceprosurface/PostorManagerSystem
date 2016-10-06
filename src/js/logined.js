@@ -242,7 +242,7 @@ function msg(mes) {
     });
 }
 $(document).ready(function() {
-    $("#dialog").load("/api/get/usrconfig",function(){$("#carousel").carousel();});
+    $("#tishi").load("/api/get/usrconfig",function(){$("#carousel").carousel();});
     var tlogin;
     sidebarRefresh(tlogin);
     $.ajax({
