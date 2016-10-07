@@ -91,7 +91,12 @@ class GetController extends BaseController {
 		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
-	public function getAllPage(){
+	/*
+	*获取已经收件列表
+	*传入参数:@param int page @param string token
+	*返回值@return array orders
+	*/
+	public function getAllTables(){
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
