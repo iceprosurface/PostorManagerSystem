@@ -87,7 +87,7 @@ function loadChecked(page) {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
-            iniPages(data.maxPage);
+            iniPages(data.maxPage,data.page);
             loadConvertButton(data);
         }
     );
@@ -123,7 +123,7 @@ function loadUnchecked(page) {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
-            iniPages(data.maxPage);
+            iniPages(data.maxPage,data.page);
             loadConvertButton(data);
         }
     );
@@ -309,13 +309,14 @@ $(document).ready(function() {
     });
 });
 
-function iniPages(maxpage) {
+function iniPages(maxpage,curr) {
     var pages = $("#pages");
     var settings = {
         cont: $("#pagecont"), //容器。值支持id名、原生dom对象，jquery对象,
         pages: maxpage, //可叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是100
         skip: true, //是否开启跳页
         skin: '#01a0e1', //#16aaff
+        curr: curr || 1, //当前页
         groups: 5, //连续显示分页数
         jump: function(obj,first) {
             if(!first){
