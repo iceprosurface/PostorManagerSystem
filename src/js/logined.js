@@ -322,19 +322,19 @@ function iniPages(maxpage) {
                 var currentPage = obj.curr;
                 switch (nowpositon) {
                     case 'Unreceived':
-                        turnUnreceived(currentPage);
+                        loadChecked(currentPage);
                         break;
                     case 'All':
-                        turnAll(currentPage);
+                        loadAll(currentPage);
                         break;
                     case 'Received':
-                        turnReceived(currentPage);
+                        loadReceived(currentPage);
                         break;
                     default:
                         break;
                 }
-                pages.html('当前：第' + obj.curr + '页，总计：' + obj.pages + '页');
             }
+            pages.html('当前：第' + obj.curr + '页，总计：' + obj.pages + '页');
         }
     };
     laypage(settings);
