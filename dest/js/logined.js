@@ -129,7 +129,7 @@ function loadUnchecked(page) {
     );
 }
 
-function getAllTable() {
+function loadAll(page) {
     if (!page) page = 1;
     $.post(
         "/api/get/getAll", { 'page': page },
@@ -153,35 +153,7 @@ function getAllTable() {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
-            loadConvertButton(data);
-        }
-    );
-}
-
-function loadAll() {
-    var page = 1;
-    $.post(
-        "/api/get/getAll", { 'page': page },
-        function(data) {
-            data = JSON.parse(data);
-            $("#OrderTable").html(""); //清空info内容
-            $.each(data.orders, function(i, item) {
-                $("#OrderTable").append(
-                    "<tr>" +
-                    "<td>" +
-                    "<label class='input-control checkbox small-check no-margin'>" +
-                    "<input type='checkbox' class='uncheck' id='checkBox_" + i + "' data-id='" + item.orderid + "'>" +
-                    "<span class='check'></span>" +
-                    "</label>" +
-                    "</td>" +
-                    "<td>" + item.orderid + "</td>" +
-                    "<td>" + item.importtime + "</td>" +
-                    "<td>" + item.exporttime + "</td>" +
-                    "<td>" + item.positionid + "</td>" +
-                    "<td>" + item.orderinfo + "</td>" +
-                    "<td>" + item.postorid + "</td>" +
-                    "</tr>");
-            });
+            iniPages(data.maxPage,data.page);
             loadConvertButton(data);
         }
     );
@@ -323,13 +295,13 @@ function iniPages(maxpage,curr) {
                 var currentPage = obj.curr;
                 switch (nowpositon) {
                     case 'Unreceived':
-                        loadChecked(currentPage);
+                        loadUnchecked(currentPage);
                         break;
                     case 'All':
                         loadAll(currentPage);
                         break;
                     case 'Received':
-                        loadReceived(currentPage);
+                        loadChecked(currentPage);
                         break;
                     default:
                         break;

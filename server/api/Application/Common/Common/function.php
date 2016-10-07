@@ -73,7 +73,7 @@
 		
 		if ( is_numeric( $pagination ) && ( $pagination <= 40 || $pagination >= 0 ) ) {
 			$count=$model->field( array( "id" ) )->where( $where )->Count();
-			$pages=intval ( $count / $pagination );
+			$pages= ceil( $count / $pagination );
 			//判断页数设置
 			if ( isset( $page ) ){
 				$page = intval($page);
