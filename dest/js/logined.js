@@ -1,3 +1,5 @@
+var nowpositon = "default";
+
 function sidebarRefresh(tlogin) {
     //检测邮件数目使用
     if (tlogin !== "") {
@@ -15,23 +17,32 @@ function sidebarRefresh(tlogin) {
 }
 
 //切换到尚未收件列表
-function turnUnreceived() {
-    $("#main").load("/tpl/UncheckedPage.html", function() { loadUnchecked(1); });
+function turnUnreceived(page) {
+    nowpositon = "Unreceived";
+    $("#main").load("/tpl/UncheckedPage.html", function() {
+        loadUnchecked(page);
+    });
 }
 //切换到设置页面
 function changeToConfig() {
+    nowpositon = "Config";
     $("#main").load("/tpl/UsrConfig.html");
 }
 //切换到已经收件列表
-function turnReceived() {
-    $("#main").load("/tpl/CheckedPage.html", function() { loadChecked(); });
+function turnReceived(page) {
+    nowpositon = "Received";
+    $("#main").load("/tpl/CheckedPage.html", function() {
+        loadChecked(page);
+    });
 }
 //切换到垃圾箱
 function turnBin() {
-    $("#main").load("/tpl/UsrBin.html");
+    nowpositon = "Bin";
+    $("#main").load("/tpl/UsrBin.html", loadBin);
 }
 //切换到全部收件列表
 function turnAll() {
+    nowpositon = "All";
     $("#main").load("/tpl/AllTable.html", loadAll);
 }
 //登出
@@ -55,9 +66,10 @@ function loginOut() {
 
 }
 
-function loadChecked() {
+function loadChecked(page) {
+    if (page) page = 1;
     $.post(
-        "/api/get/getChecked", { 'page': '1' },
+        "/api/get/getChecked", { 'page': page },
         function(data) {
             data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
@@ -76,12 +88,14 @@ function loadChecked() {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
+            iniPages(data.maxPage);
             loadConvertButton(data);
         }
     );
 }
 
 function loadUnchecked(page) {
+    if (page) page = 1;
     $.post(
         "/api/get/getUnchecked", { 'page': page },
         function(data) {
@@ -110,12 +124,42 @@ function loadUnchecked(page) {
                     "<td>" + item.postorid + "</td>" +
                     "</tr>");
             });
+            iniPages(data.maxPage);
             loadConvertButton(data);
         }
     );
 }
 
 function getAllTable() {
+    var page = 1;
+    $.post(
+        "/api/get/getAll", { 'page': page },
+        function(data) {
+            data = JSON.parse(data);
+            $("#OrderTable").html(""); //清空info内容
+            $.each(data.orders, function(i, item) {
+                $("#OrderTable").append(
+                    "<tr>" +
+                    "<td>" +
+                    "<label class='input-control checkbox small-check no-margin'>" +
+                    "<input type='checkbox' class='uncheck' id='checkBox_" + i + "' data-id='" + item.orderid + "'>" +
+                    "<span class='check'></span>" +
+                    "</label>" +
+                    "</td>" +
+                    "<td>" + item.orderid + "</td>" +
+                    "<td>" + item.importtime + "</td>" +
+                    "<td>" + item.exporttime + "</td>" +
+                    "<td>" + item.positionid + "</td>" +
+                    "<td>" + item.orderinfo + "</td>" +
+                    "<td>" + item.postorid + "</td>" +
+                    "</tr>");
+            });
+            loadConvertButton(data);
+        }
+    );
+}
+
+function loadAll() {
     var page = 1;
     $.post(
         "/api/get/getAll", { 'page': page },
@@ -242,7 +286,7 @@ function msg(mes) {
     });
 }
 $(document).ready(function() {
-    $("#tishi").load("/api/get/usrconfig",function(){$("#carousel").carousel();});
+    $("#tishi").load("/api/get/usrconfig", function() { $("#carousel").carousel(); });
     var tlogin;
     sidebarRefresh(tlogin);
     $.ajax({
@@ -265,3 +309,31 @@ $(document).ready(function() {
         }
     });
 });
+
+function iniPages(maxpage) {
+    var pages = $("#pages");
+    var settings = {
+        cont: $("#pagecont"), //容器。值支持id名、原生dom对象，jquery对象,
+        pages: maxpage, //可叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是100
+        skip: true, //是否开启跳页
+        skin: '#01a0e1', //#16aaff
+        groups: 5, //连续显示分页数
+        jump: function(obj) {
+            var currentPage = obj.curr;
+            switch (nowpositon) {
+                case 'Unreceived':
+                    turnUnreceived(currentPage);
+                    break;
+                case 'All':
+                    turnAll(currentPage);
+                    break;
+                case 'Received':
+                    turnReceived(currentPage);
+                    break;
+                default:
+                    break;
+            }
+            pages.html('当前：第' + obj.curr + '页，总计：' + obj.pages + '页');
+        }
+    };
+}
