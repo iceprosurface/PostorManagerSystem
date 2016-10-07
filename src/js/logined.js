@@ -40,9 +40,11 @@ function turnBin() {
     $("#main").load("/tpl/UsrBin.html", loadBin);
 }
 //切换到全部收件列表
-function turnAll() {
+function turnAll(page) {
     nowpositon = "All";
-    $("#main").load("/tpl/AllTable.html", loadAll);
+    $("#main").load("/tpl/AllTable.html", function(){
+        loadAll(page);
+    });
 }
 //登出
 function loginOut() {
