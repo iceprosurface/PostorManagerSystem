@@ -336,4 +336,5 @@ function iniPages(maxpage) {
             pages.html('当前：第' + obj.curr + '页，总计：' + obj.pages + '页');
         }
     };
+    var infoflows = new infoflow(settings);
 }
