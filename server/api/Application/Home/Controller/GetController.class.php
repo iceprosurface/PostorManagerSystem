@@ -91,6 +91,22 @@ class GetController extends BaseController {
 		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
+	public function getAll(){
+		//传入page
+		$page=I('post.page');
+		//设定分页数目
+		$pagination=10;
+		//设定查询内容
+		$map['usrId'] = $this->id;
+		//设定表
+		$table='orders';
+		//设定返回字段
+		$field=array('orderId','orderInfo','positionId','importTime','exportTime','postorId');
+		$type=array();
+		$orderlist=getDataByKeyWords($type,$map,$table,$pagination,$field,$page);
+		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
+		$this->ajaxReturn(json_encode($res),'JSON');
+	}
 	/*
 	*获取load的页面
 	*传入参数:@param page

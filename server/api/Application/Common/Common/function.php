@@ -72,7 +72,7 @@
 		// $field=(empty($field))?"*":$field;
 		
 		if ( is_numeric( $pagination ) && ( $pagination <= 40 || $pagination >= 0 ) ) {
-			$count=$model->field( array( "id" ) )->where( $where )->Count();
+			$count=$model->field( array( "id" ) )->where( $where )->where($query)->where($map)->Count();
 			$pages= ceil( $count / $pagination );
 			//判断页数设置
 			if ( isset( $page ) ){
@@ -95,7 +95,7 @@
 	function setDataByKeyWords(){
 		
 		$pagination = I("post.pagination");
-		$count = $model->field( array( "id" ) )->where( $where )->Count();
+		$count = $model->field( array( "id" ) )->where( $where )->where($query)->where($map)->Count();
 		$pages = ceil( $count / $pagination );
 		
 		array("list"=>$model->field($field)->where($where)->where($map)->limit($limit)->select(),"max"=>$pages);
