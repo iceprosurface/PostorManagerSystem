@@ -77,8 +77,7 @@
 			//判断页数设置
 			if ( isset( $page ) ){
 				$page = intval($page);
-			}
-			else{
+			}else{
 				//否则，设置为第一页
 				$page = 1; 
 			}

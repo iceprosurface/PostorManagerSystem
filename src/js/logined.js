@@ -67,7 +67,7 @@ function loginOut() {
 }
 
 function loadChecked(page) {
-    if (page) page = 1;
+    if (!page) page = 1;
     $.post(
         "/api/get/getChecked", { 'page': page },
         function(data) {
@@ -95,7 +95,7 @@ function loadChecked(page) {
 }
 
 function loadUnchecked(page) {
-    if (page) page = 1;
+    if (!page) page = 1;
     $.post(
         "/api/get/getUnchecked", { 'page': page },
         function(data) {
@@ -131,7 +131,7 @@ function loadUnchecked(page) {
 }
 
 function getAllTable() {
-    var page = 1;
+    if (!page) page = 1;
     $.post(
         "/api/get/getAll", { 'page': page },
         function(data) {
