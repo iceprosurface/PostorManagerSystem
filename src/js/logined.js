@@ -1,5 +1,4 @@
 var nowpositon = "default";
-
 function sidebarRefresh(tlogin) {
     //检测邮件数目使用
     if (tlogin !== "") {
@@ -318,22 +317,24 @@ function iniPages(maxpage) {
         skip: true, //是否开启跳页
         skin: '#01a0e1', //#16aaff
         groups: 5, //连续显示分页数
-        jump: function(obj) {
-            var currentPage = obj.curr;
-            switch (nowpositon) {
-                case 'Unreceived':
-                    turnUnreceived(currentPage);
-                    break;
-                case 'All':
-                    turnAll(currentPage);
-                    break;
-                case 'Received':
-                    turnReceived(currentPage);
-                    break;
-                default:
-                    break;
+        jump: function(obj,first) {
+            if(!first){
+                var currentPage = obj.curr;
+                switch (nowpositon) {
+                    case 'Unreceived':
+                        turnUnreceived(currentPage);
+                        break;
+                    case 'All':
+                        turnAll(currentPage);
+                        break;
+                    case 'Received':
+                        turnReceived(currentPage);
+                        break;
+                    default:
+                        break;
+                }
+                pages.html('当前：第' + obj.curr + '页，总计：' + obj.pages + '页');
             }
-            pages.html('当前：第' + obj.curr + '页，总计：' + obj.pages + '页');
         }
     };
     laypage(settings);
