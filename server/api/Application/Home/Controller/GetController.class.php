@@ -91,7 +91,7 @@ class GetController extends BaseController {
 		$res=array(response=>"用户昵称",status=>"1",orders=>$orderlist["list"],page=>$page,maxPage=>$orderlist["max"]);
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
-	public function getAll(){
+	public function getAllPage(){
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
