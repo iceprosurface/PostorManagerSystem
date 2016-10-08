@@ -1,7 +1,8 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class GetController extends BaseController {
+// class GetController extends BaseController {
+class GetController extends Controller {
 	/*
 	*此控制器用于ajax获取各种类型的数据
 	*不包含验证信息在内的相关数据
@@ -12,6 +13,9 @@ class GetController extends BaseController {
 			$this->redirect("public/illegalRequirement");
 		}
 		$token=getClientLToken();
+		if(!isTokenL($token)){
+			$this->redirect("login/login");
+		}
 		$this->token=$token;
 		$this->id=cookie(C('COOKIE_KEY_TOKEN'))['id'];
 	}
