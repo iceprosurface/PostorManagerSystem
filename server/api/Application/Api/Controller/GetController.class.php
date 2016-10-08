@@ -65,7 +65,7 @@ class GetController extends Controller {
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "0";
@@ -87,7 +87,7 @@ class GetController extends Controller {
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "1";
@@ -105,11 +105,11 @@ class GetController extends Controller {
 	*传入参数:@param int page @param string token
 	*返回值@return array orders
 	*/
-	public function getAllTable(){
+	public function getAllTables(){
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		//设定表
