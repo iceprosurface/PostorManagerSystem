@@ -56,7 +56,7 @@ class GetController extends BaseController {
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "0";
@@ -78,7 +78,7 @@ class GetController extends BaseController {
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "1";
@@ -100,7 +100,7 @@ class GetController extends BaseController {
 		//传入page
 		$page=I('post.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		//设定表

@@ -134,7 +134,7 @@ function loadUnchecked(page) {
 function loadAll(page) {
     if (!page) page = 1;
     $.post(
-        "/api/get/getAllPage", { 'page': page },
+        "/api/get/getAllTables", { 'page': page },
         function(data) {
             data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
