@@ -51,7 +51,10 @@ var reloadfn = {
 
 function redirectControl(controlLink) {
     $("#" + controlLink).find("a").each(function(index, item) {
-        $(this).click(reloadfn[$(this).data("method")].bind(this));
+        var itemJfn = $(this);
+        if (itemJfn.data("method") && reloadfn.hasOwnProperty(itemJfn.data("method"))) {
+            itemJfn.click(reloadfn[itemJfn.data("method")].bind(this));
+        }
     });
 
 }
