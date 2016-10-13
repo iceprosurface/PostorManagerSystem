@@ -7,17 +7,17 @@ $(function() {
 
     form.css({
         opacity: 1,
-        "-webkit-transform": "scale(1)",
         "transform": "scale(1)",
-        "-webkit-transition": ".5s",
+        "-webkit-transform": "scale(1)",
         "transition": ".5s"
+        "-webkit-transition": ".5s",
     });
 
     $('.login').click(function() {
         var params = $("#login").serialize();
         $.ajax({
             type: 'post',
-            url: "/api/login.va",
+            url: "/api/login/va",
             data: params,
             success: function(data) {
                 window.location = "/logined.html";
