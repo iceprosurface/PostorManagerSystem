@@ -317,15 +317,15 @@ function iniPages(maxpage, curr) {
         jump: function(obj, first) {
             if (!first) {
                 var currentPage = obj.curr;
-                switch (nowpositon) {
+                switch (reloadfn.nowpositon) {
                     case 'Unreceived':
-                        loadUnchecked(currentPage);
+                        reloadfn.loadUnchecked(currentPage);
                         break;
                     case 'All':
-                        loadAll(currentPage);
+                        reloadfn.loadAll(currentPage);
                         break;
                     case 'Received':
-                        loadChecked(currentPage);
+                        reloadfn.loadChecked(currentPage);
                         break;
                     default:
                         break;
