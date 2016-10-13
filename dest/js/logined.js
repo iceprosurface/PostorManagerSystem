@@ -18,9 +18,7 @@ var reloadfn = {
     //切换到尚未收件列表
     turnUnreceived: function(page) {
         reloadfn.nowpositon = "Unreceived";
-        $("#main").load("/tpl/UncheckedPage.html", function() {
-            loadUnchecked(page);
-        });
+        $("#main").load("/tpl/UncheckedPage.html", function() { loadUnchecked(page); });
     },
     //切换到设置页面
     changeToConfig: function() {
@@ -30,9 +28,7 @@ var reloadfn = {
     //切换到已经收件列表
     turnReceived: function(page) {
         reloadfn.nowpositon = "Received";
-        $("#main").load("/tpl/CheckedPage.html", function() {
-            loadChecked(page);
-        });
+        $("#main").load("/tpl/CheckedPage.html", function() { loadChecked(page); });
     },
     //切换到垃圾箱
     turnBin: function(page) {
@@ -42,9 +38,7 @@ var reloadfn = {
     //切换到全部收件列表
     turnAll: function(page) {
         reloadfn.nowpositon = "All";
-        $("#main").load("/tpl/AllTable.html", function() {
-            loadAll(page);
-        });
+        $("#main").load("/tpl/AllTable.html", function() { loadAll(page); });
     },
 
 };
@@ -53,7 +47,7 @@ function redirectControl(controlLink) {
     $("#" + controlLink).find("a").each(function(index, item) {
         var itemJfn = $(this);
         if (itemJfn.data("method") && reloadfn.hasOwnProperty(itemJfn.data("method"))) {
-            itemJfn.click(reloadfn[itemJfn.data("method")].bind(this));
+            itemJfn.click(reloadfn[itemJfn.data("method")].bind(this,1));
         }
     });
 
