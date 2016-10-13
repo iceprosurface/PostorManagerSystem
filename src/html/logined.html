@@ -43,7 +43,7 @@ body {
         <div class="flex-grid no-responsive-future" style="height: 100%;">
             <div class="row" style="height: 100%;">
                 <div class="cell size-x200" id="cell-sidebar" style="background-color: #71b1d1;height: 100%;">
-                    <ul class="sidebar">
+                    <ul class="sidebar" id="sidebar">
                         <li>
                             <a href="#" class="active">
                                 <span class="mif-apps icon"></span>
@@ -52,28 +52,28 @@ body {
                             </a>
                         </li>
                         <li>
-                            <a href="#" onclick="turnReceived()">
+                            <a href="#" data-method="turnReceived">
                                 <span class="mif-drafts icon"></span>
                                 <span class="title">已取快件</span>
                                 <span class="counter" id="checkedCount">0</span>
                             </a>
                         </li>
-                        <li onclick="turnUnreceived()">
-                            <a href="#">
+                        <li>
+                            <a href="#" data-method="turnUnreceived">
                                 <span class="mif-mail icon"></span>
                                 <span class="title">未取快件</span>
                                 <span class="counter" id="uncheckCount">0</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" onclick="turnAll()">
+                            <a href="#" data-method="turnAll">
                                 <span class="mif-cloud icon"></span>
                                 <span class="title">全部快件</span>
                                 <span class="counter" id="allCount">0</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" onclick="turnBin()">
+                            <a href="#" data-method="turnBin">
                                 <span class="mif-bin icon"></span>
                                 <span class="title">垃圾箱</span>
                                 <span id="binCount" class="counter">0</span>

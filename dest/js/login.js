@@ -12,7 +12,7 @@ $(function() {
         "-webkit-transition": ".5s",
         "transition": ".5s"
     });
-});
+}
 $(function() {
     $('.login').click(function() {
         var params = $("#login").serialize();
