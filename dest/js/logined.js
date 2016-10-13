@@ -3,7 +3,7 @@ var reloadfn = {
     sidebarRefresh: function(tlogin) {
         //检测邮件数目使用
         if (tlogin !== "") {
-            $.post(
+            $.get(
                 "/api/get/getOrderNumber",
                 tlogin,
                 function(data) {
@@ -63,7 +63,7 @@ function loginOut() {
     var tlogin;
     if (tlogin !== "") {
         $.ajax({
-            type: 'post',
+            type: 'GET',
             url: '/api/login/loginOut',
             data: tlogin,
             success: function(data) {
@@ -82,7 +82,7 @@ function loginOut() {
 
 function loadChecked(page) {
     if (!page) page = 1;
-    $.post(
+    $.get(
         "/api/get/getChecked", {
             'page': page
         },
@@ -112,7 +112,7 @@ function loadChecked(page) {
 
 function loadUnchecked(page) {
     if (!page) page = 1;
-    $.post(
+    $.get(
         "/api/get/getUnchecked", {
             'page': page
         },
@@ -150,7 +150,7 @@ function loadUnchecked(page) {
 
 function loadAll(page) {
     if (!page) page = 1;
-    $.post(
+    $.get(
         "/api/get/getAllTables", {
             'page': page
         },
@@ -262,7 +262,7 @@ function delayOrders() {
     });
     if (list.length === 0) return false;
     $.ajax({
-        type: "post",
+        type: "GET",
         url: "/api/get/delay",
         data: {
             "orderlist": list
@@ -288,7 +288,7 @@ $(document).ready(function() {
     var tlogin;
     reloadfn.sidebarRefresh(tlogin);
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: '/api/get/getusrname',
         data: {},
         success: function(data) {
