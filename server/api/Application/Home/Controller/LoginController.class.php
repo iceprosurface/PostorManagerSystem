@@ -64,13 +64,15 @@ class LoginController extends Controller {
 				
 				$list=$usrs->field(array('token','grantTime','lastLogin','lastIp'))->where($map)->save($usr);
 				$list=$usrs->field(array('id','expiretime'))->where($map)->find();
-				$res=array(response=>"登陆成功",status=>"1");
+				$res=array(response=>"登陆成功",status=>200);
+				header('HTTP/1.1 200 ok');
 				cookie(C('COOKIE_KEY_TOKEN'),array(id=>$list["id"],token=>$token),$list['expiretime']);
 			}else{
-				$res=array(response=>"用户名密码验证信息错误",status=>"2");
+				$res=array(response=>"用户名密码验证信息错误",status=>403);
+				header('HTTP/1.1 403 Forbidden');
 			}
 		}
-		$this->ajaxReturn(json_encode($res),'JSON');
+		$this->ajaxReturn(res,'JSON');
 	}
 	public function loginOut(){
 		$token=getClientLToken();
@@ -86,12 +88,14 @@ class LoginController extends Controller {
 				if($usrs->create($usr_info)){
 					$list=$usrs->where($map)->save($usr_info);
 				}
-				$res= array(response=>"登陆清除成功",status=>"1");
+				$res= array(response=>"登陆清除成功",status=>200);
+				header('HTTP/1.1 200 ok');
 			}else{
-				$res= array(response=>"非法或不允许的登陆清除方式",status=>"2");
+				$res= array(response=>"非法或不允许的登陆清除方式",status=>403);
+				header('HTTP/1.1 403 Forbidden');
 			}
 		}
-		$this->ajaxReturn(json_encode($res),'JSON');
+		$this->ajaxReturn($res,'JSON');
 	}
 
 }

@@ -62,17 +62,18 @@ var nowpositon = "default";
 function loginOut() {
     var tlogin;
     if (tlogin !== "") {
-        $.post(
-            "/api/login/loginOut",
-            tlogin,
-            function(data) {
-                var json = JSON.parse(data);
-                if (json.status == 1) {
-                    window.location = "/login.html?respond=1";
-                } else {
-                    alert('没有成功登出');
-                }
-            });
+        $.ajax({
+            type: 'post',
+            url: '/api/login/loginOut',
+            data: tlogin,
+            success: function(data) {
+                window.location = "/login.html?respond=1";
+            },
+            error: function(data) {
+                alert('没有成功登出');
+            },
+            dataType: 'json'
+        });
     } else {
         window.location = "/login.html?respond=1";
     }
@@ -82,7 +83,9 @@ function loginOut() {
 function loadChecked(page) {
     if (!page) page = 1;
     $.post(
-        "/api/get/getChecked", { 'page': page },
+        "/api/get/getChecked", {
+            'page': page
+        },
         function(data) {
             data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
@@ -110,7 +113,9 @@ function loadChecked(page) {
 function loadUnchecked(page) {
     if (!page) page = 1;
     $.post(
-        "/api/get/getUnchecked", { 'page': page },
+        "/api/get/getUnchecked", {
+            'page': page
+        },
         function(data) {
             data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
@@ -146,7 +151,9 @@ function loadUnchecked(page) {
 function loadAll(page) {
     if (!page) page = 1;
     $.post(
-        "/api/get/getAllTables", { 'page': page },
+        "/api/get/getAllTables", {
+            'page': page
+        },
         function(data) {
             data = JSON.parse(data);
             $("#OrderTable").html(""); //清空info内容
@@ -257,9 +264,13 @@ function delayOrders() {
     $.ajax({
         type: "post",
         url: "/api/get/delay",
-        data: { "orderlist": list },
+        data: {
+            "orderlist": list
+        },
         dataType: "json",
-        success: function(data) { reloadfn.turnUnreceived(); }
+        success: function(data) {
+            reloadfn.turnUnreceived();
+        }
     });
 }
 
@@ -271,7 +282,9 @@ function msg(mes) {
     });
 }
 $(document).ready(function() {
-    $("#tishi").load("/api/get/usrconfig", function() { $("#carousel").carousel(); });
+    $("#tishi").load("/api/get/usrconfig", function() {
+        $("#carousel").carousel();
+    });
     var tlogin;
     reloadfn.sidebarRefresh(tlogin);
     $.ajax({
@@ -282,7 +295,7 @@ $(document).ready(function() {
             data = JSON.parse(data);
             var name = $('#username');
             name[0].innerHTML = "";
-            name.append('<span class="mif-cog"></span><span>' + data.name+ "</span>");
+            name.append('<span class="mif-cog"></span><span>' + data.name + "</span>");
         },
         dataType: 'json'
     });
@@ -299,11 +312,11 @@ function iniPages(maxpage, curr) {
     var pages = $("#pages");
     var settings = {
         cont: $("#pagecont"), // 容器。值支持id名、原生dom对象，jquery对象,
-        pages: maxpage,       // 可叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是100
-        skip: true,           // 是否开启跳页
-        skin: '#01a0e1',      // #16aaff
-        curr: curr || 1,      // 当前页
-        groups: 5,            // 连续显示分页数
+        pages: maxpage, // 可叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是100
+        skip: true, // 是否开启跳页
+        skin: '#01a0e1', // #16aaff
+        curr: curr || 1, // 当前页
+        groups: 5, // 连续显示分页数
         jump: function(obj, first) {
             if (!first) {
                 var currentPage = obj.curr;
