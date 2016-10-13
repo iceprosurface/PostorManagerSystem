@@ -18,7 +18,9 @@ var reloadfn = {
     //切换到尚未收件列表
     turnUnreceived: function(page) {
         reloadfn.nowpositon = "Unreceived";
-        $("#main").load("/tpl/UncheckedPage.html", function() { loadUnchecked(page); });
+        $("#main").load("/tpl/UncheckedPage.html", function() {
+            loadUnchecked(page);
+        });
     },
     //切换到设置页面
     changeToConfig: function() {
@@ -28,7 +30,9 @@ var reloadfn = {
     //切换到已经收件列表
     turnReceived: function(page) {
         reloadfn.nowpositon = "Received";
-        $("#main").load("/tpl/CheckedPage.html", function() { loadChecked(page); });
+        $("#main").load("/tpl/CheckedPage.html", function() {
+            loadChecked(page);
+        });
     },
     //切换到垃圾箱
     turnBin: function(page) {
@@ -38,7 +42,9 @@ var reloadfn = {
     //切换到全部收件列表
     turnAll: function(page) {
         reloadfn.nowpositon = "All";
-        $("#main").load("/tpl/AllTable.html", function() { loadAll(page); });
+        $("#main").load("/tpl/AllTable.html", function() {
+            loadAll(page);
+        });
     },
 
 };
@@ -47,7 +53,7 @@ function redirectControl(controlLink) {
     $("#" + controlLink).find("a").each(function(index, item) {
         var itemJfn = $(this);
         if (itemJfn.data("method") && reloadfn.hasOwnProperty(itemJfn.data("method"))) {
-            itemJfn.click(reloadfn[itemJfn.data("method")].bind(this,1));
+            itemJfn.click(reloadfn[itemJfn.data("method")].bind(this, 1));
         }
     });
 
@@ -102,7 +108,6 @@ function loadChecked(page) {
                     "</tr>");
             });
             iniPages(data.maxPage, data.page);
-            loadConvertButton(data);
         }
     );
 }
@@ -140,7 +145,6 @@ function loadUnchecked(page) {
                     "</tr>");
             });
             iniPages(data.maxPage, data.page);
-            loadConvertButton(data);
         }
     );
 }
@@ -172,27 +176,10 @@ function loadAll(page) {
                     "</tr>");
             });
             iniPages(data.maxPage, data.page);
-            loadConvertButton(data);
         }
     );
 }
 
-function loadConvertButton(x) {
-    var page = x.page - 0;
-    var maxPage = x.maxPage - 0;
-    $("#page").html("");
-    $("#page").append(page + "/" + maxPage);
-
-    if (page >= 2) {
-        $("#previousPage").attr('onclick', '');
-        $("#previousPage").attr('onclick', 'loadUnchecked(' + (page - 1) + ')');
-
-    }
-    if (maxPage > 1) {
-        $("#nextPage").attr('onclick', '');
-        $("#nextPage").attr('onclick', 'loadUnchecked(' + (page + 1) + ')');
-    }
-}
 
 //dialog and swizard
 function respondDialog(id, title, text) {
@@ -319,13 +306,13 @@ function iniPages(maxpage, curr) {
                 var currentPage = obj.curr;
                 switch (reloadfn.nowpositon) {
                     case 'Unreceived':
-                        reloadfn.loadUnchecked(currentPage);
+                        loadUnchecked(currentPage);
                         break;
                     case 'All':
-                        reloadfn.loadAll(currentPage);
+                        loadAll(currentPage);
                         break;
                     case 'Received':
-                        reloadfn.loadChecked(currentPage);
+                        loadChecked(currentPage);
                         break;
                     default:
                         break;
