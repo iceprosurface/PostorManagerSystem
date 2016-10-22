@@ -140,7 +140,7 @@
 				$scope.positions = JSON.parse(data.data)['list'];
             });
             ipcService.positionPages($scope.nowPage).then(function(data) {
-				$scope.pages = JSON.parse(data);
+				//$scope.pages = JSON.parse(data);
             });
         };
         //监视库存编号，如果有改变，则更新
@@ -161,7 +161,7 @@
         var load = function() {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
                 $scope.unnoticedOrders = JSON.parse(data.data)['list'];
-                $scope.datahave = parseInt(data.length) > 0;
+                $scope.datahave = parseInt(e.unnoticedOrders.length) > 0;
             });
         };
         //监视页码，如果有改变，则更新
@@ -189,7 +189,7 @@
         //表单显示情况
         $scope.datahave = false;
         var load = function() {
-            ipcService.order($scope.nowPage).then(function(data) {
+            ipcService.order($scope.orderid).then(function(data) {
                 $scope.order = JSON.parse(data.data)['list'];
             });
         };
