@@ -72,7 +72,7 @@ class LoginController extends Controller {
 				header('HTTP/1.1 403 Forbidden');
 			}
 		}
-		$this->ajaxReturn($res,'JSON',$res['status']);
+		$this->ajaxReturn($res,'JSON');
 	}
 	public function loginOut(){
 		$token=getClientLToken();
@@ -95,7 +95,7 @@ class LoginController extends Controller {
 				header('HTTP/1.1 403 Forbidden');
 			}
 		}
-		$this->ajaxReturn(json_encode($res),'JSON');
+		$this->ajaxReturn(res,'JSON');
 	}
 
 }

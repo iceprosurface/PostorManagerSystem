@@ -32,6 +32,7 @@
                         innerObj = {};
                         innerObj[fullSubName] = subValue;
                         query += param(innerObj) + '&';
+
                     }
                 } else if (value !== undefined && value !== null)
                     query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
@@ -78,8 +79,11 @@
             unnoticedOrders: function(page) {
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
-                    "where": [{ "key": "haveNoticed", "value": 0 }],
-                    "field": ["orderId", "usrPhoneNumber"],
+                    "where": [{
+                        "key": "haveNoticed",
+                        "value": 0
+                    }],
+                    "field": ["orderId", "phoneNumber"],
                     "from": "orders",
                     "pagination": 20,
                     "page": page
@@ -93,15 +97,21 @@
             order: function(orderid) {
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
-                    "where": [{ "key": "orderId", "value": orderid }],
-                    "field": ["orderId", "usrPhoneNumber", "orderInfo", "usrId", "positionId", "importTime", "exportTime"],
+                    "where": [{
+                        "key": "orderId",
+                        "value": orderid
+                    }],
+                    "field": ["orderId", "phoneNumber", "orderInfo", "usrId", "positionId", "importTime", "exportTime"],
                     "from": "orders"
                 }).success(function(data) {
                     var json = JSON.parse(data);
                     if (json.status == 1) {
                         defer.resolve(json.list);
                     } else if (json.status == 2) {
-                        defer.resolve({ "response": json.response, "failed": true });
+                        defer.resolve({
+                            "response": json.response,
+                            "failed": true
+                        });
                     }
 
                 }).error(function(err) {
@@ -112,8 +122,11 @@
             usr: function(name) {
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
-                    "where": [{ "key": "name", "value": name }],
-                    "field": ["id", "usrPhoneNumber", "psw", "lastIp", "name", "lastLogin"],
+                    "where": [{
+                        "key": "name",
+                        "value": name
+                    }],
+                    "field": ["id", "phoneNumber", "psw", "lastIp", "name", "lastLogin"],
                     "from": "usr"
                 }).success(function(data) {
                     defer.resolve(JSON.parse(data));
@@ -238,13 +251,13 @@
         // $scope.datahave = false;
         $scope.datahave = true;
         $scope.order = {
-            "orderid":115,
-            "usrphonenumber":11234511351,
-            "orderinfo":"this is some infomation",
-            "usrid":1234521852,
-            "positionid":1123445,
-            "importtime":"2016-17-6 13:14:55",
-            "exporttime":"2016-17-6 15:14:55",
+            "orderid": 115,
+            "usrphonenumber": 11234511351,
+            "orderinfo": "this is some infomation",
+            "usrid": 1234521852,
+            "positionid": 1123445,
+            "importtime": "2016-17-6 13:14:55",
+            "exporttime": "2016-17-6 15:14:55",
 
         };
         // var load = function() {
@@ -254,7 +267,7 @@
         //     });
         // };
         //首次进入不需要重载
-        //load();
+        load();
         //监视订单号，变化则重载
         // $scope.$watch('orderid', load);
         $scope.edit = function(type) {

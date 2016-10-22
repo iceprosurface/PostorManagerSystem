@@ -31,6 +31,7 @@ class ImportController extends Controller {
 				header('HTTP/1.1 200 ok');
 			}else{
 				$res=array(response=>"注册失败",status=>403);
+				header('HTTP/1.1 403 forbidden');
 			}
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
@@ -48,11 +49,14 @@ class ImportController extends Controller {
 			$map['orderId']=$import_info['orderId'];
 			$list=$orders->where($map)->find();
 			if(empty($list)){
-				$res=array(response=>"未能检索到指定订单。错误代码:10。",status=>"10");
+				$res=array(response=>"未能检索到指定订单。错误代码:10。",status=>403);
+				header('HTTP/1.1 403 Forbidden');
 			}else{
-				$res=array(response=>"已检索到指定订单号。",status=>"11",result=>$list);
+				$res=array(response=>"已检索到指定订单号。",status=>200,result=>$list);
 				header('HTTP/1.1 200 ok');
 			}
+		}else{
+				header('HTTP/1.1 502 server error');
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
@@ -68,7 +72,13 @@ class ImportController extends Controller {
 		if($orders->create($import_info)){
 			$map['orderId']=$import_info['orderId'];
 			$list=$orders->where($map)->select();
-			$res=empty($list)?array(response=>"未能检索到指定订单。",status=>"10"):array(response=>"已检索到指定订单号。",status=>"11",result=>$list);
+			if(empty($list)){
+				$res=array(response=>"未能检索到指定订单。错误代码:10。",status=>403);
+				header('HTTP/1.1 403 Forbidden');
+			}else{
+				$res=array(response=>"已检索到指定订单号。",status=>200,result=>$list);
+				header('HTTP/1.1 200 ok');
+			}
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
@@ -119,7 +129,13 @@ class ImportController extends Controller {
 				//更改map条件为positionid
 				$map['positionId']=array('in',$list);
 				$positions_result=$positions->where($map)->save($data);
-				$res=($orders_result&$positions_result)?array(response=>"已经成功取件",status=>200):array(response=>"取件失败",status=>403);
+				if($orders_result&$positions_result){
+					header('HTTP/1.1 200 ok');
+					$res=array(response=>"已经成功取件",status=>200);
+				}else{
+					header('HTTP/1.1 200 ok');
+					$res=array(response=>"取件失败",status=>403);
+				}
 			}
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
