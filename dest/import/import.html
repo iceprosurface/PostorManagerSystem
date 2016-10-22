@@ -106,17 +106,18 @@
     $(function() {
         $('.import').click(function() {
             var params = $("#importTable").serialize();
-            $.post(
-                "/api/import/va",
-                params,
-                function(data) {
-                    json = eval('(' + data + ')');
-                    if (json.status == 1) {
+			$.ajax({
+				    type: "post",
+				    url: "/api/import/va",
+				    data: params,
+				    success: function(data){
                         window.location = "/api/import/detail?orderId=" + json.orderId;
-                    } else {
+					} ,
+					error: function(data){
                         alert('error');
-                    }
-                });
+					},
+				    dataType: 'json'
+			});
         });
         showDemo();
     });
