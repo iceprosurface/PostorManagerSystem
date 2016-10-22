@@ -77,23 +77,17 @@
                 return defer.promise;
             },
             unnoticedOrders: function(page) {
-                var defer = $q.defer();
-                $http.post('/api/admin/query', {
+                return $http.post('/api/admin/query', {
                     "where": [{
                         "key": "haveNoticed",
                         "value": 0
                     }],
-                    "field": ["orderId", "phoneNumber"],
+                    "field": ["orderId", "usrPhoneNumber"],
                     "from": "orders",
                     "pagination": 20,
                     "page": page
-                }).success(function(data) {
-                    defer.resolve(JSON.parse(data).list);
-                }).error(function(err) {
-                    defer.reject(err);
                 });
-                return defer.promise;
-            },
+ 			},
             order: function(orderid) {
                 var defer = $q.defer();
                 $http.post('/api/admin/query', {
@@ -101,7 +95,7 @@
                         "key": "orderId",
                         "value": orderid
                     }],
-                    "field": ["orderId", "phoneNumber", "orderInfo", "usrId", "positionId", "importTime", "exportTime"],
+                    "field": ["orderId", "usrPhoneNumber", "orderInfo", "usrId", "positionId", "importTime", "exportTime"],
                     "from": "orders"
                 }).success(function(data) {
                     var json = JSON.parse(data);
@@ -126,7 +120,7 @@
                         "key": "name",
                         "value": name
                     }],
-                    "field": ["id", "phoneNumber", "psw", "lastIp", "name", "lastLogin"],
+                    "field": ["id", "usrPhoneNumber", "psw", "lastIp", "name", "lastLogin"],
                     "from": "usr"
                 }).success(function(data) {
                     defer.resolve(JSON.parse(data));
@@ -206,7 +200,7 @@
         $scope.nowPage = "1";
         var load = function() {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
-                $scope.unnoticedOrders = data;
+                $scope.unnoticedOrders = data['list'];
                 $scope.datahave = parseInt(data.length) > 0;
             });
         };
