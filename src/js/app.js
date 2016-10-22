@@ -161,7 +161,7 @@
         var load = function() {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
                 $scope.unnoticedOrders = JSON.parse(data.data)['list'];
-                $scope.datahave = parseInt(e.unnoticedOrders.length) > 0;
+                $scope.datahave = parseInt($scope.unnoticedOrders.length) > 0;
             });
         };
         //监视页码，如果有改变，则更新
