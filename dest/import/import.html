@@ -7,6 +7,7 @@
     <link href="/css/all.min.css?rev=baecbcaf1e3b5606a9407654dc4fd6fc" rel="stylesheet">
     <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
     <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
+    <link href="/js/laypage/skin/laypage.css" rel="stylesheet" >
 <title>这是一个邮件录入的demo演示</title>
 </head>
 
@@ -91,6 +92,7 @@
 	<script src="/js/jquery.min.js?rev=cccc7fc56e1d2b59e4e4fe7f9861d8ba"></script>
     <script src="/js/metro.min.js?rev=57f1dbca946d6500d3cfc9baabbabc57"></script>
 	<script src="/js/all.min.js?rev=8971778a9cc0ad74eeea6d9ed8a7b87f"></script>
+	<script src="/js/laypage/laypage.js"></script>
 
     <script>
     function demo() {
@@ -104,17 +106,18 @@
     $(function() {
         $('.import').click(function() {
             var params = $("#importTable").serialize();
-            $.post(
-                "/api/import/va",
-                params,
-                function(data) {
-                    json = eval('(' + data + ')');
-                    if (json.status == 1) {
+			$.ajax({
+				    type: "post",
+				    url: "/api/import/va",
+				    data: params,
+				    success: function(data){
                         window.location = "/api/import/detail?orderId=" + json.orderId;
-                    } else {
+					} ,
+					error: function(data){
                         alert('error');
-                    }
-                });
+					},
+				    dataType: 'json'
+			});
         });
         showDemo();
     });

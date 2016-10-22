@@ -23,13 +23,15 @@ class ImportController extends Controller {
     
 		$orders = M('orders');
 		$positions = M('positions');
-		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
+		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>502);
 		if($orders->create($import_info) & $positions->create($import_info)){
 			$import_result=($orders->add($import_info))&($positions->where($import_info['positionId'])->save($import_info));
 			if($import_result !== false){
-				$res=array(response=>"注册成功",status=>"1",orderId=>$import_info['orderId']);
+				$res=array(response=>"注册成功",status=>200,orderId=>$import_info['orderId']);
+				header('HTTP/1.1 200 ok');
 			}else{
-				$res=array(response=>"注册失败",status=>"2");
+				$res=array(response=>"注册失败",status=>403);
+				header('HTTP/1.1 403 forbidden');
 			}
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
@@ -42,15 +44,19 @@ class ImportController extends Controller {
 	public function getOrder(){
 		$import_info =array('orderId'=>I('post.orderId'));
 		$orders = M('orders');
-		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
+		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>502);
 		if($orders->create($import_info)){
 			$map['orderId']=$import_info['orderId'];
 			$list=$orders->where($map)->find();
 			if(empty($list)){
-				$res=array(response=>"未能检索到指定订单。错误代码:10。",status=>"10");
+				$res=array(response=>"未能检索到指定订单。错误代码:10。",status=>403);
+				header('HTTP/1.1 403 Forbidden');
 			}else{
-				$res=array(response=>"已检索到指定订单号。",status=>"11",result=>$list);
+				$res=array(response=>"已检索到指定订单号。",status=>200,result=>$list);
+				header('HTTP/1.1 200 ok');
 			}
+		}else{
+				header('HTTP/1.1 502 server error');
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
@@ -62,11 +68,17 @@ class ImportController extends Controller {
 	public function getOrderList(){
 		$import_info =array('orderId'=>I('post.orderId'));
 		$orders = M('orders');
-		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
+		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>502);
 		if($orders->create($import_info)){
 			$map['orderId']=$import_info['orderId'];
 			$list=$orders->where($map)->select();
-			$res=empty($list)?array(response=>"未能检索到指定订单。",status=>"10"):array(response=>"已检索到指定订单号。",status=>"11",result=>$list);
+			if(empty($list)){
+				$res=array(response=>"未能检索到指定订单。错误代码:10。",status=>403);
+				header('HTTP/1.1 403 Forbidden');
+			}else{
+				$res=array(response=>"已检索到指定订单号。",status=>200,result=>$list);
+				header('HTTP/1.1 200 ok');
+			}
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
@@ -80,12 +92,13 @@ class ImportController extends Controller {
 			'usrId'=>I('post.usrId')
 			);
 		$orders = M('orders');
-		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
+		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>502);
 		if($orders->create($import_info)){
 			$map['usrId']=$import_info['usrId'];
 			$map['haveSAR']=false;
 			$list=$orders->where($map)->select();
-			$res=array(response=>"已检索到指定订单号。",status=>"11",result=>$list);
+			$res=array(response=>"已检索到指定订单号。",status=>200,result=>$list);
+			header('HTTP/1.1 200 ok');
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');
 	}
@@ -100,7 +113,7 @@ class ImportController extends Controller {
 		if( is_array( $checkOrder ) ){
 			$orders = M('orders');
 			$positions = M('positions');
-			$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
+			$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>502);
 			//获得快件订单对应的库存位置
 			$map['orderId']=array('in',$checkOrder);
 			$check_list=$orders->field(array('positionId'))->where($map)->select();
@@ -116,7 +129,13 @@ class ImportController extends Controller {
 				//更改map条件为positionid
 				$map['positionId']=array('in',$list);
 				$positions_result=$positions->where($map)->save($data);
-				$res=($orders_result&$positions_result)?array(response=>"已经成功取件",status=>"1"):array(response=>"取件失败",status=>"2");
+				if($orders_result&$positions_result){
+					header('HTTP/1.1 200 ok');
+					$res=array(response=>"已经成功取件",status=>200);
+				}else{
+					header('HTTP/1.1 200 ok');
+					$res=array(response=>"取件失败",status=>403);
+				}
 			}
 		}
 		$this->ajaxReturn(json_encode($res),'JSON');

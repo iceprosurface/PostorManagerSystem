@@ -72,18 +72,15 @@
 		// $field=(empty($field))?"*":$field;
 		
 		if ( is_numeric( $pagination ) && ( $pagination <= 40 || $pagination >= 0 ) ) {
-			$count=$model->field( array( "id" ) )->where( $where )->Count();
-			$pages=intval ( $count / $pagination );
+			$count=$model->field( array( "id" ) )->where( $where )->where($query)->where($map)->Count();
+			$pages= ceil( $count / $pagination );
 			//判断页数设置
 			if ( isset( $page ) ){
 				$page = intval($page);
-			}
-			else{
+			}else{
 				//否则，设置为第一页
 				$page = 1; 
 			}
-			if ( $count % $pagination )
-				$pages++;
 			$offset = $pagination*($page - 1);
 			$limit = $offset.",".$pagination;
 		}
@@ -97,9 +94,9 @@
 	}
 	function setDataByKeyWords(){
 		
-		$pagination=I("post.pagination");
-		$count=$model->field( array( "id" ) )->where( $where )->Count();
-		$pages=intval ( $count / $pagination );
+		$pagination = I("post.pagination");
+		$count = $model->field( array( "id" ) )->where( $where )->where($query)->where($map)->Count();
+		$pages = ceil( $count / $pagination );
 		
 		array("list"=>$model->field($field)->where($where)->where($map)->limit($limit)->select(),"max"=>$pages);
 	}

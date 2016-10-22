@@ -63,9 +63,9 @@ class GetController extends Controller {
 	*/
 	public function getUnchecked(){
 		//传入page
-		$page=I('post.page');
+		$page=I('get.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "0";
@@ -85,9 +85,9 @@ class GetController extends Controller {
 	*/
 	public function getChecked(){
 		//传入page
-		$page=I('post.page');
+		$page=I('get.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		$map['haveSAR'] = "1";
@@ -105,11 +105,11 @@ class GetController extends Controller {
 	*传入参数:@param int page @param string token
 	*返回值@return array orders
 	*/
-	public function getAllTable(){
+	public function getAllTables(){
 		//传入page
-		$page=I('post.page');
+		$page=I('get.page');
 		//设定分页数目
-		$pagination=10;
+		$pagination=6;
 		//设定查询内容
 		$map['usrId'] = $this->id;
 		//设定表
@@ -128,7 +128,7 @@ class GetController extends Controller {
 	public function delay() {
 		//强制限定id范围（）
 		$id['usrid'] = $this->id;
-		$array = I('post.orderlist');
+		$array = I('get.orderlist');
 		$orders = M('orders');
 		\Think\Log::record('where的内容为'.join(",",$array),'WARN');
 		//对于orderlist的选择

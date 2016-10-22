@@ -25,7 +25,8 @@ var fileinclude = require('gulp-file-include');
 var rev = require('gulp-rev-append');
 //js压缩
 var uglify = require('gulp-uglify');
-
+//增量更新
+var changed = require('gulp-changed');
 var jshintConfig = { "undef": false, "esnext": true, "predef": ["$", "window", "jQuery"] };
 gulp.task('default', ['server']);
 
@@ -69,6 +70,7 @@ gulp.task('html', function() {
 });
 gulp.task('script', function() {
     return gulp.src("src/js/**/*.js")
+        .pipe(changed("dest/js"))
         .pipe(gulp.dest("dest/js"))
         .pipe(babel({
             presets: ['es2015']

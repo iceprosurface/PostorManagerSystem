@@ -32,6 +32,7 @@
                         innerObj = {};
                         innerObj[fullSubName] = subValue;
                         query += param(innerObj) + '&';
+
                     }
                 } else if (value !== undefined && value !== null)
                     query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
@@ -51,85 +52,51 @@
         return {
             positions: function(page) {
                 page = isNaN(parseInt(page)) ? 1 : parseInt(page);
-                var defer = $q.defer();
-                $http.post('/api/admin/query', {
+                return $http.post('/api/admin/query', {
                     "field": ["positionId", "haveProduct"],
                     "from": "positions",
                     "pagination": 40,
                     "page": page
-                }).success(function(data) {
-                    defer.resolve(JSON.parse(data).list);
-                }).error(function(err) {
-                    defer.reject(err);
                 });
-                return defer.promise;
             },
             positionPages: function() {
-                var defer = $q.defer();
-                $http.post('/api/admin/maxPages', {
+                return $http.post('/api/admin/maxPages', {
                     "pagination": 40
-                }).success(function(data) {
-                    defer.resolve(JSON.parse(data));
-                }).error(function(err) {
-                    defer.reject(err);
                 });
-                return defer.promise;
             },
             unnoticedOrders: function(page) {
-                var defer = $q.defer();
-                $http.post('/api/admin/query', {
-                    "where": [{ "key": "haveNoticed", "value": 0 }],
+                return $http.post('/api/admin/query', {
+                    "where": [{
+                        "key": "haveNoticed",
+                        "value": 0
+                    }],
                     "field": ["orderId", "usrPhoneNumber"],
                     "from": "orders",
                     "pagination": 20,
                     "page": page
-                }).success(function(data) {
-                    defer.resolve(JSON.parse(data).list);
-                }).error(function(err) {
-                    defer.reject(err);
                 });
-                return defer.promise;
             },
             order: function(orderid) {
-                var defer = $q.defer();
-                $http.post('/api/admin/query', {
-                    "where": [{ "key": "orderId", "value": orderid }],
+				return $http.post('/api/admin/query', {
+                    "where": [{ "key": "orderId",
+                        "value": orderid
+                    }],
                     "field": ["orderId", "usrPhoneNumber", "orderInfo", "usrId", "positionId", "importTime", "exportTime"],
                     "from": "orders"
-                }).success(function(data) {
-                    var json = JSON.parse(data);
-                    if (json.status == 1) {
-                        defer.resolve(json.list);
-                    } else if (json.status == 2) {
-                        defer.resolve({ "response": json.response, "failed": true });
-                    }
-
-                }).error(function(err) {
-                    defer.reject(err);
                 });
-                return defer.promise;
             },
             usr: function(name) {
-                var defer = $q.defer();
-                $http.post('/api/admin/query', {
-                    "where": [{ "key": "name", "value": name }],
+                return $http.post('/api/admin/query', {
+                    "where": [{
+                        "key": "name",
+                        "value": name
+                    }],
                     "field": ["id", "usrPhoneNumber", "psw", "lastIp", "name", "lastLogin"],
                     "from": "usr"
-                }).success(function(data) {
-                    defer.resolve(JSON.parse(data));
-                }).error(function(err) {
-                    defer.reject(err);
                 });
-                return defer.promise;
             },
             adminName: function() {
-                var defer = $q.defer();
-                $http.post('/api/admin/getRootName', {}).success(function(data) {
-                    defer.resolve(JSON.parse(data).name);
-                }).error(function(err) {
-                    defer.reject(err);
-                });
-                return defer.promise;
+                return $http.post('/api/admin/getRootName', {});
             }
         };
     }]);
@@ -170,10 +137,10 @@
         $scope.nowPage = "1";
         var loadPositions = function() {
             ipcService.positions($scope.nowPage).then(function(data) {
-                $scope.positions = data;
+				$scope.positions = JSON.parse(data.data)['list'];
             });
             ipcService.positionPages($scope.nowPage).then(function(data) {
-                $scope.pages = data;
+				//$scope.pages = JSON.parse(data);
             });
         };
         //监视库存编号，如果有改变，则更新
@@ -183,7 +150,7 @@
     var msgController = appModule.controller('msgController', ['$scope', 'ipcService', function($scope, ipcService) {
         $scope.username = "root";
         ipcService.adminName().then(function(data) {
-            $scope.username = data;
+			$scope.username = JSON.parse(data.data);
         });
     }]);
     //未发送信息列表控制器
@@ -193,8 +160,8 @@
         $scope.nowPage = "1";
         var load = function() {
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
-                $scope.unnoticedOrders = data;
-                $scope.datahave = parseInt(data.length) > 0;
+                $scope.unnoticedOrders = JSON.parse(data.data)['list'];
+                $scope.datahave = parseInt($scope.unnoticedOrders.length) > 0;
             });
         };
         //监视页码，如果有改变，则更新
@@ -208,7 +175,7 @@
         $scope.datahave = false;
         var load = function() {
             ipcService.usr($scope.usrid).then(function(data) {
-                $scope.usr = data.list;
+                $scope.usr = JSON.parse(data.data)['list'];
                 $scope.datahave = parseInt(data.length) > 0;
             });
         };
@@ -222,8 +189,8 @@
         //表单显示情况
         $scope.datahave = false;
         var load = function() {
-            ipcService.order($scope.nowPage).then(function(data) {
-                $scope.order = data;
+            ipcService.order($scope.orderid).then(function(data) {
+                $scope.order = JSON.parse(data.data)['list'];
             });
         };
         // 监视订单号，如果满足12位数字则查询（减小压力）
@@ -238,13 +205,13 @@
         // $scope.datahave = false;
         $scope.datahave = true;
         $scope.order = {
-            "orderid":115,
-            "usrphonenumber":11234511351,
-            "orderinfo":"this is some infomation",
-            "usrid":1234521852,
-            "positionid":1123445,
-            "importtime":"2016-17-6 13:14:55",
-            "exporttime":"2016-17-6 15:14:55",
+            "orderid": 115,
+            "usrphonenumber": 11234511351,
+            "orderinfo": "this is some infomation",
+            "usrid": 1234521852,
+            "positionid": 1123445,
+            "importtime": "2016-17-6 13:14:55",
+            "exporttime": "2016-17-6 15:14:55",
 
         };
         // var load = function() {
@@ -254,7 +221,7 @@
         //     });
         // };
         //首次进入不需要重载
-        //load();
+        load();
         //监视订单号，变化则重载
         // $scope.$watch('orderid', load);
         $scope.edit = function(type) {

@@ -43,37 +43,37 @@ body {
         <div class="flex-grid no-responsive-future" style="height: 100%;">
             <div class="row" style="height: 100%;">
                 <div class="cell size-x200" id="cell-sidebar" style="background-color: #71b1d1;height: 100%;">
-                    <ul class="sidebar">
+                    <ul class="sidebar" id="sidebar">
                         <li>
-                            <a href="#" class="active">
+                            <a href="#" class="active" data-method="index">
                                 <span class="mif-apps icon"></span>
                                 <span class="title" onclick="">快件管理</span>
                                 <span class="title">在下面的选项中操作快件</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" onclick="turnReceived()">
+                            <a href="#" data-method="turnReceived">
                                 <span class="mif-drafts icon"></span>
                                 <span class="title">已取快件</span>
                                 <span class="counter" id="checkedCount">0</span>
                             </a>
                         </li>
-                        <li onclick="turnUnreceived()">
-                            <a href="#">
+                        <li>
+                            <a href="#" data-method="turnUnreceived">
                                 <span class="mif-mail icon"></span>
                                 <span class="title">未取快件</span>
                                 <span class="counter" id="uncheckCount">0</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" onclick="turnAll()">
+                            <a href="#" data-method="turnAll">
                                 <span class="mif-cloud icon"></span>
                                 <span class="title">全部快件</span>
                                 <span class="counter" id="allCount">0</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" onclick="turnBin()">
+                            <a href="#" data-method="turnBin">
                                 <span class="mif-bin icon"></span>
                                 <span class="title">垃圾箱</span>
                                 <span id="binCount" class="counter">0</span>
@@ -85,10 +85,12 @@ body {
                 </div>
             </div>
         </div>
-        <!-- 提示栏 -->
-        <div id="tishi"></div>
-        <!--./diaglog -->
     </div>
+    <!-- 提示栏 -->
+    <div data-role="dialog" id="dialog" class="padding20 container auto-size" data-windows-style="true" data-height="80%" data-width="100%" data-overlay="true" data-overlay-color="op-dark" data-close-button="true" data-overlay="true">
+        <div id="tishi" style="height: 100%;"></div>
+    </div>
+    <!--./diaglog -->
     <!--./page-content -->
 </body>
 @@include('public/script.html')

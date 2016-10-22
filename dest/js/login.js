@@ -7,26 +7,25 @@ $(function() {
 
     form.css({
         opacity: 1,
-        "-webkit-transform": "scale(1)",
         "transform": "scale(1)",
-        "-webkit-transition": ".5s",
+        "-webkit-transform": "scale(1)",
         "transition": ".5s"
+        "-webkit-transition": ".5s",
     });
-});
-$(function() {
+
     $('.login').click(function() {
         var params = $("#login").serialize();
-        $.post(
-            "/api/login/va",
-            params,
-            function(data) {
-                var json = JSON.parse(data);
-                if (json.status == 1) {
-                    //return true;
-                    window.location = "/logined.html";
-                } else {
-                    alert('error');
-                }
-            });
+        $.ajax({
+            type: 'post',
+            url: "/api/login/va",
+            data: params,
+            success: function(data) {
+                window.location = "/logined.html";
+            },
+            error: function(data) {
+                alert("login fails")
+            },
+            dataType: 'json'
+        });
     });
 });
