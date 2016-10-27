@@ -203,6 +203,7 @@
 		}else{
 			return true;
 		}
+	}
 	/**
     * 从客户端获取admin用户的登录信息
     * @return $value-token
@@ -230,3 +231,4 @@
 		}
 		return false;
 	}
+?>

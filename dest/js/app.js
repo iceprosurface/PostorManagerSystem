@@ -77,8 +77,9 @@
                 });
             },
             order: function(orderid) {
-				return $http.post('/api/admin/query', {
-                    "where": [{ "key": "orderId",
+                return $http.post('/api/admin/query', {
+                    "where": [{
+                        "key": "orderId",
                         "value": orderid
                     }],
                     "field": ["orderId", "usrPhoneNumber", "orderInfo", "usrId", "positionId", "importTime", "exportTime"],
@@ -91,10 +92,15 @@
                         "key": "name",
                         "value": name
                     }],
-                    "field": ["id", "usrPhoneNumber", "psw", "lastIp", "name", "lastLogin"],
+                    "field": ["id", "phoneNumber", "psw", "lastIp", "name", "email", "lastLogin"],
                     "from": "usr"
                 });
             },
+			editUsr: function(data){
+				return $http.post('/api/admin/editUsr',{
+					"usr":data
+				});
+			},
             adminName: function() {
                 return $http.post('/api/admin/getRootName', {});
             }
@@ -137,10 +143,10 @@
         $scope.nowPage = "1";
         var loadPositions = function() {
             ipcService.positions($scope.nowPage).then(function(data) {
-				$scope.positions = JSON.parse(data.data)['list'];
+                $scope.positions = JSON.parse(data.data)['list'];
             });
             ipcService.positionPages($scope.nowPage).then(function(data) {
-				//$scope.pages = JSON.parse(data);
+                //$scope.pages = JSON.parse(data);
             });
         };
         //监视库存编号，如果有改变，则更新
@@ -150,7 +156,7 @@
     var msgController = appModule.controller('msgController', ['$scope', 'ipcService', function($scope, ipcService) {
         $scope.username = "root";
         ipcService.adminName().then(function(data) {
-			$scope.username = JSON.parse(data.data);
+            $scope.username = data.data.name;
         });
     }]);
     //未发送信息列表控制器
@@ -175,12 +181,28 @@
         $scope.datahave = false;
         var load = function() {
             ipcService.usr($scope.usrid).then(function(data) {
-                $scope.usr = JSON.parse(data.data)['list'];
-                $scope.datahave = parseInt(data.length) > 0;
+                $scope.usr = data.data.list[0];
+
+                $scope.datahave = parseInt(data.data['list'].length) > 0;
             });
         };
-        $scope.$watch('usrid', load);
-
+        $scope.$watch('usrid', function(newVal) {
+            var regex = /\b\w{6,12}\b/g; //正则表达式，可修改为需要的内容
+            if (newVal && newVal.toString().match(regex) !== null) {
+                load();
+            }
+        });
+		$scope.confirm = function(){
+			console.log("this");
+			ipcService.editUsr($scope.usr).then(function(data) {
+				//resove
+				alert("success");
+				$scope.datahave = false;
+			},function(){
+				//reject
+				alert("false,you may need a second try");
+			});
+		};
     }]);
     //用户订单修改控制器
     var usrOrderController = appModule.controller('usrOrderController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
@@ -190,7 +212,7 @@
         $scope.datahave = false;
         var load = function() {
             ipcService.order($scope.orderid).then(function(data) {
-                $scope.order = JSON.parse(data.data)['list'];
+                $scope.order = data.data['list'];
             });
         };
         // 监视订单号，如果满足12位数字则查询（减小压力）
@@ -202,37 +224,42 @@
         });
     }]);
     var orderConfController = appModule.controller('orderConfController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
-        // $scope.datahave = false;
-        $scope.datahave = true;
-        $scope.order = {
-            "orderid": 115,
-            "usrphonenumber": 11234511351,
-            "orderinfo": "this is some infomation",
-            "usrid": 1234521852,
-            "positionid": 1123445,
-            "importtime": "2016-17-6 13:14:55",
-            "exporttime": "2016-17-6 15:14:55",
-
+        $scope.datahave = false;
+        var load = function() {
+            ipcService.order($scope.orderid).then(function(data) {
+                if(data.data.list){
+					$scope.datahave = parseInt(data.data.list.length) > 0;
+				}else{
+					$scope.datahave = false;
+				}
+                $scope.order = data.data.list[0];
+            });
         };
-        // var load = function() {
-        //     ipcService.order($scope.orderid).then(function(data) {
-        //         $scope.datahave = parseInt(data.length) > 0;
-        //         // $scope.order = data[0];
-        //     });
-        // };
         //首次进入不需要重载
         load();
         //监视订单号，变化则重载
-        // $scope.$watch('orderid', load);
-        $scope.edit = function(type) {
-            ipcService.order().then(function(data) {
-
-            });
-            //编辑完重载数据
-            load();
-        };
+        $scope.$watch('orderid', load);
+		
     }]);
     var IndexController = appModule.controller('IndexController', ['$scope', function($scope) {
 
+    }]);
+    appModule.directive("edit", ['$document', function($document) {
+        return {
+            restrict: 'AE',
+            scope: {
+                edata: '='
+            },
+            template: `<div ng-show="isEditing"><div class="input-control"><input class="input" ng-model="edata"></div><button ng-click="confirm()" class="button primary">确认</button></div><div ng-click="edit()" ng-hide="isEditing">编辑</div>`,
+            link: function(scope, element, attrs, ngModel) {
+                scope.edit = function() {
+                    scope.isEditing = true;
+                };
+                scope.confirm = function() {
+                    scope.isEditing = false;
+                };
+
+            }
+        }
     }]);
 }(angular));
