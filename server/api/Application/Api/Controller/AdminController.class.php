@@ -9,6 +9,20 @@ class AdminController extends Controller {
 	*/
 	public function _initialize(){
 		//TODO: 初始化检测，ajax状态检测，cookie检测，登录检测
+		$token=getAdminToken();
+		if(!isThisAdminTokenL($token)){
+			$this->redirect("public/illegalRequirement");
+		}
+		if(C('IS_AJAX')&& !IS_AJAX ){
+			$this->redirect("public/illegalRequirement");
+		}
+		$this->token=$token;
+		if(cookie('admin')['id']){
+			$this->id = cookie('admin')['id'];
+		}else{
+			$this->id = -1;
+		}
+
 	}
 	public function index () {
 		//一个index方法

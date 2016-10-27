@@ -98,10 +98,7 @@ gulp.task('script-watch', ['script'], reload);
 gulp.task('server', ['html', 'sass', 'script', 'css'], function() {
     // 从这个项目的根目录启动服务器
     browserSync.init({
-        server: {
-            baseDir: ["./dest"],
-            index: "./index.html"
-        },
+		proxy:"localhost:4000",
         //禁止网络模式
         online: false
             //静止ui模式

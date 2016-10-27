@@ -17,21 +17,42 @@ class MailController extends Controller {
 	//邮件验证平台
 	public function mailcheck(){
 		$token=getClientLToken();
+		$res=array(response=>"you must login instead of visiting.",status=>"0");
 		if(isThisTokenL($token)){
-			$map['Id'] = getTokenKey($token);
+			$map['id'] = getTokenKey($token);
 			$usrs = M('usr');
-			$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>"0");
-			if($usrs->create($usr_info)){
-				$usr=$usrs->where($map)->find();
-				$url="http://".C("DB_HOST")."/index.php/email/va?id=".$usr['id']."&token=".$token;
-				$Body = "亲爱的".$usr['name']."：<br/>  你注册的 <strong>".$usr['id']."</strong>尚未被激活，请点击下列链接以验证邮箱激活：<br/>  <a href='".$url."'>点击此处</a><br/>请不要将该邮件转发或复制给任何其他用户，该链接在30min内验证有效，若该用户与你无关请不要点击该邮件内的任何链接谢谢配合。";
-				$result = sendMail($usr['email'],'快件管理中心的激活邮件',$Body);
+			$usr=$usrs->where($map)->find();
+			$url="http://104.224.163.181/api/email/va?id=".$usr['id']."&token=".$token;
+			$Body = "亲爱的".$usr['name']."：<br/>  你注册的 <strong>".$usr['id']."</strong>尚未被激活，请点击下列链接以验证邮箱激活：<br/>  <a href='".$url."'>点击此处</a><br/>请不要将该邮件转发或复制给任何其他用户，该链接在30min内验证有效，若该用户与你无关请不要点击该邮件内的任何链接谢谢配合。";
+			$result = sendMail($usr['email'],'快件管理中心的激活邮件',$Body);
+			if($result ){
+				$res=array(response=>"mail has been sended",status=>200);
+				header('HTTP/1.1 200 Success');
+			}else{
+				$res=array(response=>"mail fail to send",status=>403);
+				header('HTTP/1.1 403 Forbidden');
 			}
 			
 		}else{
 			//$this->redirect("/login/login");
 		}
-		$this->ajaxReturn(json_encode($res),'JSON');
+		$this->ajaxReturn($res,'JSON');
+	}
+	public function va(){
+		$token = I('get.token');
+		$map['Id'] = I('get.id');
+		$usrs = M('usr');
+		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>500);
+		$usr=$usrs->where($map)->find();
+		if($usr['token'] == $token){
+			$usr=$usrs->where($map)->save(array('vaEmail'=>true));
+			$res=array(response=>"success",status=>200);
+			header('HTTP/1.1 200 Success');
+		}else{
+			$res=array(response=>"this is not a validated code ",status=>403);
+			header('HTTP/1.1 403 Forbidden');
+		}
+		$this->ajaxReturn($res,'JSON');
 	}
 	//短信验证平台
 	public function phonecheck(){
