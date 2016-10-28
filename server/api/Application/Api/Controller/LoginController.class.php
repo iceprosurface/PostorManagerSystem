@@ -14,6 +14,12 @@ class LoginController extends Controller {
 			$this->display("login");
 		}
 	}
+	
+	/**
+    * admin的登录
+    * @param string usrid
+    * @param string psw
+    */
 	public function adminLogin(){
 		$usr_info = array(
 			'id'=>I('post.usrid',0),

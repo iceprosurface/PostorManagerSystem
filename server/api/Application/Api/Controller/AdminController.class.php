@@ -115,7 +115,21 @@ class AdminController extends Controller {
 		if($usrData['id']){
 			$where['id'] = $usrData['id'];
 			$usr = M("usr");
-			$result=$usr->where($where)->save($usrData);
+			$result=$usr->field(array("phonenumber", "psw", "lastip", "name", "email", "lastlogin"))->where($where)->save($usrData);
+			$res=array(response=>$result,status=>200);
+			header('HTTP/1.1 200 success');
+		}else{
+			$res=array(response=>"must have an A primary key ",status=>403);
+			header('HTTP/1.1 403 Forbidden');
+		}
+		$this->ajaxReturn($res,'JSON');
+	}
+	public function editOrder(){
+		$orderData = I('post.order');
+		if($orderData['orderid']){
+			$where['orderId'] = $orderData['orderid'];
+			$order = M("orders");
+			$result=$order->field(array("usrphonenumber", "orderinfo", "usrid", "positionid", "importtime", "exporttime"))->where($where)->save($orderData);
 			$res=array(response=>$result,status=>200);
 			header('HTTP/1.1 200 success');
 		}else{
@@ -131,11 +145,15 @@ class AdminController extends Controller {
 	public function maxPages(){
 		$pagination=I("post.pagination",40);
 		$model = M("positions");
-		$count=$model->field( array( "id" ) )->where( $where )->Count();
-		$maxpage=intval ( $count / $pagination );
-		for($i=1;$i<=$maxpage;$i++){
-			$pages[$i] = array("id"=>$i);
-		}
-		$this->ajaxReturn(json_encode($pages),'JSON');
+		$count=$model->field( array( "id" ) )->Count();
+		$maxpage=ceil ( $count / $pagination );
+		$this->ajaxReturn($maxpage,'JSON');
 	}
+//	public function addpositions(){
+//		$positions = M("positions");
+//		for($i=0;$i<=200;$i++){
+//			$datas[] = array('positionId'=>$i,'haveProduct'=>false);
+//		}
+//		$result=$positions->addAll($datas);
+//	}
 }

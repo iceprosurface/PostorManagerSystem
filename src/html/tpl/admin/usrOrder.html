@@ -3,47 +3,50 @@
 
 <hr class="thin bg-grayLighter">
 
-<div class="input-control text">
-    <input type="text"  ng-model="orderid" required placeholder="请输入订单号">
+<div class="input-control text" data-role="input">
+	<input type="text"  ng-model="orderid" required placeholder="请输入订单号"><button ng-disabled="!datahave" class="button warning" ng-click="confirm()">确认信息</button>
 </div>
 
-<p ng-hide="datahave">查无此订单号</p>
-<table ng-show="datahave">
-    <tr>	
-        <td>订单编号</td>
-        <td ng-bind="order['orderid']"></td>
-        <td>修改</td>
-    </tr>    
-    <tr>
-        <td>用户手机号</td>
-        <td ng-bind="order['usrphonenumber']"></td>
-        <td>修改</td>
-    </tr>
-    <tr>
-        <td>订单信息</td>
-        <td ng-bind="order['orderinfo']"></td>
-        <td>修改</td>
-    </tr>
+<div data-role="preloader" data-type="ring" data-style="dark" ng-show="onloading"></div>
+<div ng-hide="onloading">
+	<p ng-hide="datahave">查无此订单号</p>
+	<table class="table striped hovered cell-hovered border bordered" ng-show="datahave">
+		<tr>	
+			<td>订单编号</td>
+			<td ng-bind="order['orderid']"></td>
+			<td><edit edata="order['orderid']"></edit></td>
+		</tr>    
+		<tr>
+			<td>用户手机号</td>
+			<td ng-bind="order['usrphonenumber']"></td>
+			<td><edit edata="order['usrphonenumber']"></edit></td>
+		</tr>
+		<tr>
+			<td>订单信息</td>
+			<td ng-bind="order['orderinfo']"></td>
+			<td><edit edata="order['orderinfo']"></edit></td>
+		</tr>
 
-    <tr>
-        <td>用户id</td>
-        <td ng-bind="order['usrid']"></td>
-        <td>修改</td>
-    </tr>
-    <tr>
-        <td>所在箱子</td>
-        <td ng-bind="order['positionid']"></td>
-        <td>修改</td>
-    </tr>
+		<tr>
+			<td>用户id</td>
+			<td ng-bind="order['usrid']"></td>
+			<td><edit edata="order['usrid']"></edit></td>
+		</tr>
+		<tr>
+			<td>所在箱子</td>
+			<td ng-bind="order['positionid']"></td>
+			<td><edit edata="order['positionid']"></edit></td>
+		</tr>
 
-    <tr>
-        <td>送达时间</td>
-        <td ng-bind="order['importtime']"></td>
-        <td>修改</td>
-    </tr>
-    <tr>
-        <td>取件时间</td>
-        <td ng-bind="order['exporttime']"></td>
-        <td>修改</td>
-    </tr>
-</table>
+		<tr>
+			<td>送达时间</td>
+			<td ng-bind="order['importtime']"></td>
+			<td><edit edata="order['importtime']"></edit></td>
+		</tr>
+		<tr>
+			<td>取件时间</td>
+			<td ng-bind="order['exporttime']"></td>
+			<td><edit edata="order['exporttime']"></edit></td>
+		</tr>
+	</table>
+</div>

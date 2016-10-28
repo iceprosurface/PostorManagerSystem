@@ -55,13 +55,13 @@
                 return $http.post('/api/admin/query', {
                     "field": ["positionId", "haveProduct"],
                     "from": "positions",
-                    "pagination": 40,
+                    "pagination": 35,
                     "page": page
                 });
             },
             positionPages: function() {
                 return $http.post('/api/admin/maxPages', {
-                    "pagination": 40
+                    "pagination": 35
                 });
             },
             unnoticedOrders: function(page) {
@@ -99,6 +99,11 @@
 			editUsr: function(data){
 				return $http.post('/api/admin/editUsr',{
 					"usr":data
+				});
+			},
+			editOrder: function(data){
+				return $http.post('/api/admin/editOrder',{
+					"order":data
 				});
 			},
             adminName: function() {
@@ -141,12 +146,20 @@
     var containerStatusController = appModule.controller('containerStatusController', ['$scope', 'ipcService', function($scope, ipcService) {
         //库存箱子编号
         $scope.nowPage = "1";
+		$scope.onloading = true;
         var loadPositions = function() {
+			$scope.onloading = true;
             ipcService.positions($scope.nowPage).then(function(data) {
-                $scope.positions = JSON.parse(data.data)['list'];
+                $scope.positions = data.data.list;
+                $scope.positions.unshift({});
             });
-            ipcService.positionPages($scope.nowPage).then(function(data) {
-                //$scope.pages = JSON.parse(data);
+            ipcService.positionPages().then(function(data) {
+				var pages = [];
+				for(var i = 1; i<= parseInt(data.data);i++){
+					pages.push({'id':i});
+					$scope.onloading = false;
+				}
+                $scope.pages = pages;
             });
         };
         //监视库存编号，如果有改变，则更新
@@ -162,12 +175,17 @@
     //未发送信息列表控制器
     var unnoticedController = appModule.controller('unnoticedController', ['$scope', 'ipcService', function($scope, ipcService) {
         $scope.datahave = false;
+		$scope.onloading = true;
         //页码
         $scope.nowPage = "1";
         var load = function() {
+			$scope.onloading = true;
             ipcService.unnoticedOrders($scope.nowPage).then(function(data) {
-                $scope.unnoticedOrders = JSON.parse(data.data)['list'];
-                $scope.datahave = parseInt($scope.unnoticedOrders.length) > 0;
+				$scope.onloading = false;
+                $scope.unnoticedOrders = data.data.list;
+				if($scope.unnoticedOrders){
+					$scope.datahave = parseInt($scope.unnoticedOrders.length) > 0;
+				}
             });
         };
         //监视页码，如果有改变，则更新
@@ -193,7 +211,6 @@
             }
         });
 		$scope.confirm = function(){
-			console.log("this");
 			ipcService.editUsr($scope.usr).then(function(data) {
 				//resove
 				alert("success");
@@ -210,18 +227,38 @@
         $scope.orderid = "";
         //表单显示情况
         $scope.datahave = false;
+		$scope.onloading = true;
         var load = function() {
+			$scope.onloading = true;
             ipcService.order($scope.orderid).then(function(data) {
-                $scope.order = data.data['list'];
+				$scope.onloading = false;
+                $scope.order = data.data.list[0];
+				if($scope.order){
+					$scope.datahave = data.data.list[0];
+				}else{
+					$scope.datahave = false;
+				}
             });
         };
         // 监视订单号，如果满足12位数字则查询（减小压力）
         $scope.$watch('orderid', function(newVal) {
-            var regex = /\b\d{12}\b/g; //正则表达式，可修改为需要的内容
+            var regex = /\b\d{12,20}\b/g; //正则表达式，可修改为需要的内容
             if (newVal.toString().match(regex) !== null) {
                 load();
-            }
+            }else{
+				$scope.onloading = false;
+			}
         });
+		$scope.confirm = function(){
+			ipcService.editOrder($scope.order).then(function(data) {
+				//resove
+				alert("success");
+				$scope.datahave = false;
+			},function(){
+				//reject
+				alert("false,you may need a second try");
+			});
+		};
     }]);
     var orderConfController = appModule.controller('orderConfController', ['$scope', 'ipcService', '$http', function($scope, ipcService, $http) {
         $scope.datahave = false;
