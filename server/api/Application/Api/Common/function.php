@@ -177,11 +177,12 @@
 		$mail->Body = $content;
 		// 发送邮件
 		if (!$mail->Send()) {
-			return FALSE;
+			return false;
 		} else {
-			return TRUE;
+			return true;
 		}
 	}
+	
 	/**
     * 从客户端获取登陆信息
     * @return $value-token
@@ -190,3 +191,44 @@
 		$value=cookie(C('COOKIE_KEY_TOKEN'));
 		return $value['token'];
 	}
+	/**
+	*  检测admin用户是否密码是否正确
+    *  @return $value-token
+    */
+	function checkAdmin($map){
+		$usrs = M('admin');
+		$list = $usrs -> where($map) -> find();
+		if( empty( $list ) ){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	/**
+    * 从客户端获取admin用户的登录信息
+    * @return $value-token
+    */
+	function getAdminToken(){
+		$value=cookie('admin');
+		return $value['token'];
+	}
+	/**
+    * 检查此次admin 的 token登录是否合法
+    * @param string $token 要检查的token值
+    * @return boolean
+    */
+	function isThisAdminTokenL($token){
+		//判断是否有token若有必然在此次登录有效期内
+		if(session('admin')!=null){
+			//判断是否和session一致，一致说明还处在本次登录有效期内
+			if(session('admin')==$token){
+				//更新token
+				cookie('admin',cookie('admin'));
+				return  true;
+			}else{
+				return  false;
+			}
+		}
+		return false;
+	}
+?>

@@ -27,10 +27,10 @@ class ImportController extends Controller {
 		if($orders->create($import_info) & $positions->create($import_info)){
 			$import_result=($orders->add($import_info))&($positions->where($import_info['positionId'])->save($import_info));
 			if($import_result !== false){
-				$res=array(response=>"注册成功",status=>200,orderId=>$import_info['orderId']);
+				$res=array(response=>"success",status=>200,orderId=>$import_info['orderId']);
 				header('HTTP/1.1 200 ok');
 			}else{
-				$res=array(response=>"注册失败",status=>403);
+				$res=array(response=>"fail",status=>403);
 				header('HTTP/1.1 403 forbidden');
 			}
 		}

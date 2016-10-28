@@ -14,6 +14,38 @@ class LoginController extends Controller {
 			$this->display("login");
 		}
 	}
+	
+	/**
+    * admin的登录
+    * @param string usrid
+    * @param string psw
+    */
+	public function adminLogin(){
+		$usr_info = array(
+			'id'=>I('post.usrid',0),
+			'psw'=>I('post.psw',0),
+		);
+		$usrs = M('admin');
+		$map=array(
+			'id'=>$usr_info['id'],
+			'psw'=>$usr_info['psw']);
+		// 检测是否用户名密码正确
+		if(checkAdmin($map)){
+			//创建token
+			$token =createToken($usr_info['id']);
+			//清空token
+			session('admin',null);
+			//写入token（重新密码登录代表重新获取令牌）
+			session('admin',$token);
+			$res=array(response=>"登陆成功",status=>200);
+			cookie('admin',array(id=>$list["id"],token=>$token));
+			header('HTTP/1.1 200 ok');
+		}else{
+			$res=array(response=>"用户名密码验证信息错误",status=>403);
+			header('HTTP/1.1 403 Forbidden');
+		}
+		$this->ajaxReturn($res,'JSON');
+	}
     public function logined(){
 		$login = getClientLToken();
 		$res=isThisTokenL($login);
@@ -51,7 +83,7 @@ class LoginController extends Controller {
 		if($usrs->create($usr_info)){
 			if(checkUsr($map)){
 				//创建token
-				$token =createToken($usr_info['Id']);
+				$token =createToken($usr_info['id']);
 				//清空token
 				session(C('SESSION_KEY_TOKEN'),null);
 				//写入token（重新密码登录代表重新获取令牌）

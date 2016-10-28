@@ -6,15 +6,16 @@
 <button class="button warning" onclick=""><span class="mif-loop2"></span>全部项目重新发送</button>
 
 <hr class="thin bg-grayLighter">
+<div data-role="preloader" data-type="ring" data-style="dark" ng-show="onloading"></div>
+<div ng-hide="onloading">
+	<p ng-hide="datahave">暂无需要通知快件</p>
 
-<p ng-hide="datahave">暂无需要通知快件</p>
-
-<table class="table striped hovered cell-hovered border bordered" ng-show="datahave">
-	<thead>
-		<tr><th>订单号</th><th>手机号码</th></tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="unnoticedOrder in unnoticedOrders"><td ng-bind="unnoticedOrder['orderid']"></td><td ng-bind="unnoticedOrder['usrphonenumber']"></td></tr>
-	</tbody>
-</table>
-
+	<table class="table striped hovered cell-hovered border bordered" ng-show="datahave">
+		<thead>
+			<tr><th>订单号</th><th>手机号码</th></tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="unnoticedOrder in unnoticedOrders"><td ng-bind="unnoticedOrder['orderid']"></td><td ng-bind="unnoticedOrder['usrphonenumber']"></td></tr>
+		</tbody>
+	</table>
+</div>

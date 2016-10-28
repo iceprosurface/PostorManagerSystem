@@ -74,13 +74,13 @@
                     <hr class="bg-red"></hr>
                     <div class="list">
                         <div class="list-content" onclick="msg('通知|重新发送成功')">
-                            <span class="list-title">邮箱尚未激活(点击以重新发送验证邮件)</span>
+							<span id="mailcheck" data-issended="{$list['vaEmail']}" class="list-title">{$list['vaEmail']?邮箱已经激活:邮箱尚未激活}</span>
                         </div>
                     </div>
                     <div class="list">
                         <div class="list-content">
                             <span class="list-title">手机尚未激活</span>
-                            <input type="button" value="点击以发送验证短信" onclick="msg('通知|重新发送成功')">
+                            <input type="button" value="点击以发送验证短信" onclick="msg('通知|手机验证功能暂不可用')">
                             <br/>
                             <input type="text">
                             <input type="button" value="验证" onclick="msg('通知|重新发送成功')">

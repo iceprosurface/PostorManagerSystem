@@ -268,6 +268,14 @@ function msg(mes) {
 $(document).ready(function() {
     $("#tishi").load("/api/get/usrconfig", function() {
         $("#carousel").carousel();
+		$("#mailcheck").on('click',function(){
+			if( $(this).data('issended') == 'true' ){
+				return false;
+			}
+			$.get('/api/mail/mailcheck',{},function(data){
+				msg('通知|重新发送成功');
+			});
+		});
     });
     var tlogin;
     reloadfn.sidebarRefresh(tlogin);
@@ -291,6 +299,9 @@ $(document).ready(function() {
         }
     });
 });
+function sendMail(){
+
+}
 
 function iniPages(maxpage, curr) {
     var pages = $("#pages");
