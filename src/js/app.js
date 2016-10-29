@@ -101,6 +101,11 @@
 					"usr":data
 				});
 			},
+			editContainer: function(data){
+				return $http.post('/api/admin/editContainer',{
+					"positions":data
+				});
+			},
 			editOrder: function(data){
 				return $http.post('/api/admin/editOrder',{
 					"order":data
@@ -151,17 +156,26 @@
 			$scope.onloading = true;
             ipcService.positions($scope.nowPage).then(function(data) {
                 $scope.positions = data.data.list;
+				$scope.onloading = false;
                 $scope.positions.unshift({});
             });
-            ipcService.positionPages().then(function(data) {
-				var pages = [];
-				for(var i = 1; i<= parseInt(data.data);i++){
-					pages.push({'id':i});
-					$scope.onloading = false;
-				}
-                $scope.pages = pages;
-            });
-        };
+		};
+		$scope.confirm = function(){
+			ipcService.editContainer($scope.positions).then(function(data){
+
+				alert('success');
+			},function(data){
+				alert("some thing error ,you may need a second try");	
+			});
+		};
+		ipcService.positionPages().then(function(data) {
+			var pages = [];
+			for(var i = 1; i<= parseInt(data.data);i++){
+				pages.push({'id':i});
+			}
+			$scope.pages = pages;
+	   });
+
         //监视库存编号，如果有改变，则更新
         $scope.$watch('nowPage', loadPositions);
     }]);
@@ -299,4 +313,28 @@
             }
         }
     }]);
+	appModule.directive("cedit", ['$document', function($document) {
+        return {
+            restrict: 'AE',
+            scope: {
+                cdata: '=',
+				text: '='
+            },
+            template: `<div ng-class="{'bg-lime':(cdata=='0'),'bg-crimson':(cdata!='0')}" ng-bind="text" ng-click="toggle()"></div>`,
+            link: function(scope, element, attrs, ngModel) {
+                scope.toggle = function() {
+					if(scope.cdata == '0'){
+						scope.cdata = '1';	
+					}else{
+						scope.cdata = '0';	
+					}
+                };
+                scope.confirm = function() {
+
+                };
+
+            }
+        }
+    }]);
+
 }(angular));

@@ -138,6 +138,34 @@ class AdminController extends Controller {
 		}
 		$this->ajaxReturn($res,'JSON');
 	}
+	public function editContainer(){
+		$containers = I('post.positions');
+		$container = M('positions');
+		$str = "";
+		$str0 = "";
+		foreach ( $containers  as &$v ) {
+			if($v['haveproduct']=="1"){
+				if($str == ""){
+					$str .= $v['positionid'];
+				}else{
+					$str .= ','.$v['positionid'];
+				}
+			}else{
+				if($str0 == ""){
+					$str0 .= $v['positionid'];
+				}else{
+					$str0 .= ','.$v['positionid'];
+				}
+			}
+		}
+		$where['positionId'] = array('in',$str);
+		$where0['positionId'] = array('in',$str0);
+		$data['haveProduct'] = 1;
+		$data0['haveProduct'] = 0;
+		if($str != "") $result = $container->where($where)->save($data);
+		if($str0 != "") $result = $container->where($where0)->save($data0);
+		$this->ajaxReturn('success','JSON');
+	}
 	public function getRootName() {
 		//TODO:admin用户账户的检测（may权限系统）
 		$this->ajaxReturn(array('name' => "icepro" ),'JSON');
