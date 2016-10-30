@@ -4,11 +4,12 @@
 
 <h3>库存系统</h3>
 <hr class="thin bg-grayLighter">
-<div class="input-control" data-role="select" style="width:300px;">
-	<select class="select2" ng-model="nowPage" ng-options=" page.id as page.id  for page in pages"  ng-disabled="onloading"> </select>
+<div class="input-control" data-role="select" >
+	<div style="float:left;width:300px;margin: .15625rem 0;"><select class="select2" ng-model="nowPage" ng-options=" page.id as page.id  for page in pages"  ng-disabled="onloading"> </select></div>
+	<button class="button warning" ng-click="confirm()" style="float:left;">确认信息</button>
 </div>
 <div class="input-control">
-	<button class="button warning" ng-click="confirm()">确认信息</button>
+	
 </div>
 <div data-role="preloader" data-type="ring" data-style="dark" ng-show="onloading"></div>
 <div class="grid" style="text-align:center;" ng-hide="onloading">

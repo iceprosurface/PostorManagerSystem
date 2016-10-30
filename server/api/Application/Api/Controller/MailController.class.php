@@ -23,7 +23,7 @@ class MailController extends Controller {
 			$usr=$usrs->where($map)->find();
 			$url="http://104.224.163.181/api/email/va?id=".$usr['id']."&token=".$token;
 			$Body = "亲爱的".$usr['name']."：<br/>  你注册的 <strong>".$usr['id']."</strong>尚未被激活，请点击下列链接以验证邮箱激活：<br/>  <a href='".$url."'>点击此处</a><br/>请不要将该邮件转发或复制给任何其他用户，该链接在30min内验证有效，若该用户与你无关请不要点击该邮件内的任何链接谢谢配合。";
-			if($usr['vaEmail']){ 
+			if($usr['vaEmail'] == null){ 
 				$result = sendMail($usr['email'],'快件管理中心的激活邮件',$Body);
 				if($result ){
 					$res=array(response=>"mail has been sended",status=>200);
