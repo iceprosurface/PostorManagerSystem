@@ -9,19 +9,16 @@ class AdminController extends Controller {
 	*/
 	public function _initialize(){
 		//TODO: 初始化检测，ajax状态检测，cookie检测，登录检测
-//		$token=getAdminToken();
-//		if(!isThisAdminTokenL($token)){
-//			$this->redirect("public/illegalRequirement");
-//		}
-//		if(C('IS_AJAX')&& !IS_AJAX ){
-//			$this->redirect("public/illegalRequirement");
-//		}
-//		$this->token=$token;
-//		if(cookie('admin')['id']){
-//			$this->id = cookie('admin')['id'];
-//		}else{
-//			$this->id = -1;
-//		}
+		$token=getAdminToken();
+		if(!isThisAdminTokenL($token)){
+			$this->redirect("public/illegalRequirement");
+		}
+		$this->token=$token;
+		if($token){
+			$this->username = getTokenKey($token);
+		}else{
+			$this->username = -1;
+		}
 
 	}
 	public function index () {
@@ -168,7 +165,7 @@ class AdminController extends Controller {
 	}
 	public function getRootName() {
 		//TODO:admin用户账户的检测（may权限系统）
-		$this->ajaxReturn(array('name' => "icepro" ),'JSON');
+		$this->ajaxReturn(array('name' => $this->username ),'JSON');
 	}
 	public function maxPages(){
 		$pagination=I("post.pagination",40);
