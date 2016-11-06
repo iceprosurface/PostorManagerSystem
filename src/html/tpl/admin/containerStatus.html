@@ -4,57 +4,61 @@
 
 <h3>库存系统</h3>
 <hr class="thin bg-grayLighter">
-<div class="input-control" data-role="select" style="width:300px;">
-	<select class="select2" ng-model="nowPage" ng-options=" page.id as page.id  for page in pages"  ng-disabled="onloading"> </select>
+<div class="input-control" data-role="select" >
+	<div style="float:left;width:300px;margin: .15625rem 0;"><select class="select2" ng-model="nowPage" ng-options=" page.id as page.id  for page in pages"  ng-disabled="onloading"> </select></div>
+	<button class="button warning" ng-click="confirm()" style="float:left;">确认信息</button>
+</div>
+<div class="input-control">
+	
 </div>
 <div data-role="preloader" data-type="ring" data-style="dark" ng-show="onloading"></div>
 <div class="grid" style="text-align:center;" ng-hide="onloading">
     <div class="row cells5">
-		<div class="cell" ng-class="{'bg-lime':(positions[1]['haveproduct']=='0'),'bg-crimson':(positions[1]['haveproduct']!='0')}">1</div>
-		<div class="cell" ng-class="{'bg-lime':(positions[2]['haveproduct']=='0'),'bg-crimson':(positions[2]['haveproduct']!='0')}">2</div>
-		<div class="cell" ng-class="{'bg-lime':(positions[3]['haveproduct']=='0'),'bg-crimson':(positions[3]['haveproduct']!='0')}">3</div>
+		<cedit class="cell" cdata="positions[1]['haveproduct']" text="1" ></cedit>
+		<cedit class="cell" cdata="positions[2]['haveproduct']" text="2" ></cedit>
+		<cedit class="cell" cdata="positions[3]['haveproduct']" text="3" ></cedit>
 
-		<div class="cell" ng-class="{'bg-lime':(positions[4]['haveproduct']=='0'),'bg-crimson':(positions[4]['haveproduct']!='0')}">4</div>
-		<div class="cell" ng-class="{'bg-lime':(positions[5]['haveproduct']=='0'),'bg-crimson':(positions[5]['haveproduct']!='0')}">5</div>
+		<cedit class="cell" cdata="positions[4]['haveproduct']" text="4" ></cedit>
+		<cedit class="cell" cdata="positions[5]['haveproduct']" text="5" ></cedit>
     </div>
 	 <div class="row cells5">
-        <div class="cell" ng-class="{'bg-lime':(positions[6]['haveproduct']=='0'),'bg-crimson':(positions[6]['haveproduct']!='0')}">6</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[7]['haveproduct']=='0'),'bg-crimson':(positions[7]['haveproduct']!='0')}">7</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[8]['haveproduct']=='0'),'bg-crimson':(positions[8]['haveproduct']!='0')}">8</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[9]['haveproduct']=='0'),'bg-crimson':(positions[9]['haveproduct']!='0')}">9</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[10]['haveproduct']=='0'),'bg-crimson':(positions[10]['haveproduct']!='0')}">10</div>
+        <cedit class="cell" cdata="positions[6]['haveproduct']" text="6" ></cedit>
+        <cedit class="cell" cdata="positions[7]['haveproduct']" text="7" ></cedit>
+        <cedit class="cell" cdata="positions[8]['haveproduct']" text="8" ></cedit>
+        <cedit class="cell" cdata="positions[9]['haveproduct']" text="9" ></cedit>
+        <cedit class="cell" cdata="positions[10]['haveproduct']" text="10" ></cedit>
     </div>
     <div class="row cells6">
-        <div class="cell" ng-class="{'bg-lime':(positions[11]['haveproduct']=='0'),'bg-crimson':(positions[11]['haveproduct']!='0')}">11</div>
-        <div class="cell colspan2" ng-class="{'bg-lime':(positions[12]['haveproduct']=='0'),'bg-crimson':(positions[12]['haveproduct']!='0')}">12</div>
-        <div class="cell colspan2" ng-class="{'bg-lime':(positions[13]['haveproduct']=='0'),'bg-crimson':(positions[13]['haveproduct']!='0')}">13</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[15]['haveproduct']=='0'),'bg-crimson':(positions[15]['haveproduct']!='0')}">15</div>
+        <cedit class="cell" cdata="positions[11]['haveproduct']" text="11" ></cedit>
+        <cedit class="cell colspan2" cdata="positions[12]['haveproduct']" text="12" ></cedit>
+        <cedit class="cell colspan2" cdata="positions[13]['haveproduct']" text="13" ></cedit>
+        <cedit class="cell" cdata="positions[15]['haveproduct']" text="15" ></cedit>
     </div>
     <div class="row cells6">
-        <div class="cell" ng-class="{'bg-lime':(positions[16]['haveproduct']=='0'),'bg-crimson':(positions[16]['haveproduct']!='0')}">16</div>
-        <div class="cell colspan2" ng-class="{'bg-lime':(positions[17]['haveproduct']=='0'),'bg-crimson':(positions[17]['haveproduct']!='0')}">17</div>
-        <div class="cell colspan2" ng-class="{'bg-lime':(positions[18]['haveproduct']=='0'),'bg-crimson':(positions[18]['haveproduct']!='0')}">18</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[19]['haveproduct']=='0'),'bg-crimson':(positions[19]['haveproduct']!='0')}">19</div>
+        <cedit class="cell" cdata="positions[16]['haveproduct']" text="16" ></cedit>
+        <cedit class="cell colspan2" cdata="positions[17]['haveproduct']" text="17" ></cedit>
+        <cedit class="cell colspan2" cdata="positions[18]['haveproduct']" text="18" ></cedit>
+        <cedit class="cell" cdata="positions[19]['haveproduct']" text="19" ></cedit>
     </div>
     <div class="row cells8">
-        <div class="cell" ng-class="{'bg-lime':(positions[20]['haveproduct']=='0'),'bg-crimson':(positions[20]['haveproduct']!='0')}">20</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[21]['haveproduct']=='0'),'bg-crimson':(positions[21]['haveproduct']!='0')}">21</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[22]['haveproduct']=='0'),'bg-crimson':(positions[22]['haveproduct']!='0')}">22</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[23]['haveproduct']=='0'),'bg-crimson':(positions[23]['haveproduct']!='0')}">23</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[24]['haveproduct']=='0'),'bg-crimson':(positions[24]['haveproduct']!='0')}">24</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[25]['haveproduct']=='0'),'bg-crimson':(positions[25]['haveproduct']!='0')}">25</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[26]['haveproduct']=='0'),'bg-crimson':(positions[26]['haveproduct']!='0')}">26</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[27]['haveproduct']=='0'),'bg-crimson':(positions[27]['haveproduct']!='0')}">27</div>
+        <cedit class="cell" cdata="positions[20]['haveproduct']" text="20" ></cedit>
+        <cedit class="cell" cdata="positions[21]['haveproduct']" text="21" ></cedit>
+        <cedit class="cell" cdata="positions[22]['haveproduct']" text="22" ></cedit>
+        <cedit class="cell" cdata="positions[23]['haveproduct']" text="23" ></cedit>
+        <cedit class="cell" cdata="positions[24]['haveproduct']" text="24" ></cedit>
+        <cedit class="cell" cdata="positions[25]['haveproduct']" text="25" ></cedit>
+        <cedit class="cell" cdata="positions[26]['haveproduct']" text="26" ></cedit>
+        <cedit class="cell" cdata="positions[27]['haveproduct']" text="27" ></cedit>
     </div>
     <div class="row cells8">
-        <div class="cell" ng-class="{'bg-lime':(positions[28]['haveproduct']=='0'),'bg-crimson':(positions[28]['haveproduct']!='0')}">28</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[29]['haveproduct']=='0'),'bg-crimson':(positions[29]['haveproduct']!='0')}">29</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[30]['haveproduct']=='0'),'bg-crimson':(positions[30]['haveproduct']!='0')}">30</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[31]['haveproduct']=='0'),'bg-crimson':(positions[31]['haveproduct']!='0')}">31</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[32]['haveproduct']=='0'),'bg-crimson':(positions[32]['haveproduct']!='0')}">32</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[33]['haveproduct']=='0'),'bg-crimson':(positions[33]['haveproduct']!='0')}">33</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[34]['haveproduct']=='0'),'bg-crimson':(positions[34]['haveproduct']!='0')}">34</div>
-        <div class="cell" ng-class="{'bg-lime':(positions[35]['haveproduct']=='0'),'bg-crimson':(positions[35]['haveproduct']!='0')}">35</div>
+        <cedit class="cell" cdata="positions[28]['haveproduct']" text="28" ></cedit>
+        <cedit class="cell" cdata="positions[29]['haveproduct']" text="29" ></cedit>
+        <cedit class="cell" cdata="positions[30]['haveproduct']" text="30" ></cedit>
+        <cedit class="cell" cdata="positions[31]['haveproduct']" text="31" ></cedit>
+        <cedit class="cell" cdata="positions[32]['haveproduct']" text="32" ></cedit>
+        <cedit class="cell" cdata="positions[33]['haveproduct']" text="33" ></cedit>
+        <cedit class="cell" cdata="positions[34]['haveproduct']" text="34" ></cedit>
+        <cedit class="cell" cdata="positions[35]['haveproduct']" text="35" ></cedit>
     </div>
 </div>
 </div>

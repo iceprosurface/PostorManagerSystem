@@ -14,6 +14,7 @@ return array(
 		'DB_CHARSET'		=>'utf8', 		// 字符集
 		'DB_FIELDS_CACHE'	=>false,
 		'READ_DATA_MAP'		=>true,
+		//'DB_PARAMS' => array(\PDO::ATTR_CASE => \PDO::CASE_NATURAL),
 		
 		'DEFAULT_FILTER'	=>'strip_tags',		// 默认的拦截器
 		'API_KEY'			=>'',				// 设置短信平台的验证码

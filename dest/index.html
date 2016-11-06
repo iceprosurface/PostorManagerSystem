@@ -8,10 +8,187 @@
     <link href="/css/metro.min.css?rev=ccf7b49270b4bdcfb9606ddc87abb873" rel="stylesheet">
     <link href="/css/metro-icons.min.css?rev=f079c4396891ecc6eb6ef9db80a52964" rel="stylesheet">
     <link href="/js/laypage/skin/laypage.css" rel="stylesheet" >
+	<script src="/js/jquery.min.js?rev=cccc7fc56e1d2b59e4e4fe7f9861d8ba"></script>
+    <script src="/js/metro.min.js?rev=57f1dbca946d6500d3cfc9baabbabc57"></script>
+	<script src="/js/prettify/run_prettify.js?rev=c9076487b9f637bd858e3d565f3504f4"></script>
+	<style>
+		.prettyprint {
+			background-color: #eeeeee;
+			border: 0 !important;
+			border-width: 1px !important;
+			border-color: #eeeeee !important;
+			border-left: 8px #555555 solid !important;
+		}
+
+		.prettyprint ol {
+			background-color: transparent !important;
+		}
+
+		.prettyprint li {background-color: white !important; list-style-type: decimal !important; padding-left: 1em; border-bottom: 1px #eee solid;}
+		.prettyprint li:last-child{border-bottom: 0;}
+		.prettyprint code .tag {
+			font-size: .7rem;
+		}
+
+		.prettyprint {
+			overflow: hidden;
+			overflow-x: scroll;
+		}
+	</style>
 <title>登陆</title>
 </head>
 
-<body class="bg-darkTeal">
+<body class="">
+	<div class="">
+	<div class="bg-lightBlue fg-white align-center">
+		<div class="container">
+			<div class="no-overflow" style="padding-top: 40px">
+				<br />
+				<br />
+				<br />
+				<h1 style="font-size: 4.5rem; line-height: 1" class="text-shadow metro-title">校园快速取件管理系统</h1>
+				<div class="padding30 sub-leader text-light">
+					基于校园IC卡通过学生id信息快速取件的校园快件取件系统
+				</div>
+				<p class="" style="margin-top: 10px; padding: 0 50px">
+					本项目是基于校园与系统共享学生数据信息，通过直接读取校园ic卡信息实现校园内使用ic卡快速取件的系统。
+					项目基于php快速敏捷开发，使用thinkphp框架，采用mysql为数据库，结合相关前端技术完成整体项目的构建和开发。
+				</p>
+
+				<div class="margin60">
+					<div class="clear-float">
+						<a href=""><button class="button big-button block-shadow warning loading-cube lighten">源码下载</button></a>
+						<a href=""><button class="button big-button block-shadow info loading-cube lighten" >项目完整进度</button></a>
+					</div>
+					<br />
+				</div>
+
+				<small>项目使用的相关开源代码皆保留有先关linence信息，截止到项目结题为止，证书内容无变更</small>
+
+				<div class="grid no-margin-bottom" style="margin-top: 100px" id="g1">
+					<div class="row cells3">
+						<div class="cell no-overflow" style="height: 85px">
+							<div class="bg-yellow fg-white block-shadow" style="height: 85px; padding-top: 20px; margin-top: 85px;">
+								<h2 class="text-light">快速</h2>
+							</div>
+						</div>
+						<div class="cell no-overflow" style="height: 85px">
+							<div class="bg-green fg-white block-shadow" style="height: 85px; padding-top: 20px; margin-top: 85px;">
+								<h2 class="text-light">便捷</h2>
+							</div>
+						</div>
+						<div class="cell no-overflow" style="height: 85px">
+							<div class="bg-red fg-white block-shadow" style="height: 85px; padding-top: 20px; margin-top: 85px;">
+								<h2 class="text-light">易于使用</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					$(function(){
+						setTimeout(function(){
+							$("#g1 .cell > div:eq(0)").animate({
+								'margin-top': 0
+							}, 500, 'easeOutBounce');
+							$("#g1 .cell > div:eq(1)").animate({
+								'margin-top': 0
+							}, 1000, 'easeOutBounce');
+							$("#g1 .cell > div:eq(2)").animate({
+								'margin-top': 0
+							}, 1500, 'easeOutBounce');
+						}, 500);
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+	<div class="fg-dark">
+		<div class="container">
+			<div class="padding80" style="padding-top: 40px">
+				<div class="">
+					<div class="grid">
+						<div class="row cells3">
+							<div class="cell no-phone">
+								<div class="image-container bordered">
+									<div class="frame">
+										<img src="images/whats-new.jpg">
+									</div>
+								</div>
+							</div>
+							<div class="cell colspan2" style="padding-left: 20px">
+								<h1 class="">项目主要内容</h1>
+								<ol class="numeric-list square-marker">
+									<li>快件录入系统(提供api以及演示接口)</li>
+									<li>前台登录系统/快件信息的查看和延期</li>
+									<li>快件的取件系统(提供api以及演示接口)</li>
+									<li>后台处理系统，提供部分信息的修改权限</li>
+									<li>邮件发送(需要提供smtp/pop3权限)</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<br />
+				<hr class="thin" />
+
+				<div>
+					<h1 class="margin40">快件录入系统</h1>
+					<ul class="step-list">
+						<li>
+							<h4>向服务器发送请求(仅提供js版本)</h4>
+							<pre class="prettyprint linenums no-phone"><code>
+								&lt;script&gt;
+								$.ajax({
+									type: &quot;post&quot;,
+										url: &quot;/api/import/va&quot;,
+										success: function(data){
+											//do something on success
+
+										} ,
+										error: function(data){
+											//do something on error
+
+										},
+										dataType: &#x27;json&#x27;
+								});
+								&lt;/script&gt;
+							</code></pre>
+						</li>
+						<li>
+							<h4>获取回执信息</h4>
+							<p>如果服务器正常，那么回执信息可能存在两种情况一种是403，一种是200,而服务器未能正确处理的也有两种，一种是502一种是404</p>
+							<ol class="numeric-list square-marker">
+								<li>403 代表接口访问被拒绝，最大的可能是前一次清除数据的时候没有成功，这种情况下应当取出获取更换货仓并提示后台清除占用情况。</li>
+								<li>200 代表正常访问，没有任何问题，通常会返回这个</li>
+								<li>502 代表服务器出错，请联系后台处理，并停止录入工作</li>
+								<li>404 代表服务器没有找到资源，服务器配置出错，请停止工作并联系后台处理</li>
+							</ol>
+						</li>
+						<li>
+							<h4>演示</h4>
+						<a href=""><button class="button big-button block-shadow primary loading-cube lighten">演示</button></a>
+						</li>
+						<li>
+							<h4>Enjoy the result</h4>
+							<div class="padding20 bg-grayLighter no-phone">
+								<h1>Hello world!</h1>
+								<div class="countdown" data-role="countdown" data-days="2"></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+ 
+	<button class="command-button icon-right warning">
+		<span class="icon mif-share"></span>
+		Yes, share and connect
+		<small>Use this option for home or work</small>
+	</button>
     <div class="padding20 block-shadow bg-white">
         <p>
             <a href='login.html'>

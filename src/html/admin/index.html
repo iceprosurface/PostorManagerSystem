@@ -63,12 +63,11 @@
         $('.login').click(function() {
             var params = $("#login").serialize();
             $.post(
-                "/api/admin/va",
+                "/api/login/adminLogin",
                 params,
                 function(data) {
-                    json = eval('(' + data + ')');
-                    if (json.status == 1) {
-                        window.location = "/admin/edit";
+                    if (data.status == 200) {
+                        window.location = "/admin/logined.html";
                         //return true;
                     } else {
                         alert('error');

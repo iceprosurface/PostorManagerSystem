@@ -270,6 +270,7 @@ $(document).ready(function() {
         $("#carousel").carousel();
 		$("#mailcheck").on('click',function(){
 			if( $(this).data('issended') == 'true' ){
+				msg('通知|以及完成验证');
 				return false;
 			}
 			$.get('/api/mail/mailcheck',{},function(data){

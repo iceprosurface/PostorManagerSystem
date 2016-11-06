@@ -24,28 +24,17 @@
 			<tr><td  colspan="4" style="text-align: center;">暂无快件</td></tr>
 		</tbody>
 	</table>
+	<div id="loading">
+		<div data-role="preloader" data-type="ring" data-style="dark" ng-show="onloading"></div>
+	</div>
 </div>
 @@include('../public/script.html')
 <script>
 	$(document).ready( function(){
-		//function checkOrder(){
 		$("#userid").keyup(function(){
 			var userid = $("#userid").prop("value");
 			if(userid.length<6)return false;
-				$.ajax({
-					type: "post",
-					url: "/api/import/getUncheckList",
-					data: {"usrId":userid},
-					dataType: "json",
-					success:
-						function(data){
-							//data=eval('('+data+')');
-							loadInfo(data);
-						}
-				});
-		});
-		var userid = $("#userid").prop("value");
-		if(userid.length<6)return false;
+			$("#loading").show();	
 			$.ajax({
 				type: "post",
 				url: "/api/import/getUncheckList",
@@ -53,17 +42,20 @@
 				dataType: "json",
 				success:
 					function(data){
-						//data=eval('('+data+')');
 						loadInfo(data);
+						$("#loading").hide();	
 					}
 			});
+		});
+		var userid = $("#userid").prop("value");
+		$("#loading").hide();	
 	});
 </script>
 <script>
 	function loadInfo(data) {
         $("#import").html("");//清空info内容
 		var json = JSON.parse(data);
-		if(json.result != [] ){
+		if(json.result && json.result.length && json.result.length > 0 ){
 			$.each(json.result, function(i, item) {
 				$("#import").append(
 						"<tr></tr>"+
@@ -82,6 +74,7 @@
 			});
 		}else{
 			$("#import").append('<tr><td  colspan="4" style="text-align: center;">暂无快件</td></tr>')
+			$("#loading").hide();	
 		}
 	}
 </script>
@@ -103,7 +96,7 @@
 			success:
 				function(data){
 						var json = JSON.parse(data);
-						if(json.status==1)
+						if(json.status==200)
 							window.location.reload();
 				}
 		});

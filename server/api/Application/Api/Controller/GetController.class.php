@@ -12,9 +12,6 @@ class GetController extends Controller {
 		if(!isTokenL($token)){
 			$this->redirect("public/illegalRequirement");
 		}
-		if(C('IS_AJAX')&& !IS_AJAX ){
-			$this->redirect("public/illegalRequirement");
-		}
 		$token=getClientLToken();
 		$this->token=$token;
 		if(cookie(C('COOKIE_KEY_TOKEN'))['id']){
