@@ -43,48 +43,49 @@
                 <tr>
                     <td>postor id</td>
                     <td>
-                        <input name="postorId">
+                        <input name="postorId" id="postorId">
                     </td>
                 </tr>
                 <tr>
                     <td>ordeId</td>
                     <td>
-                        <input name="orderId">
+                        <input name="orderId" id="orderId">
                     </td>
                 </tr>
                 <tr>
                     <td>usrPhoneNumber</td>
                     <td>
-                        <input name="usrPhoneNumber">
+                        <input name="usrPhoneNumber" id="usrPhoneNumber">
                     </td>
                 </tr>
                 <tr>
                     <td>usrId</td>
                     <td>
-                        <input name="usrId">
+                        <input name="usrId" id="usrId">
                     </td>
                 </tr>
                 <tr>
                     <td>usrName</td>
                     <td>
-                        <input name="usrName">
+                        <input name="usrName" id="usrName">
                     </td>
                 </tr>
                 <tr>
                     <td>orderInfo</td>
                     <td>
-                        <input name="orderInfo">
+                        <input name="orderInfo" id="orderInfo">
                     </td>
                 </tr>
                 <tr>
                     <td>positionId</td>
                     <td>
-                        <input name="positionId">
+                        <input name="positionId" id="positionId">
                     </td>
                 </tr>
             </table>
             <div>
                 <button class="import">录入</button>
+				<button class="button" click="random()">生成随机数据</button>
             </div>
         </form>
     </div>
@@ -95,6 +96,16 @@
 	<script src="/js/laypage/laypage.js"></script>
 
     <script>
+	function(){
+		var postorId = $("#postorId");
+		var orderId = $("#orderId");
+		var usrPhoneNumber = $("#usrPhoneNumber");
+		var usrId = $("#usrId");
+		var usrName = $("#usrName");
+		var orderInfo = $("#orderInfo");
+		var positionId = $("#positionId");
+
+	}
     function demo() {
         $("#pre").fadeOut();
         $("#demo").fadeIn(3000);

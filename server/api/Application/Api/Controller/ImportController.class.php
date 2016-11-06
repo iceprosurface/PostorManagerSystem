@@ -129,7 +129,7 @@ class ImportController extends Controller {
 				//更改map条件为positionid
 				$map['positionId']=array('in',$list);
 				$positions_result=$positions->where($map)->save($data);
-				if($orders_result&$positions_result){
+				if($orders_result & $positions_result){
 					header('HTTP/1.1 200 ok');
 					$res=array(response=>"已经成功取件",status=>200);
 				}else{
