@@ -59,21 +59,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>usrId</td>
-                    <td>
-                        <input name="usrId" id="usrId">
-                    </td>
-                </tr>
-                <tr>
-                    <td>usrName</td>
-                    <td>
-                        <input name="usrName" id="usrName">
-                    </td>
-                </tr>
-                <tr>
                     <td>orderInfo</td>
                     <td>
-                        <input name="orderInfo" id="orderInfo">
+                        <textarea name="orderInfo" id="orderInfo"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -84,8 +72,9 @@
                 </tr>
             </table>
             <div>
-                <button class="import">录入</button>
-				<button class="button" click="random()">生成随机数据</button>
+                <button class="button import">录入</button>
+				<button class="button" onClick="random()">生成随机数据</button>
+				<button class="button" onClick="randomC()">生成可录入的随机数据</button>
             </div>
         </form>
     </div>
@@ -96,7 +85,7 @@
 	<script src="/js/laypage/laypage.js"></script>
 
     <script>
-	function(){
+	function random(){
 		var postorId = $("#postorId");
 		var orderId = $("#orderId");
 		var usrPhoneNumber = $("#usrPhoneNumber");
@@ -104,8 +93,38 @@
 		var usrName = $("#usrName");
 		var orderInfo = $("#orderInfo");
 		var positionId = $("#positionId");
-
+		postorId.val([115468,122455,998879][Math.ceil(Math.random()*2)]);
+		orderId.val(Math.ceil(Math.random()*100000000));
+		usrPhoneNumber.val(Math.ceil([1.70,1.50,1.86,1.36,1.32][Math.ceil(Math.random()*4)]*1e11+Math.ceil(Math.random()*1e8)));
+		var hz="",word="";
+		for(i=0;i<60;i++){ 
+			    eval( "var word=" +  '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16)+'"');
+			    hz += word;
+		}
+		orderInfo.val(hz);
+		positionId.val(Math.ceil(Math.random()*135));
 	}
+	
+	function randomC(){
+		var postorId = $("#postorId");
+		var orderId = $("#orderId");
+		var usrPhoneNumber = $("#usrPhoneNumber");
+		var usrId = $("#usrId");
+		var usrName = $("#usrName");
+		var orderInfo = $("#orderInfo");
+		var positionId = $("#positionId");
+		postorId.val([115468,122455,998879][Math.ceil(Math.random()*2)]);
+		orderId.val(Math.ceil(Math.random()*100000000));
+		usrPhoneNumber.val([132039336878,150012916617,186003305497][Math.ceil(Math.random()*2)])
+		var hz="",word="";
+		for(i=0;i<60;i++){ 
+			    eval( "var word=" +  '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16)+'"');
+			    hz += word;
+		}
+		orderInfo.val(hz);
+		positionId.val(Math.ceil(Math.random()*135));
+	}
+
     function demo() {
         $("#pre").fadeOut();
         $("#demo").fadeIn(3000);
@@ -122,10 +141,10 @@
 				    url: "/api/import/va",
 				    data: params,
 				    success: function(data){
-                        window.location = "/api/import/detail?orderId=" + json.orderId;
+                        window.location = "/import/detail.html?orderId=" + data.orderId;
 					} ,
 					error: function(data){
-                        alert('error');
+                        alert(data.responseJSON.response);
 					},
 				    dataType: 'json'
 			});

@@ -11,12 +11,12 @@
 <title>你的邮件已经录入成功了</title>
 </head>
 
-<body>
+<body style="text-align:center;">
     <h3>你的邮件已经录入成功了</h3>
     <p>详细情况如下所示</p>
-    <table border="1" cellspacing="0" cellpadding="0">
+    <table class="table" border="1" cellspacing="0" cellpadding="0">
         <tr>
-            <th>录入单</th>
+            <th  colspan="9">录入单</th>
         </tr>
         <tr>
             <td>邮递员编号</td>
@@ -39,6 +39,11 @@
 	<script src="/js/laypage/laypage.js"></script>
 
     <script>
+	function getUrlParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		if (r != null) return unescape(r[2]); return null; //返回参数值
+	}
     $(document).ready(function() {
         var orderId = getUrlParam("orderId");
         $.ajax({

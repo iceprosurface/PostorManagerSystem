@@ -9,23 +9,35 @@ class ImportController extends Controller {
 	*/
     public function va(){
     	$import_info =array(
-				'orderId'=>I('post.orderId'),
+				'orderId'=>I('post.orderId',0),
 				'orderInfo'=>I('post.orderInfo'),
-				'usrPhoneNumber'=>I('post.usrPhoneNumber'),
-				'usrId'=>I('post.usrId'),
-				'usrName'=>I('post.usrName'),
+				'usrPhoneNumber'=>I('post.usrPhoneNumber',0),
 				'positionId'=>I('post.positionId'),
 				'haveProduct'=>true,
 				'postorId'=>I('post.postorId'),
 				'importTime'=>date('Y-m-d H:i:s', time()),
-				
 		);
-    
+		
+		$postor = M('postor');
+		if(!$postor->where(array('postorId'=>$import_info['postorId']))->find()) {
+			redirect("/api/import/illegalImport");
+		}
+		$usr = M('usr');
+		$usr_info = $usr->where(array('phoneNumber'=>$import_info['usrPhoneNumber']))->find();
+		if(!$usr_info) {
+			redirect("/api/import/unknowPhone");
+		}
+		$import_info['usrId']=$usr_info['id'];
+		$import_info['usrName']=$usr_info['name'];
 		$orders = M('orders');
 		$positions = M('positions');
+		$position_info = $positions->where(array('positionId'=>$import_info['positionId']))->find();
+		if($position_info['haveproduct'] == 1) {
+			redirect("/api/import/haveProduct");
+		}
 		$res=array(response=>"数据创建失败,请联系管理员以解决问题。错误代码:0。",status=>502);
 		if($orders->create($import_info) & $positions->create($import_info)){
-			$import_result=($orders->add($import_info))&($positions->where($import_info['positionId'])->save($import_info));
+			$import_result=($orders->add($import_info))&($positions->where(array('positionId'=>$import_info['positionId']))->save($import_info));
 			if($import_result !== false){
 				$res=array(response=>"success",status=>200,orderId=>$import_info['orderId']);
 				header('HTTP/1.1 200 ok');
@@ -34,7 +46,23 @@ class ImportController extends Controller {
 				header('HTTP/1.1 403 forbidden');
 			}
 		}
-		$this->ajaxReturn(json_encode($res),'JSON');
+		$this->ajaxReturn($res,'JSON');
+	}
+	
+	public function haveProduct(){
+		$res=array(response=>"there is something in position",status=>403);
+		header('HTTP/1.1 403 forbidden');
+		$this->ajaxReturn($res,'JSON');
+	}
+	public function unknowPhone(){
+		$res=array(response=>"the phone is unknow",status=>406);
+		header('HTTP/1.1 406 forbidden');
+		$this->ajaxReturn($res,'JSON');
+	}
+	public function illegalImport(){
+		$res=array(response=>"you may give an uncurrect input infomation,please check and have a new post ",status=>407);
+		header('HTTP/1.1 407 forbidden');
+		$this->ajaxReturn($res,'JSON');
 	}
 	/*
 	*读取快件信息
